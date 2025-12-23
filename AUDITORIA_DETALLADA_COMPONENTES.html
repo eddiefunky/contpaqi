@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría Detallada de Componentes y Design System</title>
+    <style>
+        body {
+            font-family: 'Calibri', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        h1 {
+            color: #0428f4;
+            border-bottom: 3px solid #0428f4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #0520b9;
+            margin-top: 30px;
+            border-bottom: 2px solid #eaf1ff;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #003A70;
+            margin-top: 20px;
+        }
+        h4 {
+            color: #0520b9;
+            margin-top: 15px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-size: 11pt;
+        }
+        th {
+            background-color: #0428f4;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .warning {
+            color: #caa502;
+            font-weight: bold;
+        }
+        .error {
+            color: #e14545;
+            font-weight: bold;
+        }
+        .correct {
+            color: #319835;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #0428f4;
+        }
+        .section {
+            page-break-inside: avoid;
+            margin-bottom: 30px;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #eaf1ff;
+            margin: 30px 0;
+        }
+        .summary-box {
+            background-color: #eaf1ff;
+            border-left: 4px solid #0428f4;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>AUDITORÍA DETALLADA DE COMPONENTES Y DESIGN SYSTEM</h1>
+<h2>Analiza 2.0 - Archivo Figma</h2>
+
+<p><strong>Fecha de Auditoría:</strong> $(date)</p>
+<p><strong>Nodos Analizados:</strong></p>
+<ul>
+    <li><strong>Node ID: 112:7258</strong> - Biblioteca de Componentes y Visualización</li>
+    <li><strong>Node ID: 1:1151</strong> - Sistema de Tokens y Variables</li>
+    <li><strong>Node ID: 7221:96109</strong> - Sistema de Tokens Extendido</li>
+</ul>
+
+<hr>
+
+<h2>TABLA DE CONTENIDOS</h2>
+<ol>
+    <li>Resumen Ejecutivo</li>
+    <li>Análisis de Componentes Detectados</li>
+    <li>Auditoría de Tokens de Diseño</li>
+    <li>Errores e Inconsistencias</li>
+    <li>Análisis Comparativo Entre Nodos</li>
+    <li>Sugerencias de Corrección</li>
+    <li>Recomendaciones Estratégicas</li>
+</ol>
+
+<hr>
+
+<div class="section">
+    <h2>1. RESUMEN EJECUTIVO</h2>
+    
+    <h3>1.1 Objetivo de la Auditoría</h3>
+    <p>Evaluar la consistencia, calidad y completitud del design system de Analiza 2.0, identificando errores, inconsistencias y oportunidades de mejora en componentes UI y tokens de diseño.</p>
+    
+    <h3>1.2 Metodología</h3>
+    <ul>
+        <li>Análisis visual de componentes en Node 112:7258</li>
+        <li>Extracción y análisis de variables/tokens en los tres nodos</li>
+        <li>Comparación cruzada entre páginas para detectar inconsistencias</li>
+        <li>Identificación de patrones y anti-patrones</li>
+    </ul>
+    
+    <h3>1.3 Hallazgos Principales</h3>
+    
+    <h4>🔴 Críticos (3)</h4>
+    <ol>
+        <li><strong>Duplicación masiva de tokens</strong> - 15+ tokens duplicados con valores idénticos</li>
+        <li><strong>Error de ortografía sistemático</strong> - "Secundary" en lugar de "Secondary" (aparece en múltiples tokens)</li>
+        <li><strong>Falta de sistema para visualización de datos</strong> - 30-40 paletas sin documentar ni estructurar</li>
+    </ol>
+    
+    <h4>🟡 Moderados (8)</h4>
+    <ol>
+        <li>Mezcla de idiomas (inglés/español) sin criterio</li>
+        <li>Múltiples sistemas de nomenclatura coexistiendo</li>
+        <li>Variables de componente mezcladas con tokens globales</li>
+        <li>Tipografía inconsistente (dos fuentes para mismo propósito)</li>
+        <li>Sombras con color específico en lugar de neutras</li>
+        <li>Valores diferentes para mismo propósito semántico</li>
+        <li>Falta de escala tipográfica sistemática</li>
+        <li>Line-heights incorrectos en tipografía</li>
+    </ol>
+    
+    <h4>🟢 Menores (12)</h4>
+    <ol>
+        <li>Nombres poco descriptivos</li>
+        <li>Inconsistencia en capitalización</li>
+        <li>Falta de documentación de estados</li>
+        <li>Tokens obsoletos sin deprecar</li>
+    </ol>
+    
+    <h3>1.4 Métricas Generales</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Métrica</th>
+                <th>Valor Actual</th>
+                <th>Objetivo Ideal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total de Tokens Únicos</td>
+                <td>~80</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Tokens Duplicados</td>
+                <td>15+</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Sistemas de Naming Diferentes</td>
+                <td>4</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Errores de Ortografía</td>
+                <td>3</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Paletas de Gráficos Documentadas</td>
+                <td>0/30-40</td>
+                <td>Todas</td>
+            </tr>
+            <tr>
+                <td>Componentes Documentados</td>
+                <td>0%</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Tokens en Español</td>
+                <td>~25</td>
+                <td>0 (tokens técnicos)</td>
+            </tr>
+            <tr>
+                <td>Coherencia Entre Nodos</td>
+                <td>60%</td>
+                <td>100%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>2. ANÁLISIS DE COMPONENTES DETECTADOS</h2>
+    
+    <h3>2.1 Node 112:7258 - Biblioteca de Componentes</h3>
+    <p>Este nodo contiene una colección exhaustiva de componentes UI organizados en secciones.</p>
+    
+    <h4>2.1.1 Componentes de Entrada (Inputs)</h4>
+    <h5>Campos de Texto</h5>
+    <p><strong>Características observadas:</strong></p>
+    <ul>
+        <li>Múltiples estados: Default, Active, Disabled</li>
+        <li>Variaciones: Con placeholder, sin placeholder, con icono</li>
+        <li>Campos de búsqueda especializados</li>
+    </ul>
+    <p><strong>Problemas identificados:</strong></p>
+    <ul>
+        <li>⚠️ <strong>Falta documentación:</strong> No se identifica claramente el estado de error/validación</li>
+        <li>⚠️ <strong>Inconsistencia:</strong> Algunos campos tienen iconos, otros no, sin criterio claro</li>
+        <li>⚠️ <strong>Espaciado:</strong> Variaciones en padding interno no documentadas</li>
+    </ul>
+    
+    <h5>Checkboxes</h5>
+    <p><strong>Características observadas:</strong></p>
+    <ul>
+        <li>Estados: Checked, Unchecked, Disabled</li>
+        <li>Múltiples variaciones de tamaño</li>
+    </ul>
+    <p><strong>Problemas identificados:</strong></p>
+    <ul>
+        <li>⚠️ <strong>Falta de escala:</strong> No hay documentación sobre cuándo usar cada tamaño</li>
+        <li>⚠️ <strong>Color:</strong> Inconsistencia en colores de estado (algunos azules, otros grises)</li>
+        <li>⚠️ <strong>Accesibilidad:</strong> No se verifica contraste en estado disabled</li>
+    </ul>
+    
+    <h5>Radio Buttons</h5>
+    <p><strong>Características observadas:</strong></p>
+    <ul>
+        <li>Estados: Selected, Unselected, Disabled</li>
+        <li>Similar a checkboxes en variaciones</li>
+    </ul>
+    
+    <h5>Toggles/Switches</h5>
+    <p><strong>Características observadas:</strong></p>
+    <ul>
+        <li>Estados: On, Off</li>
+        <li>Múltiples tamaños</li>
+        <li>Colores diferentes: azul y gris</li>
+    </ul>
+    <p><strong>Problemas identificados:</strong></p>
+    <ul>
+        <li>🔴 <strong>CRÍTICO - Inconsistencia de color:</strong> No está documentado cuándo usar azul vs gris</li>
+    </ul>
+    
+    <h4>2.1.3 Componentes de Acción - Buttons</h4>
+    <p><strong>Variaciones detectadas:</strong></p>
+    <ul>
+        <li>Primary (azul sólido)</li>
+        <li>Secondary (blanco con borde)</li>
+        <li>Text only (sin fondo)</li>
+        <li>Ghost (transparente)</li>
+    </ul>
+    <p><strong>Tamaños:</strong> Al menos 3 variaciones (small, medium, large)</p>
+    
+    <p><strong>Problemas identificados:</strong></p>
+    <ul>
+        <li>🔴 <strong>CRÍTICO - Tipografía inconsistente:</strong>
+            <ul>
+                <li>Token <code>Textos nube/Button</code> usa: Karla, Bold, 16px</li>
+                <li>Token <code>texto boton</code> usa: Manrope, Bold, 16px</li>
+                <li><strong>No hay criterio</strong> para cuándo usar cada una</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <h4>2.1.4 Componentes de Datos</h4>
+    <h5>Tablas</h5>
+    <p><strong>Variaciones:</strong></p>
+    <ul>
+        <li>Con headers claramente definidos</li>
+        <li>Sin headers (simple list)</li>
+        <li>Scrollables (con scrollbar visible)</li>
+        <li>Con acciones por fila</li>
+    </ul>
+    
+    <h5>Gráficos de Barras</h5>
+    <p><strong>Cantidad:</strong> Aproximadamente 30-40 variaciones individuales</p>
+    <p><strong>Paletas identificadas por color:</strong></p>
+    <ul>
+        <li>Azul (múltiples tonos)</li>
+        <li>Teal/Cyan (gradientes y tonos sólidos)</li>
+        <li>Verde (varios matices)</li>
+        <li>Amarillo/Naranja (tonos cálidos)</li>
+        <li>Púrpura (diferentes saturaciones)</li>
+    </ul>
+    <p><strong>Problemas identificados:</strong></p>
+    <ul>
+        <li>🔴 <strong>CRÍTICO - Falta de sistema documentado:</strong>
+            <ul>
+                <li>No hay tokens definidos para estas paletas</li>
+                <li>No existe documentación sobre cuándo usar cada paleta</li>
+                <li>No hay criterio de accesibilidad (contraste, daltonismo)</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>3. AUDITORÍA DE TOKENS DE DISEÑO</h2>
+    
+    <p><em>Nota: Esta sección contiene un análisis exhaustivo de todos los tokens detectados. Para la lista completa de tokens, ver el documento "LISTA_TOKENS_Y_COMPONENTES.html"</em></p>
+    
+    <h3>3.1 Tokens de Color - Primary</h3>
+    <p><strong>Errores Críticos Detectados:</strong></p>
+    <ol>
+        <li>🔴 <strong>DUPLICACIÓN EXACTA:</strong>
+            <ul>
+                <li><code>Primary default 500</code> = <code>Azul Contpaqi</code> = <code>#0428f4</code></li>
+                <li><strong>Impacto:</strong> Confusión en desarrollo, mantenimiento duplicado</li>
+            </ul>
+        </li>
+        <li>⚠️ <strong>Sistema de Nomenclatura Alternativo:</strong>
+            <ul>
+                <li><code>Contabilidad Light/Primary/PCP001L - Primary</code> usa código alfanumérico</li>
+                <li>No sigue la estructura del sistema principal</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>3.2 Tokens de Color - Secondary</h3>
+    <p><strong>Errores Críticos:</strong></p>
+    <ol>
+        <li>🔴 <strong>ERROR DE ORTOGRAFÍA SISTEMÁTICO:</strong>
+            <ul>
+                <li>"Secundary" aparece en <strong>4 tokens</strong> diferentes</li>
+                <li><strong>Correcto:</strong> "Secondary" (con 'o')</li>
+            </ul>
+        </li>
+        <li>🔴 <strong>TOKEN COMPLETAMENTE DIFERENTE:</strong>
+            <ul>
+                <li><code>secundario: #650397</code> es un púrpura oscuro</li>
+                <li>Sistema <code>Secundary</code> es púrpura claro/lavanda</li>
+                <li>No son el mismo color ni conceptualmente relacionados</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>3.3 Tokens de Color - Text</h3>
+    <p><strong>Errores Críticos Detectados:</strong></p>
+    <ol>
+        <li>🔴 <strong>DUPLICACIÓN MÚLTIPLE:</strong>
+            <ul>
+                <li><code>Text Light/Primary text</code> = <code>Text/Primary text</code> = <code>#101010</code></li>
+                <li><code>Text Light/White Icon, text</code> = <code>Text/White Icon, text</code> = <code>#FFFFFF</code></li>
+            </ul>
+        </li>
+        <li>🔴 <strong>VALORES DIFERENTES PARA MISMO PROPÓSITO:</strong>
+            <ul>
+                <li><code>tex deshabilitado: #b0b0b0</code></li>
+                <li><code>Texto deshabilitado: #c2c2c2</code></li>
+                <li>Diferencia de 12% en luminosidad - inconsistente</li>
+            </ul>
+        </li>
+        <li>🔴 <strong>ERROR DE ORTOGRAFÍA:</strong> <code>tex deshabilitado</code> falta la 't'</li>
+    </ol>
+    
+    <h3>3.7 Tokens de Tipografía</h3>
+    <p><strong>Errores Críticos:</strong></p>
+    <ol>
+        <li>🔴 <strong>DUPLICACIÓN CON DIFERENCIAS:</strong>
+            <ul>
+                <li><code>Textos nube/Button</code> (Karla, line-height: 20px)</li>
+                <li><code>texto boton</code> (Manrope, line-height: 24px)</li>
+                <li>Diferentes fuentes para mismo propósito</li>
+            </ul>
+        </li>
+        <li>🔴 <strong>ERROR CRÍTICO - Line-Height:</strong>
+            <ul>
+                <li><code>Párrafos</code>: line-height de 100px para fuente de 14px</li>
+                <li><code>Textos nube/H3 - Subtítulo</code>: line-height de 100px para fuente de 24px</li>
+                <li><code>Sidebar - Placeholder</code>: line-height de 100px para fuente de 16px</li>
+                <li>100px es claramente un error - debería ser proporcional</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>3.8 Tokens de Efectos (Shadows/Elevation)</h3>
+    <p><strong>Errores Críticos:</strong></p>
+    <ol>
+        <li>🔴 <strong>SOMBRAS CON COLOR ESPECÍFICO:</strong>
+            <ul>
+                <li><code>cards</code> y <code>Elevation 1 Blue</code> usan color azul (#003A70)</li>
+                <li>Problema: No son reutilizables en otros contextos</li>
+                <li>Solución: Cambiar a negro con opacidad</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>4. ERRORES E INCONSISTENCIAS</h2>
+    
+    <h3>4.1 Categorización de Errores</h3>
+    
+    <h4>🔴 Críticos (Requieren Acción Inmediata)</h4>
+    <ol>
+        <li><strong>Duplicación Masiva de Tokens</strong> (15+ casos)</li>
+        <li><strong>Error de Ortografía Sistemático</strong> - "Secundary" en lugar de "Secondary"</li>
+        <li><strong>Falta de Sistema para Visualización de Datos</strong> - 30-40 paletas sin documentar</li>
+        <li><strong>Line-Heights Incorrectos</strong> - Valores de 100px para fuentes pequeñas</li>
+        <li><strong>Tipografía Inconsistente</strong> - Dos fuentes para botones (Karla vs Manrope)</li>
+    </ol>
+    
+    <h4>🟡 Moderados (Requieren Planificación)</h4>
+    <ol>
+        <li>Mezcla de Idiomas - Inglés y español sin criterio</li>
+        <li>Múltiples Sistemas de Nomenclatura - Al menos 4 sistemas diferentes coexistiendo</li>
+        <li>Variables de Componente Mezcladas con Tokens - 8+ variables de estado como tokens globales</li>
+        <li>Sombras con Color Específico - Deberían ser neutras para reutilización</li>
+        <li>Valores Diferentes para Mismo Propósito</li>
+    </ol>
+    
+    <h4>🟢 Menores (Mejoras de Calidad)</h4>
+    <ol>
+        <li>Nombres Poco Descriptivos</li>
+        <li>Inconsistencia en Capitalización</li>
+        <li>Falta de Documentación - Estados de componentes, criterios de uso</li>
+        <li>Escalas Incompletas - Primary: falta 400, 500</li>
+    </ol>
+    
+    <h3>4.2 Matriz de Impacto vs. Urgencia</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Error</th>
+                <th>Impacto</th>
+                <th>Urgencia</th>
+                <th>Prioridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Duplicación de tokens</td>
+                <td>Alto</td>
+                <td>Alta</td>
+                <td class="error">🔴 P0</td>
+            </tr>
+            <tr>
+                <td>Error ortografía "Secundary"</td>
+                <td>Medio</td>
+                <td>Alta</td>
+                <td class="error">🔴 P0</td>
+            </tr>
+            <tr>
+                <td>Falta sistema gráficos</td>
+                <td>Alto</td>
+                <td>Media</td>
+                <td class="warning">🟡 P1</td>
+            </tr>
+            <tr>
+                <td>Line-heights incorrectos</td>
+                <td>Alto</td>
+                <td>Alta</td>
+                <td class="error">🔴 P0</td>
+            </tr>
+            <tr>
+                <td>Tipografía inconsistente</td>
+                <td>Medio</td>
+                <td>Media</td>
+                <td class="warning">🟡 P1</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>5. ANÁLISIS COMPARATIVO ENTRE NODOS</h2>
+    
+    <h3>5.5 Análisis de Coherencia</h3>
+    <p><strong>Coherencia entre nodos:</strong></p>
+    <ul>
+        <li><strong>112:7258 vs 1:1151:</strong> ~60% de tokens compartidos</li>
+        <li><strong>112:7258 vs 7221:96109:</strong> ~60% de tokens compartidos</li>
+        <li><strong>1:1151 vs 7221:96109:</strong> ~95% de tokens compartidos</li>
+    </ul>
+    
+    <p><strong>Conclusión:</strong></p>
+    <ul>
+        <li>Los nodos 1:1151 y 7221:96109 están más alineados entre sí</li>
+        <li>El nodo 112:7258 parece ser de una versión anterior o con enfoque diferente</li>
+        <li>Hay una evolución del sistema donde se agregaron tokens de tipografía y elevación en versiones más recientes</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>6. SUGERENCIAS DE CORRECCIÓN</h2>
+    
+    <h3>6.1 Correcciones Críticas (P0 - Inmediatas)</h3>
+    
+    <h4>6.1.1 Unificar Tokens Duplicados</h4>
+    <p><strong>Mapeo propuesto:</strong></p>
+    <pre>
+PRIMARIO:
+Primary default 500 (#0428f4) → MANTENER
+Azul Contpaqi (#0428f4) → DEPRECAR → Usar "Primary default 500"
+azul 200 (#eaf1ff) → DEPRECAR → Usar "Primary 200"
+
+TEXTO:
+Text Light/Primary text (#101010) → MANTENER
+Text/Primary text (#101010) → DEPRECAR → Usar "Text Light/Primary text"
+text tablas (#000000) → DEPRECAR → Usar "Text Light/Primary text"
+    </pre>
+    
+    <h4>6.1.2 Corregir Errores de Ortografía</h4>
+    <pre>
+Secundary → Secondary (en todos los tokens)
+- Secundary default 500 → Secondary default 500
+- Secundary 200 → Secondary 200
+- Secundary 300 → Secondary 300
+- Secundary 600 → Secondary 600
+
+tex deshabilitado → texto deshabilitado
+    </pre>
+    
+    <h4>6.1.3 Corregir Line-Heights</h4>
+    <pre>
+Párrafos (14px):
+- Actual: line-height: 100px ❌
+- Correcto: line-height: 21px (1.5x) o 20px
+
+Textos nube/H3 - Subtítulo (24px):
+- Actual: line-height: 100px ❌
+- Correcto: line-height: 36px (1.5x) o 32px
+
+Sidebar - Placeholder (16px):
+- Actual: line-height: 100px ❌
+- Correcto: line-height: 24px (1.5x)
+    </pre>
+    
+    <h3>6.2 Correcciones Moderadas (P1 - Planificadas)</h3>
+    
+    <h4>6.2.1 Estandarizar Idioma</h4>
+    <p><strong>Estrategia:</strong></p>
+    <ul>
+        <li><strong>Tokens técnicos:</strong> Siempre en inglés</li>
+        <li><strong>Documentación/Labels:</strong> Pueden estar en español</li>
+    </ul>
+    
+    <h4>6.2.2 Crear Sistema de Nomenclatura Unificado</h4>
+    <p><strong>Estructura propuesta:</strong></p>
+    <pre>
+{categoria}/{subcategoria}/{propiedad}/{variante}
+
+Ejemplos:
+color/primary/500
+color/text/primary
+color/alert/success/600
+typography/button/primary
+elevation/3
+    </pre>
+    
+    <h4>6.2.3 Crear Sistema de Colores para Gráficos</h4>
+    <pre>
+color/chart/
+├── categorical/
+│   ├── primary (4-5 colores azules)
+│   ├── secondary (4-5 colores púrpuras)
+│   └── accent (4-5 colores verdes)
+├── sequential/
+│   ├── blue
+│   ├── green
+│   └── purple
+└── diverging/
+    └── blue-red
+    </pre>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>7. RECOMENDACIONES ESTRATÉGICAS</h2>
+    
+    <h3>7.1 Estructura Recomendada de Tokens</h3>
+    <pre>
+tokens/
+├── color/
+│   ├── primary/[100, 200, 300, 400, 500, 600]
+│   ├── secondary/[100, 200, 300, 400, 500, 600]
+│   ├── text/[primary, secondary, disabled, inverse, support]
+│   ├── background/[primary, secondary, disabled, overlay]
+│   ├── alert/[success, warning, danger, standby]
+│   └── chart/[categorical, sequential, diverging]
+├── typography/
+│   ├── font-family/[primary, secondary]
+│   ├── font-size/[h1, h2, h3, h4, h5, h6, body-large, body, body-small, caption]
+│   ├── font-weight/[regular, medium, semibold, bold]
+│   └── line-height/[asociado a cada font-size]
+├── spacing/[base unit: 4px o 8px, escala: 1x, 2x, 3x...]
+├── elevation/[0, 1, 2, 3, 4]
+├── border/[width, radius, color]
+└── opacity/[disabled, hover, overlay]
+    </pre>
+    
+    <h3>7.2 Convenciones de Naming</h3>
+    <ol>
+        <li><strong>Estructura:</strong> {category}/{subcategory}/{property}/{variant}</li>
+        <li><strong>Idioma:</strong> Inglés para todos los tokens técnicos</li>
+        <li><strong>Formato:</strong> lowercase con separadores /</li>
+        <li><strong>Jerarquía:</strong> Máximo 4 niveles</li>
+        <li><strong>Descripción:</strong> Nombres descriptivos y semánticos</li>
+    </ol>
+    
+    <h3>7.3 Plan de Migración Recomendado</h3>
+    
+    <h4>Fase 1: Limpieza (2 semanas)</h4>
+    <ul>
+        <li>Identificar y documentar todos los duplicados</li>
+        <li>Corregir errores de ortografía</li>
+        <li>Remover variables de componente</li>
+        <li>Corregir line-heights</li>
+    </ul>
+    
+    <h4>Fase 2: Estandarización (3 semanas)</h4>
+    <ul>
+        <li>Definir nueva estructura</li>
+        <li>Crear sistema de nombres unificado</li>
+        <li>Migrar tokens a nueva estructura</li>
+        <li>Unificar tipografía</li>
+    </ul>
+    
+    <h4>Fase 3: Consolidación (2 semanas)</h4>
+    <ul>
+        <li>Crear paletas de gráficos como tokens</li>
+        <li>Estandarizar sombras</li>
+        <li>Resolver sistema "Contabilidad"</li>
+        <li>Completar escalas faltantes</li>
+    </ul>
+    
+    <h4>Fase 4: Documentación (2 semanas)</h4>
+    <ul>
+        <li>Documentar todos los tokens</li>
+        <li>Crear guía de uso</li>
+        <li>Documentar estados de componentes</li>
+        <li>Crear ejemplos de código</li>
+    </ul>
+    
+    <h4>Fase 5: Validación (1 semana)</h4>
+    <ul>
+        <li>Revisar consistencia en todas las páginas</li>
+        <li>Validar accesibilidad</li>
+        <li>Obtener feedback del equipo</li>
+        <li>Ajustes finales</li>
+    </ul>
+    
+    <h3>7.5 Métricas de Éxito</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Métrica</th>
+                <th>Actual</th>
+                <th>Objetivo 3 meses</th>
+                <th>Objetivo 6 meses</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tokens duplicados</td>
+                <td>15+</td>
+                <td>5</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Errores de ortografía</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Sistemas de naming</td>
+                <td>4</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Paletas documentadas</td>
+                <td>0/40</td>
+                <td>20/40</td>
+                <td>40/40</td>
+            </tr>
+            <tr>
+                <td>Componentes documentados</td>
+                <td>0%</td>
+                <td>50%</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Coherencia entre nodos</td>
+                <td>60%</td>
+                <td>80%</td>
+                <td>100%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>8. CONCLUSIÓN</h2>
+    
+    <h3>8.1 Resumen Ejecutivo</h3>
+    <p>El design system de Analiza 2.0 muestra una base sólida con una amplia colección de componentes y tokens. Sin embargo, requiere trabajo significativo en:</p>
+    <ol>
+        <li><strong>Estandarización</strong> (Prioridad Alta) - Unificar nomenclatura, corregir errores sistemáticos, eliminar duplicados</li>
+        <li><strong>Documentación</strong> (Prioridad Media) - Componentes y sus estados, criterios de uso, guías de estilo</li>
+        <li><strong>Sistema</strong> (Prioridad Media) - Colores para visualización de datos, escalas completas, estructura jerárquica clara</li>
+    </ol>
+    
+    <h3>8.2 Próximos Pasos Recomendados</h3>
+    <h4>Inmediato (Esta semana):</h4>
+    <ul>
+        <li>Corregir errores de ortografía</li>
+        <li>Corregir line-heights</li>
+        <li>Documentar tokens duplicados</li>
+    </ul>
+    
+    <h4>Corto Plazo (1 mes):</h4>
+    <ul>
+        <li>Unificar tokens duplicados</li>
+        <li>Establecer nueva estructura</li>
+        <li>Comenzar migración</li>
+    </ul>
+    
+    <h4>Mediano Plazo (3 meses):</h4>
+    <ul>
+        <li>Completar migración</li>
+        <li>Documentar componentes</li>
+        <li>Crear sistema de gráficos</li>
+    </ul>
+    
+    <h4>Largo Plazo (6 meses):</h4>
+    <ul>
+        <li>Validación completa</li>
+        <li>Optimización</li>
+        <li>Escalabilidad</li>
+    </ul>
+</div>
+
+<hr>
+
+<p><em>Fin del Reporte de Auditoría</em></p>
+<p><em>Generado el: $(date)</em></p>
+<p><em>Nodos analizados: 112:7258, 1:1151, 7221:96109</em></p>
+<p><em>Total de tokens analizados: ~80</em></p>
+<p><em>Total de componentes identificados: ~15 categorías</em></p>
+
+</body>
+</html>
+

@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategia de Product Design 2026 - CONTPAQi®</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Colores CONTPAQi */
+            --contpaqi-blue: #0066cc;
+            --contpaqi-dark-blue: #004d99;
+            --contpaqi-light-blue: #3385d6;
+            --contpaqi-teal: #00a8a8;
+            --contpaqi-green: #00b894;
+            --contpaqi-dark: #1a2332;
+            --contpaqi-gray: #6c757d;
+            --contpaqi-light-gray: #e9ecef;
+            --white: #ffffff;
+            --text-primary: #1a2332;
+            --text-secondary: #6c757d;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 40px;
+            --spacing-xl: 64px;
+            --spacing-2xl: 80px;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 168, 168, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 80px;
+            line-height: 1.05;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h2 {
+            font-size: 56px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h3 {
+            font-size: 40px;
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: 0em;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h4 {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 600;
+            letter-spacing: 0.007em;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h5 {
+            font-size: 21px;
+            line-height: 1.19048;
+            font-weight: 600;
+            letter-spacing: 0.011em;
+        }
+
+        p, li {
+            font-size: 19px;
+            line-height: 1.42105;
+            letter-spacing: 0.012em;
+        }
+
+        .large-text {
+            font-size: 24px;
+            line-height: 1.41667;
+            letter-spacing: 0.009em;
+        }
+
+        .small-text {
+            font-size: 17px;
+            line-height: 1.47059;
+            letter-spacing: 0.022em;
+            font-weight: 300;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
+            text-align: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            color: var(--contpaqi-dark-blue);
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--contpaqi-dark-blue) 0%, var(--contpaqi-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        header .subtitle {
+            font-size: 28px;
+            color: var(--contpaqi-gray);
+            font-weight: 300;
+            margin-bottom: var(--spacing-md);
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        header .meta {
+            font-size: 17px;
+            color: var(--contpaqi-gray);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 300;
+        }
+
+        header .author {
+            font-size: 15px;
+            color: var(--contpaqi-gray);
+            font-style: italic;
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 300;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .bento-item {
+            background: var(--white);
+            border-radius: 24px;
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.15);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        .bento-item:active {
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        /* Cursor effects */
+        .bento-item,
+        .card,
+        .stat-card,
+        .timeline-item,
+        nav a {
+            cursor: pointer;
+        }
+
+        /* Glow effect on hover for key elements */
+        .card-teal:hover,
+        .card-blue:hover {
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.25), 0 0 40px rgba(0, 168, 168, 0.15);
+        }
+
+
+        /* Grid spans */
+        .span-4 { grid-column: span 4; }
+        .span-6 { grid-column: span 6; }
+        .span-8 { grid-column: span 8; }
+        .span-12 { grid-column: span 12; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--contpaqi-blue) 0%, var(--contpaqi-dark-blue) 100%);
+            color: var(--white);
+            border-radius: 24px;
+            padding: var(--spacing-2xl);
+            margin: var(--spacing-xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero h2 {
+            color: var(--white);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: left;
+            margin: var(--spacing-2xl) 0 var(--spacing-xl);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header h2 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--contpaqi-dark-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--contpaqi-blue) 0%, var(--contpaqi-teal) 100%);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 24px;
+            color: var(--contpaqi-gray);
+            max-width: 900px;
+            font-weight: 300;
+        }
+
+        /* Stagger animation for grid items */
+        .bento-grid {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .bento-item {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .bento-item:nth-child(1) { animation-delay: 0.1s; }
+        .bento-item:nth-child(2) { animation-delay: 0.2s; }
+        .bento-item:nth-child(3) { animation-delay: 0.3s; }
+        .bento-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 102, 204, 0.12);
+        }
+
+        .card h4 {
+            color: var(--contpaqi-dark-blue);
+            margin-bottom: var(--spacing-sm);
+            transition: color 0.3s ease;
+        }
+
+        .card:hover h4 {
+            color: var(--contpaqi-blue);
+        }
+
+        .card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            font-size: 17px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            position: relative;
+        }
+
+        .card li::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--contpaqi-blue) 0%, var(--contpaqi-teal) 100%);
+            transition: width 0.3s ease;
+        }
+
+        .card li:hover {
+            color: var(--contpaqi-blue);
+            transform: translateX(8px);
+            padding-left: var(--spacing-xs);
+        }
+
+        .card li:hover::after {
+            width: 40px;
+        }
+
+        .card li:before {
+            content: "•";
+            color: var(--contpaqi-blue);
+            font-weight: bold;
+            margin-right: var(--spacing-xs);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+        }
+
+        .card li:hover:before {
+            transform: scale(1.8) rotate(180deg);
+            color: var(--contpaqi-teal);
+        }
+
+        /* Teal accent cards - CONTPAQi */
+        .card-teal {
+            background: linear-gradient(135deg, var(--contpaqi-teal) 0%, var(--contpaqi-green) 100%);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-teal h4,
+        .card-teal li,
+        .card-teal h5 {
+            color: var(--white);
+        }
+
+        .card-teal li:before {
+            color: var(--white);
+        }
+
+        /* Blue accent cards - CONTPAQi */
+        .card-blue {
+            background: linear-gradient(135deg, var(--contpaqi-blue) 0%, var(--contpaqi-dark-blue) 100%);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-blue h4,
+        .card-blue li,
+        .card-blue h5 {
+            color: var(--white);
+        }
+
+        .card-blue li:before {
+            color: var(--white);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-lg) 0;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table th {
+            background: var(--contpaqi-dark-blue);
+            color: var(--white);
+            padding: var(--spacing-md);
+            text-align: left;
+            font-weight: 600;
+            font-size: 17px;
+            transition: background 0.3s ease;
+        }
+
+        table th:hover {
+            background: var(--contpaqi-blue);
+        }
+
+        table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 17px;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table tr {
+            transition: all 0.3s ease;
+        }
+
+        table tr:hover {
+            background: rgba(0, 102, 204, 0.05);
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.1);
+        }
+
+        table td {
+            transition: color 0.2s ease;
+        }
+
+        table tr:hover td {
+            color: var(--contpaqi-blue);
+        }
+
+        /* Quarter sections */
+        .quarter-section {
+            background: var(--white);
+            border-radius: 24px;
+            padding: var(--spacing-xl);
+            margin: var(--spacing-lg) 0;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quarter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--contpaqi-blue) 0%, var(--contpaqi-teal) 100%);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+
+        .quarter-section:hover {
+            transform: translateX(4px);
+            box-shadow: 0 12px 40px rgba(0, 102, 204, 0.12);
+        }
+
+        .quarter-section:hover::before {
+            transform: scaleY(1);
+        }
+
+        .quarter-section h3 {
+            color: var(--contpaqi-dark-blue);
+            margin-bottom: var(--spacing-md);
+            transition: color 0.3s ease;
+        }
+
+        .quarter-section:hover h3 {
+            color: var(--contpaqi-blue);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 2px 0;
+        }
+
+        li:hover {
+            color: var(--contpaqi-blue);
+            transform: translateX(4px);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* Scroll animations */
+        @media (prefers-reduced-motion: no-preference) {
+            .bento-item,
+            .quarter-section,
+            .timeline-item {
+                opacity: 0;
+                animation: fadeInUp 0.6s ease-out forwards;
+            }
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: var(--spacing-xs);
+        }
+
+        .badge-high {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .badge-high:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+        }
+
+        .badge-critical {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+            animation: pulse-badge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(192, 57, 43, 0.5); }
+        }
+
+        .badge-new {
+            background: linear-gradient(135deg, var(--contpaqi-teal) 0%, var(--contpaqi-green) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 168, 168, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .badge-new:hover {
+            transform: scale(1.05);
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.2);
+            border-color: rgba(0, 102, 204, 0.3);
+        }
+
+        /* Stat cards dentro de cards teal/blue */
+        .card-teal .stat-card,
+        .card-blue .stat-card {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card-teal .stat-card:hover,
+        .card-blue .stat-card:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        .card-teal .stat-value,
+        .card-blue .stat-value {
+            color: var(--white);
+        }
+
+        .card-teal .stat-label,
+        .card-blue .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--contpaqi-blue);
+            margin-bottom: var(--spacing-xs);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .stat-card:hover .stat-value {
+            transform: scale(1.1);
+            color: var(--contpaqi-teal);
+        }
+
+        .stat-label {
+            font-size: 17px;
+            color: var(--contpaqi-gray);
+            font-weight: 300;
+        }
+
+        /* Process flow */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: var(--spacing-xl) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: var(--spacing-md);
+        }
+
+        .process-step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--contpaqi-blue) 0%, var(--contpaqi-teal) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 auto var(--spacing-sm);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-step-number::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .process-step:hover .process-step-number {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .process-step:hover .process-step-number::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .process-step h5 {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: var(--spacing-md) var(--spacing-lg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--contpaqi-dark-blue);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        nav a:hover {
+            background: rgba(0, 102, 204, 0.1);
+            color: var(--contpaqi-blue);
+            transform: translateY(-2px);
+        }
+
+        nav a:hover::before {
+            left: 100%;
+        }
+
+        nav a:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--contpaqi-dark-blue) 0%, var(--contpaqi-dark) 100%);
+            color: var(--white);
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+            margin-top: var(--spacing-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 168, 168, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 17px;
+            margin: var(--spacing-xs) 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .span-4 { grid-column: span 6; }
+            .span-6 { grid-column: span 12; }
+            .span-8 { grid-column: span 12; }
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .timeline-item:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            h2 { font-size: 40px; }
+            h3 { font-size: 32px; }
+            h4 { font-size: 24px; }
+            
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .span-4,
+            .span-6,
+            .span-8,
+            .span-12 {
+                grid-column: span 1;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .process-flow {
+                flex-direction: column;
+            }
+
+            header {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+        }
+
+        /* Checkmarks and icons */
+        .icon-check {
+            color: var(--contpaqi-teal);
+            margin-right: var(--spacing-xs);
+            transition: transform 0.2s ease;
+        }
+
+        .icon-check:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .icon-new {
+            color: var(--contpaqi-blue);
+            margin-right: var(--spacing-xs);
+            transition: transform 0.2s ease;
+        }
+
+        .icon-new:hover {
+            transform: scale(1.2);
+        }
+
+        .icon-rocket {
+            color: var(--contpaqi-teal);
+            margin-right: var(--spacing-xs);
+            transition: transform 0.2s ease;
+        }
+
+        .icon-rocket:hover {
+            transform: scale(1.2) translateY(-4px);
+        }
+
+        /* Code blocks */
+        pre {
+            background: var(--contpaqi-dark);
+            color: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+            font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+
+        pre:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: var(--white);
+            border-left: 4px solid var(--contpaqi-teal);
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            margin: var(--spacing-md) 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 24px rgba(0, 168, 168, 0.15);
+        }
+
+        /* Timeline Horizontal */
+        .timeline {
+            position: relative;
+            padding: var(--spacing-xl) 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: var(--white);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--contpaqi-blue) 0%, var(--contpaqi-teal) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.15);
+        }
+
+        .timeline-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -28px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: var(--contpaqi-blue);
+            opacity: 0.4;
+            z-index: 10;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% {
+                transform: translateY(-50%) translateX(0);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-50%) translateX(4px);
+                opacity: 0.7;
+            }
+        }
+
+        .timeline-item:hover:not(:last-child)::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(8px);
+            color: var(--contpaqi-teal);
+        }
+
+        .timeline-marker {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--contpaqi-blue) 0%, var(--contpaqi-teal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: var(--spacing-md);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-marker {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-content h4 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--contpaqi-dark-blue);
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .timeline-content li {
+            padding: var(--spacing-xs) 0;
+            font-size: 15px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--spacing-md);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .timeline-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--contpaqi-teal);
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .timeline-content li:hover {
+            color: var(--contpaqi-blue);
+            transform: translateX(4px);
+        }
+
+        .timeline-content li:hover::before {
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#resumen">Resumen</a></li>
+            <li><a href="#objetivos">Objetivos</a></li>
+            <li><a href="#organizacion">Organización</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#metricas">Métricas</a></li>
+            <li><a href="#design-system">Design System</a></li>
+            <li><a href="#roi">ROI</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Estrategia de Product Design 2026</h1>
+        <p class="subtitle">Consolidación y Evolución de UX/UI hacia Product Design</p>
+        <p class="meta">Continuidad de la Estrategia UX/UI 2025 — Dirección de Desarrollo de Producto CONTPAQi®</p>
+        <p class="author">Estrategia realizada por Eduardo Lobato — Líder UX/UI</p>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h2>Evolucionar de UX/UI hacia Product Design</h2>
+            <p>Consolidando lo establecido y escalando hacia una función estratégica que impacte directamente en los resultados del negocio</p>
+        </div>
+
+        <!-- Resumen Ejecutivo -->
+        <section id="resumen" class="section-header">
+            <h2>Resumen Ejecutivo</h2>
+            <p>Esta estrategia propone la evolución y consolidación del área de UX/UI hacia un modelo de Product Design integral, construyendo sobre los cimientos establecidos durante 2025.</p>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-6 card-teal">
+                <h4>Lo Logrado en 2025</h4>
+                <ul>
+                    <li>Proceso UX/UI estructurado (6 fases)</li>
+                    <li>Métricas definidas por área</li>
+                    <li>Entregables documentados por etapa</li>
+                    <li>Identificación de necesidades</li>
+                    <li>Enfoque DesignOps implementado</li>
+                </ul>
+            </div>
+            <div class="bento-item span-6 card-blue">
+                <h4>Objetivo Principal 2026</h4>
+                <ul>
+                    <li><strong>Estrategia de Producto</strong>: Participación activa en roadmap</li>
+                    <li><strong>Impacto Medible</strong>: Conexión diseño-métricas de negocio</li>
+                    <li><strong>Escalabilidad</strong>: Sistemas y procesos escalables</li>
+                    <li><strong>Product Thinking</strong>: Decisiones basadas en datos</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Capacitación Exhaustiva en Productos CONTPAQi -->
+        <section class="section-header">
+            <h2>Iniciativas Medulares: Capacitación y Design System</h2>
+            <p style="font-weight: 300;">Dos pilares fundamentales que inician en Q1 y sustentan toda la estrategia</p>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-12 card-teal">
+                <h4>Capacitación Exhaustiva en Productos CONTPAQi <span class="badge badge-critical">Prioridad Crítica - Inicia Q1</span></h4>
+                <p style="font-weight: 300; margin-bottom: var(--spacing-md); font-size: 19px;">Esta iniciativa es crítica para habilitar a los diseñadores a proponer soluciones integrales sin depender exclusivamente del Product Owner. Inicia en Q1 y se desarrolla durante todo el año.</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); margin-top: var(--spacing-md);">
+                    <div>
+                        <h5>Q1: Nivel Básico</h5>
+                        <ul>
+                            <li>Mapeo de productos y funcionalidades</li>
+                            <li>Sesiones estructuradas por producto</li>
+                            <li>Hands-on practice</li>
+                            <li>Certificación básica</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>Q2: Nivel Intermedio</h5>
+                        <ul>
+                            <li>Funcionalidades avanzadas</li>
+                            <li>Casos de uso complejos</li>
+                            <li>Integración entre productos</li>
+                            <li>Evaluación intermedia</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>Q3-Q4: Nivel Avanzado</h5>
+                        <ul>
+                            <li>Casos especializados</li>
+                            <li>Actualización continua</li>
+                            <li>Contribución a documentación</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: var(--spacing-md); font-size: 17px; opacity: 0.9; font-weight: 300;"><strong>Resultado esperado:</strong> Diseñadores capaces de proponer soluciones sin depender exclusivamente del Product Owner</p>
+            </div>
+        </div>
+
+        <!-- Design System como Iniciativa Medular -->
+        <div class="bento-grid" style="margin-top: var(--spacing-md);">
+            <div class="bento-item span-12 card-blue">
+                <h4>Design System: Implementación y Escalamiento <span class="badge badge-high">Prioridad Alta - Inicia Q1</span></h4>
+                <p style="font-weight: 300; margin-bottom: var(--spacing-md); font-size: 19px;">El Design System es la base técnica que permite escalabilidad, consistencia y velocidad. Con la librería para devs existente y la integración MCP activa, Q1 se enfoca en la implementación activa.</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); margin-top: var(--spacing-md);">
+                    <div>
+                        <h5>Estado Actual</h5>
+                        <ul>
+                            <li>Design System en creación</li>
+                            <li>Librería para devs existente</li>
+                            <li>Integración MCP activa</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>Q1 2026: Implementación</h5>
+                        <ul>
+                            <li>Finalización Design Tokens</li>
+                            <li>Finalización Componentes Base</li>
+                            <li>Implementación en productos piloto</li>
+                            <li>Training del equipo</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>Q2-Q3: Escalamiento</h5>
+                        <ul>
+                            <li>Componentes Complejos</li>
+                            <li>Patrones de diseño</li>
+                            <li>Expansión a más productos</li>
+                            <li>Evolución basada en feedback</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objetivos Estratégicos -->
+        <section id="objetivos" class="section-header">
+            <h2>Objetivos Estratégicos 2026</h2>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-6 card">
+                <h4>1. Consolidación de Procesos y Métricas</h4>
+                <p class="small-text" style="color: var(--contpaqi-gray); margin-bottom: var(--spacing-sm);">Q1-Q2</p>
+                <ul>
+                    <li>Refinar y optimizar el proceso "to be"</li>
+                    <li>Completar implementación de métricas</li>
+                    <li>Establecer períodos de revisión</li>
+                    <li>Documentar subprocesos</li>
+                </ul>
+            </div>
+            <div class="bento-item span-6 card">
+                <h4>2. Evolución hacia Product Design</h4>
+                <p class="small-text" style="color: var(--apple-gray); margin-bottom: var(--spacing-sm);">Q2-Q3</p>
+                <ul>
+                    <li>Expandir habilidades hacia product thinking</li>
+                    <li>Desarrollar competencias en data analysis</li>
+                    <li>Participar en roadmap de producto</li>
+                    <li>Conectar diseño con métricas de negocio</li>
+                </ul>
+            </div>
+            <div class="bento-item span-6 card">
+                <h4>3. Escalamiento de Capacidades</h4>
+                <p class="small-text" style="color: var(--apple-gray); margin-bottom: var(--spacing-sm);">Q3-Q4</p>
+                <ul>
+                    <li>Implementar y evolucionar design system</li>
+                    <li>Establecer Research Operations</li>
+                    <li>Desarrollar prototipado avanzado</li>
+                    <li>Crear repositorio de insights</li>
+                </ul>
+            </div>
+            <div class="bento-item span-6 card">
+                <h4>4. Cultura y Medición de Impacto</h4>
+                <p class="small-text" style="color: var(--apple-gray); margin-bottom: var(--spacing-sm);">Todo el año</p>
+                <ul>
+                    <li>Promover design thinking</li>
+                    <li>Establecer comunidad de práctica</li>
+                    <li>Medir y comunicar ROI</li>
+                    <li>Documentar casos de éxito</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Evolución Organizacional -->
+        <section id="organizacion" class="section-header">
+            <h2>Evolución Organizacional</h2>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-6 card">
+                <h4>Estado Actual (2025)</h4>
+                <ul>
+                    <li>1 Líder UX/UI</li>
+                    <li>2 Senior UX/UI Designers</li>
+                    <li>2 Middle UX/UI Designers</li>
+                    <li>1 UX Researcher</li>
+                    <li><strong>Total: 6 personas</strong></li>
+                </ul>
+            </div>
+            <div class="bento-item span-6 card-teal">
+                <h4>Estructura Objetivo (2026)</h4>
+                <ul>
+                    <li>1 Gerente / Head of Product Design</li>
+                    <li>1 Senior Product Designer - Design System Lead</li>
+                    <li>2 Senior Product Designers</li>
+                    <li>2 Product Designers</li>
+                    <li>1 UX Researcher</li>
+                    <li><strong>Total: 7 personas</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bento-grid" style="margin-top: var(--spacing-md);">
+            <div class="bento-item span-12">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rol</th>
+                            <th>Cantidad</th>
+                            <th>Origen</th>
+                            <th>Responsabilidades Clave</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gerente / Head of Product Design</strong></td>
+                            <td>1</td>
+                            <td>Promoción del Líder</td>
+                            <td>Liderazgo estratégico, visión de diseño, stakeholders ejecutivos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Senior Product Designer - Design System Lead</strong></td>
+                            <td>1</td>
+                            <td>Promoción de 1 Senior</td>
+                            <td>Ownership completo del Design System, governance, integración MCP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Senior Product Designers</strong></td>
+                            <td>2</td>
+                            <td>1 actual + 1 nuevo</td>
+                            <td>Ownership de productos/features, product thinking, mentoring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Product Designers</strong></td>
+                            <td>2</td>
+                            <td>2 Middle (upskilling)</td>
+                            <td>Diseño de features, prototipado, handoff, uso del DS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>UX Researcher</strong></td>
+                            <td>1</td>
+                            <td>Rol existente</td>
+                            <td>Research continuo, ResearchOps, insights, soporte al equipo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Roadmap -->
+        <section id="roadmap" class="section-header">
+            <h2>Roadmap de Implementación</h2>
+            <p>Estructura por trimestres con objetivos claros y entregables medibles</p>
+        </section>
+
+        <div class="quarter-section">
+            <h3>Q1 2026: Consolidación, Design System e Implementación</h3>
+            <div class="bento-grid">
+                <div class="bento-item span-6 card">
+                    <h4>Objetivos</h4>
+                    <ul>
+                        <li>Consolidar procesos establecidos en 2025</li>
+                        <li>Implementar Design System en productos</li>
+                        <li class="priority-critical">Capacitación exhaustiva en productos CONTPAQi</li>
+                        <li>Refinar métricas y establecer períodos</li>
+                        <li>Completar Jobs to be Done framework</li>
+                    </ul>
+                </div>
+                <div class="bento-item span-6 card-teal">
+                    <h4>Actividades Clave</h4>
+                    <ul>
+                        <li><strong>Implementación del Design System</strong> <span class="badge badge-high">Prioridad Alta</span></li>
+                        <li><strong>Capacitación en Productos CONTPAQi</strong> <span class="badge badge-critical">Prioridad Crítica</span></li>
+                        <li>Refinamiento de Procesos</li>
+                        <li>Jobs to be Done Framework</li>
+                        <li>Métricas y Períodos de Revisión</li>
+                        <li>Auditoría y Análisis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarter-section">
+            <h3>Q2 2026: Design System Escalamiento y ResearchOps</h3>
+            <div class="bento-grid">
+                <div class="bento-item span-6 card">
+                    <h4>Objetivos</h4>
+                    <ul>
+                        <li>Escalar implementación del Design System</li>
+                        <li>Establecer Research Operations</li>
+                        <li>Mejorar herramientas y stack tecnológico</li>
+                        <li>Continuar capacitación productos CONTPAQi (intermedio)</li>
+                        <li>Iniciar capacitación en product thinking</li>
+                    </ul>
+                </div>
+                <div class="bento-item span-6 card-blue">
+                    <h4>Actividades Clave</h4>
+                    <ul>
+                        <li>Design System Escalamiento (Liderado por Design System Lead)</li>
+                        <li>Research Operations (ResearchOps)</li>
+                        <li>Stack Tecnológico</li>
+                        <li>Capacitación en Productos CONTPAQi (Nivel Intermedio)</li>
+                        <li>Capacitación Inicial en Product Thinking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarter-section">
+            <h3>Q3 2026: Product Thinking y Escalamiento</h3>
+            <div class="bento-grid">
+                <div class="bento-item span-6 card">
+                    <h4>Objetivos</h4>
+                    <ul>
+                        <li>Desarrollar product thinking en el equipo</li>
+                        <li>Participar activamente en roadmap de producto</li>
+                        <li>Escalar impacto del diseño</li>
+                        <li>Establecer cultura de diseño</li>
+                    </ul>
+                </div>
+                <div class="bento-item span-6 card-teal">
+                    <h4>Actividades Clave</h4>
+                    <ul>
+                        <li>Product Thinking Avanzado</li>
+                        <li>Expansión de Impacto</li>
+                        <li>Cultura de Diseño</li>
+                        <li>Colaboración Interdisciplinaria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarter-section">
+            <h3>Q4 2026: Medición, Optimización y Planificación 2027</h3>
+            <div class="bento-grid">
+                <div class="bento-item span-6 card">
+                    <h4>Objetivos</h4>
+                    <ul>
+                        <li>Medir impacto del diseño en negocio</li>
+                        <li>Optimizar procesos y herramientas</li>
+                        <li>Evolucionar design system</li>
+                        <li>Planificar estrategia 2027</li>
+                    </ul>
+                </div>
+                <div class="bento-item span-6 card-blue">
+                    <h4>Actividades Clave</h4>
+                    <ul>
+                        <li>Medición de Impacto</li>
+                        <li>Optimización Continua</li>
+                        <li>Evolución del Design System</li>
+                        <li>Planificación 2027</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Design System -->
+        <section id="design-system" class="section-header">
+            <h2>Design System</h2>
+            <p>Implementación y evolución del sistema de diseño</p>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-4 card">
+                <h4>Estado Actual</h4>
+                <ul>
+                    <li>Design System en creación</li>
+                    <li>Librería para devs existente</li>
+                    <li>Integración MCP activa</li>
+                </ul>
+            </div>
+            <div class="bento-item span-4 card-teal">
+                <h4>Fase 1: Q1 2026</h4>
+                <ul>
+                    <li>Finalización Design Tokens</li>
+                    <li>Finalización Componentes Base</li>
+                    <li>Implementación en productos piloto</li>
+                    <li>Training del equipo</li>
+                </ul>
+            </div>
+            <div class="bento-item span-4 card-blue">
+                <h4>Fase 2: Q2-Q3</h4>
+                <ul>
+                    <li>Componentes Complejos</li>
+                    <li>Patrones de diseño</li>
+                    <li>Expansión a más productos</li>
+                    <li>Evolución basada en feedback</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Métricas -->
+        <section id="metricas" class="section-header">
+            <h2>Métricas y ROI</h2>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-4 card">
+                <h4>Métricas de Eficiencia</h4>
+                <div class="stats-grid" style="grid-template-columns: 1fr; margin: var(--spacing-md) 0 0;">
+                    <div class="stat-card" style="padding: var(--spacing-sm);">
+                        <div class="stat-value" style="font-size: 32px;">30-40%</div>
+                        <div class="stat-label">Reducción tiempo diseño</div>
+                    </div>
+                    <div class="stat-card" style="padding: var(--spacing-sm);">
+                        <div class="stat-value" style="font-size: 32px;">50%</div>
+                        <div class="stat-label">Reducción rework</div>
+                    </div>
+                    <div class="stat-card" style="padding: var(--spacing-sm);">
+                        <div class="stat-value" style="font-size: 32px;">60%</div>
+                        <div class="stat-label">Aumento velocidad iteración</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bento-item span-4 card">
+                <h4>Métricas de Calidad</h4>
+                <div class="stats-grid" style="grid-template-columns: 1fr; margin: var(--spacing-md) 0 0;">
+                    <div class="stat-card" style="padding: var(--spacing-sm);">
+                        <div class="stat-value" style="font-size: 32px;">25%</div>
+                        <div class="stat-label">Mejora usabilidad</div>
+                    </div>
+                    <div class="stat-card" style="padding: var(--spacing-sm);">
+                        <div class="stat-value" style="font-size: 32px;">40%</div>
+                        <div class="stat-label">Reducción bugs UI</div>
+                    </div>
+                    <div class="stat-card" style="padding: var(--spacing-sm);">
+                        <div class="stat-value" style="font-size: 32px;">30%</div>
+                        <div class="stat-label">Mejora satisfacción usuario</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bento-item span-4 card-teal">
+                <h4>Impacto en Negocio</h4>
+                <div class="stats-grid" style="grid-template-columns: 1fr; margin: var(--spacing-md) 0 0;">
+                    <div class="stat-card" style="padding: var(--spacing-sm); background: rgba(255,255,255,0.2);">
+                        <div class="stat-value" style="font-size: 32px; color: white;">15-20%</div>
+                        <div class="stat-label" style="color: white;">Mejora conversión</div>
+                    </div>
+                    <div class="stat-card" style="padding: var(--spacing-sm); background: rgba(255,255,255,0.2);">
+                        <div class="stat-value" style="font-size: 32px; color: white;">25%</div>
+                        <div class="stat-label" style="color: white;">Reducción churn</div>
+                    </div>
+                    <div class="stat-card" style="padding: var(--spacing-sm); background: rgba(255,255,255,0.2);">
+                        <div class="stat-value" style="font-size: 32px; color: white;">30%</div>
+                        <div class="stat-label" style="color: white;">Mejora feature adoption</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nuevas Métricas -->
+        <div class="bento-grid" style="margin-top: var(--spacing-md);">
+            <div class="bento-item span-4 card">
+                <h4>Product Impact Metrics</h4>
+                <ul>
+                    <li>Feature Adoption Rate</li>
+                    <li>Time to Value</li>
+                    <li>Engagement Metrics</li>
+                    <li>Conversion Impact</li>
+                </ul>
+            </div>
+            <div class="bento-item span-4 card">
+                <h4>Business Impact Metrics</h4>
+                <ul>
+                    <li>Revenue Impact</li>
+                    <li>Churn Reduction</li>
+                    <li>Support Ticket Reduction</li>
+                    <li>Onboarding Efficiency</li>
+                </ul>
+            </div>
+            <div class="bento-item span-4 card">
+                <h4>Design System Metrics</h4>
+                <ul>
+                    <li>Component Reuse Rate</li>
+                    <li>Design System Adoption</li>
+                    <li>Design Debt</li>
+                    <li>Design System Velocity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ROI -->
+        <section id="roi" class="section-header">
+            <h2>ROI y Retorno Esperado</h2>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-12">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-lg);">
+                    <div class="stat-card">
+                        <div class="stat-value">30-40%</div>
+                        <div class="stat-label">Reducción tiempo diseño</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">50%</div>
+                        <div class="stat-label">Reducción rework</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">60%</div>
+                        <div class="stat-label">Aumento velocidad</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">40%</div>
+                        <div class="stat-label">Reducción handoff</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proceso Evolucionado -->
+        <section class="section-header">
+            <h2>Proceso Evolucionado</h2>
+            <p>De UX/UI a Product Design</p>
+        </section>
+
+        <div class="process-flow">
+            <div class="process-step">
+                <div class="process-step-number">1</div>
+                <h5>Discovery y Problem Space</h5>
+                <p class="small-text">Business context, market analysis, data analysis</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-number">2</div>
+                <h5>Ideación con Product Thinking</h5>
+                <p class="small-text">Hypothesis-driven, priorización, business validation</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-number">3</div>
+                <h5>Diseño y Prototipado</h5>
+                <p class="small-text">Testing continuo, data-informed, accessibility</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-number">4</div>
+                <h5>Desarrollo</h5>
+                <p class="small-text">Design-Engineering sync, Design QA, component library</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-number">5</div>
+                <h5>Validación y Lanzamiento</h5>
+                <p class="small-text">Pre-launch metrics, launch plan, success criteria</p>
+            </div>
+            <div class="process-step">
+                <div class="process-step-number">6</div>
+                <h5>Monitoreo y Mejora</h5>
+                <p class="small-text">Business metrics, impact analysis, iteration planning</p>
+            </div>
+        </div>
+
+        <!-- Continuidad y Evolución -->
+        <section class="section-header">
+            <h2>Continuidad y Evolución</h2>
+        </section>
+
+        <div class="bento-grid">
+            <div class="bento-item span-4 card">
+                <h4>Lo que Mantenemos ✅</h4>
+                <ul>
+                    <li>Proceso estructurado (6 fases)</li>
+                    <li>Métricas definidas</li>
+                    <li>Entregables por etapa</li>
+                    <li>Enfoque DesignOps</li>
+                    <li>Colaboración con Product y Engineering</li>
+                </ul>
+            </div>
+            <div class="bento-item span-4 card-teal">
+                <h4>Lo que Evolucionamos 🚀</h4>
+                <ul>
+                    <li>Product Thinking</li>
+                    <li>Business Impact</li>
+                    <li>Design System completo</li>
+                    <li>ResearchOps</li>
+                    <li>Estrategia</li>
+                </ul>
+            </div>
+            <div class="bento-item span-4 card-blue">
+                <h4>Lo que Agregamos ➕</h4>
+                <ul>
+                    <li>Participación en Roadmap</li>
+                    <li>Métricas de Negocio</li>
+                    <li>Design System Completo</li>
+                    <li>ResearchOps</li>
+                    <li>Cultura de Diseño</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Próximos Pasos -->
+        <section class="section-header">
+            <h2>Próximos Pasos Inmediatos</h2>
+            <p>Q1 2026 - Primeros 90 días</p>
+        </section>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker">1-2</div>
+                <div class="timeline-content">
+                    <h4>Kickoff y Alineación</h4>
+                    <ul>
+                        <li>Reunión con stakeholders</li>
+                        <li>Presentación al equipo</li>
+                        <li>Proceso de promoción del Líder</li>
+                        <li>Proceso de promoción de 1 Senior</li>
+                        <li>Inicio de contratación nuevo Senior</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">3-4</div>
+                <div class="timeline-content">
+                    <h4>Auditoría y Análisis</h4>
+                    <ul>
+                        <li>Evaluación proceso "to be" vs "as is"</li>
+                        <li>Análisis de métricas 2025</li>
+                        <li>Inventario de herramientas</li>
+                        <li>Identificación de gaps</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">5-8</div>
+                <div class="timeline-content">
+                    <h4>Refinamiento e Implementación</h4>
+                    <ul>
+                        <li>Documentación de subprocesos</li>
+                        <li>Mapeo a Jobs to be Done</li>
+                        <li>Setup de dashboard de métricas</li>
+                        <li>Implementación Design System</li>
+                        <li>Inicio capacitación productos CONTPAQi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker">9-12</div>
+                <div class="timeline-content">
+                    <h4>Consolidación</h4>
+                    <ul>
+                        <li>Playbook de procesos publicado</li>
+                        <li>Design System en uso activo</li>
+                        <li>Capacitación productos CONTPAQi avanzando</li>
+                        <li>Evaluación y certificación básica</li>
+                        <li>ResearchOps setup iniciado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Estrategia de Product Design 2026</strong></p>
+        <p>Dirección de Desarrollo de Producto CONTPAQi®</p>
+        <p>Documento creado: Enero 2026 | Versión: 2.0 | Próxima revisión: Trimestral</p>
+    </footer>
+</body>
+</html>

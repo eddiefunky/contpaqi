@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="es" class="theme-dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Informe Anual — Equipo de Product Design</title>
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="Informe anual del equipo de Product Design: outcomes, aportaciones y dirección del área." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (() => {
+        const STORAGE_KEY = "report-theme";
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const theme = stored === "light" ? "light" : "dark"; // dark is default
+        const root = document.documentElement;
+        root.classList.toggle("theme-light", theme === "light");
+        root.classList.toggle("theme-dark", theme !== "light");
+      })();
+    </script>
+    <style>
+      :root {
+        /* Theme tokens (dark default) */
+        --bg: #070a12;
+        --ink: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.70);
+        --muted2: rgba(255, 255, 255, 0.54);
+        --border: rgba(255, 255, 255, 0.10);
+        --panel: rgba(17, 23, 40, 0.66);
+        --card: rgba(14, 18, 34, 0.92);
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+        --shadow2: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+        /* Component tokens */
+        --btn-bg: rgba(255, 255, 255, 0.06);
+        --btn-bg-hover: rgba(255, 255, 255, 0.10);
+        --btn-text: rgba(255, 255, 255, 0.78);
+        --btn-border-hover: rgba(27, 108, 255, 0.35);
+
+        /* CONTPAQi brand (from brand manual) */
+        --brand-primary: #0055a5;
+        --brand-secondary: #009ee2;
+        --brand-primary-rgb: 0, 85, 165;
+        --brand-secondary-rgb: 0, 158, 226;
+
+        --toc-hover: rgba(var(--brand-secondary-rgb), 0.18);
+        --quote-bg: rgba(var(--brand-secondary-rgb), 0.18);
+
+        --pill-bg: rgba(var(--brand-secondary-rgb), 0.20);
+        --pill-primary: rgba(var(--brand-primary-rgb), 0.26);
+        --pill-secondary: rgba(var(--brand-secondary-rgb), 0.22);
+        --pill-amber: rgba(255, 176, 32, 0.18);
+        --pill-slate: rgba(255, 255, 255, 0.10);
+
+        --radius-xl: 24px;
+        --radius-lg: 18px;
+        --radius-md: 14px;
+        --accent: var(--brand-primary);
+        --accent2: var(--brand-secondary);
+        --accent3: #ffb020;
+        --max: 100%;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        --display: "Manrope", "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      .theme-light {
+        /* CONTPAQi-tinted light */
+        --bg: #f2f7fd;
+        --panel: rgba(255, 255, 255, 0.86);
+        --card: #ffffff;
+        --ink: #0b1220;
+        --muted: rgba(11, 18, 32, 0.68);
+        --muted2: rgba(11, 18, 32, 0.52);
+        --border: rgba(var(--brand-primary-rgb), 0.14);
+        --shadow: 0 18px 50px rgba(2, 6, 23, 0.10);
+        --shadow2: 0 10px 26px rgba(2, 6, 23, 0.08);
+
+        --btn-bg: rgba(255, 255, 255, 0.75);
+        --btn-bg-hover: #fff;
+        --btn-text: rgba(11, 18, 32, 0.76);
+        --btn-border-hover: rgba(var(--brand-secondary-rgb), 0.35);
+
+        --toc-hover: rgba(var(--brand-secondary-rgb), 0.08);
+        --quote-bg: rgba(var(--brand-secondary-rgb), 0.08);
+
+        --pill-bg: rgba(var(--brand-secondary-rgb), 0.12);
+        --pill-primary: rgba(var(--brand-primary-rgb), 0.12);
+        --pill-secondary: rgba(var(--brand-secondary-rgb), 0.12);
+        --pill-amber: rgba(255, 176, 32, 0.16);
+        --pill-slate: rgba(var(--brand-primary-rgb), 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      html {
+        position: relative;
+        background: var(--bg);
+      }
+
+      /* Cross-fade backgrounds for smooth theme transitions */
+      html::before,
+      html::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        transition: opacity 320ms ease;
+      }
+
+      html::before {
+        opacity: 1;
+        background:
+          radial-gradient(1100px 700px at 20% -15%, rgba(var(--brand-secondary-rgb), 0.22), transparent 60%),
+          radial-gradient(900px 600px at 85% 0%, rgba(var(--brand-primary-rgb), 0.14), transparent 55%),
+          radial-gradient(900px 650px at 75% 95%, rgba(255, 176, 32, 0.14), transparent 55%);
+      }
+
+      html::after {
+        opacity: 0;
+        background:
+          radial-gradient(1100px 700px at 20% -15%, rgba(var(--brand-secondary-rgb), 0.14), transparent 60%),
+          radial-gradient(900px 600px at 85% 0%, rgba(var(--brand-primary-rgb), 0.10), transparent 55%),
+          radial-gradient(900px 650px at 75% 95%, rgba(255, 176, 32, 0.10), transparent 55%);
+      }
+
+      .theme-light::before { opacity: 0; }
+      .theme-light::after { opacity: 1; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--sans);
+        background: transparent;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Smooth theme transitions for key surfaces */
+      html,
+      body,
+      .topline,
+      .hero,
+      section,
+      .toc,
+      .card,
+      .btn,
+      .pill,
+      .quote,
+      .slider {
+        transition:
+          background-color 260ms ease,
+          color 260ms ease,
+          border-color 260ms ease,
+          box-shadow 260ms ease;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html::before,
+        html::after,
+        .topline,
+        .hero,
+        section,
+        .toc,
+        .card,
+        .btn,
+        .pill,
+        .quote,
+        .slider {
+          transition: none !important;
+        }
+      }
+
+      a { color: inherit; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .wrap {
+        width: calc(100% - 160px);
+        margin: 0 auto;
+        padding: 26px 0 72px;
+      }
+      @media (max-width: 980px) {
+        .wrap { width: calc(100% - 48px); }
+      }
+
+      .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: var(--radius-lg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: var(--shadow2);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        color: var(--muted);
+      }
+
+      .left {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .wordmark {
+        font-family: var(--display);
+        letter-spacing: -0.01em;
+        font-weight: 800;
+        font-size: 14px;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .wordmark span {
+        font-weight: 700;
+        color: var(--muted);
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--accent), var(--accent2));
+        box-shadow: 0 6px 16px rgba(27, 108, 255, 0.35);
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .btn {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: var(--btn-bg);
+        border-radius: 999px;
+        padding: 10px 12px;
+        font-size: 13px;
+        font-weight: 650;
+        color: var(--btn-text);
+        cursor: pointer;
+        transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, border-color 120ms ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: var(--btn-border-hover);
+        box-shadow: 0 14px 28px rgba(2, 6, 23, 0.10);
+        background: var(--btn-bg-hover);
+      }
+
+      /* Theme switch */
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 0;
+        background: transparent;
+      }
+      .theme-toggle .hint {
+        font-size: 12px;
+        font-weight: 650;
+        color: var(--muted2);
+        letter-spacing: 0.01em;
+        user-select: none;
+      }
+      .switch {
+        position: relative;
+        width: 46px;
+        height: 26px;
+        display: inline-block;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border);
+        transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      }
+      .slider::before {
+        content: "";
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 999px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.70));
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+        transition: transform 160ms ease, background 160ms ease;
+      }
+      /* checked = light */
+      .switch input:checked + .slider {
+        background: rgba(var(--brand-secondary-rgb), 0.22);
+        border-color: rgba(var(--brand-secondary-rgb), 0.30);
+      }
+      .switch input:checked + .slider::before {
+        transform: translate(20px, -50%);
+      }
+      .switch input:focus-visible + .slider {
+        box-shadow: 0 0 0 4px rgba(var(--brand-secondary-rgb), 0.25);
+      }
+
+      .hero {
+        margin-top: 18px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border);
+        background:
+          radial-gradient(1000px 550px at 0% 0%, rgba(var(--brand-secondary-rgb), 0.22), transparent 60%),
+          radial-gradient(950px 620px at 100% 0%, rgba(var(--brand-primary-rgb), 0.14), transparent 60%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+        box-shadow: var(--shadow);
+        padding: 28px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        overflow: hidden;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted2);
+      }
+
+      h1 {
+        margin: 14px 0 6px;
+        font-size: clamp(34px, 4.4vw, 54px);
+        letter-spacing: -0.02em;
+        line-height: 1.08;
+        font-family: var(--display);
+      }
+      .sub {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15.5px;
+        line-height: 1.65;
+        max-width: 90ch;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      @media (max-width: 980px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+
+      .toc {
+        position: sticky;
+        top: 18px;
+        align-self: start;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        background: var(--panel);
+        box-shadow: var(--shadow2);
+        padding: 22px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      @media (max-width: 980px) {
+        .toc { position: static; }
+      }
+
+      .toc h2 {
+        margin: 0 0 10px;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted2);
+      }
+
+      .toc a {
+        display: block;
+        padding: 14px 14px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        color: var(--ink);
+        font-weight: 650;
+        font-size: 13.5px;
+        transition: background 140ms ease, border-radius 140ms ease;
+      }
+      .toc a:hover {
+        background: var(--toc-hover);
+        border-color: transparent;
+        border-radius: 999px;
+        text-decoration: none;
+      }
+      .toc a small { display: block; font-weight: 600; color: var(--muted2); margin-top: 2px; }
+
+      section {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        background: var(--panel);
+        box-shadow: var(--shadow2);
+        padding: 22px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        scroll-margin-top: 18px;
+      }
+
+      section + section { margin-top: 18px; }
+
+      h3 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+        font-family: var(--display);
+      }
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 15.25px;
+      }
+      .lead + .lead { margin-top: 10px; }
+
+      .lead-block { margin-top: 18px; }
+      .lead-block:first-of-type { margin-top: 0; }
+      .lead-title {
+        font-family: var(--display);
+        font-weight: 800;
+        color: var(--ink);
+      }
+      .lead-body { margin-top: 8px; }
+
+      /* Make leadership blocks easier to scan (indent + subtle bullet + more air) */
+      .lead-block {
+        position: relative;
+        padding-left: 18px;
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      .lead-block::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 11px;
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(27, 108, 255, 0.55);
+      }
+      .lead-body {
+        line-height: 1.78;
+        color: var(--muted);
+      }
+
+      .bento {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      @media (max-width: 980px) {
+        .bento { grid-template-columns: 1fr; }
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: var(--radius-xl);
+        padding: 22px 22px 20px;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, background 140ms ease;
+      }
+      .card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 22px 52px rgba(2, 6, 23, 0.12);
+        border-color: rgba(27, 108, 255, 0.28);
+      }
+
+      /* Stronger hover lift for dark mode (more perceptible) */
+      .theme-dark .card:hover {
+        transform: translateY(-3px);
+        background: rgba(18, 23, 43, 0.96);
+        border-color: rgba(var(--brand-secondary-rgb), 0.40);
+        box-shadow:
+          0 26px 70px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(var(--brand-secondary-rgb), 0.14);
+      }
+
+      /* Stronger hover lift for light mode (still clean) */
+      .theme-light .card:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(var(--brand-secondary-rgb), 0.30);
+        box-shadow:
+          0 22px 46px rgba(2, 6, 23, 0.14),
+          0 0 0 1px rgba(var(--brand-secondary-rgb), 0.10);
+      }
+
+      .span-6, .span-7, .span-5, .span-12 { grid-column: auto; }
+
+      .card h4 {
+        margin: 0;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        font-family: var(--display);
+      }
+
+      .pill {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 0;
+        color: var(--ink);
+        background: var(--pill-bg);
+      }
+
+      .pill--primary { background: var(--pill-primary); }
+      .pill--secondary { background: var(--pill-secondary); }
+      .pill--amber { background: var(--pill-amber); }
+      .pill--slate { background: var(--pill-slate); }
+
+      .span-all { grid-column: 1 / -1; }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+        font-size: 14.6px;
+      }
+      .card p + p { margin-top: 0; }
+
+      .list {
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+      .li {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 12px 12px;
+        background: var(--card);
+      }
+      .li strong {
+        display: block;
+        font-size: 14.6px;
+        letter-spacing: -0.01em;
+        margin-bottom: 4px;
+      }
+      .li span {
+        display: block;
+        color: var(--muted);
+        line-height: 1.65;
+        font-size: 14.4px;
+      }
+
+      .quote {
+        margin-top: 0;
+        border-radius: 999px;
+        border: 0;
+        background: var(--quote-bg);
+        padding: 12px 20px;
+      }
+      .card > .quote { margin-top: auto; }
+      .quote b { color: var(--ink); }
+      .quote p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted2);
+        font-size: 12.5px;
+        line-height: 1.65;
+      }
+
+      @media print {
+        body { background: #fff; }
+        .topline, .toc, .actions { display: none !important; }
+        .wrap { width: 100%; padding: 0; }
+        .hero, section, .card { box-shadow: none !important; background: #fff !important; }
+      }
+    </style>
+    <script>
+      (() => {
+        const STORAGE_KEY = "report-theme";
+        const root = document.documentElement;
+        const apply = (theme) => {
+          const isLight = theme === "light";
+          root.classList.toggle("theme-light", isLight);
+          root.classList.toggle("theme-dark", !isLight);
+          localStorage.setItem(STORAGE_KEY, isLight ? "light" : "dark");
+          // UI label handled by the switch state
+        };
+
+        window.addEventListener("DOMContentLoaded", () => {
+          const input = document.getElementById("themeToggle");
+          if (!input) return;
+          const current = root.classList.contains("theme-light") ? "light" : "dark";
+          input.checked = current === "light";
+          input.addEventListener("change", () => {
+            apply(input.checked ? "light" : "dark");
+          });
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topline">
+        <div class="left">
+          <div class="wordmark">CONTPA<span>Qi</span></div>
+          <div class="badge">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Informe anual · Dirección de Desarrollo de Producto</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn" type="button" onclick="window.print()">Imprimir / PDF</button>
+          <div class="theme-toggle" aria-label="Cambiar tema">
+            <span class="hint">Dark</span>
+            <label class="switch">
+              <input id="themeToggle" type="checkbox" aria-label="Tema (activar para modo claro)" />
+              <span class="slider"></span>
+            </label>
+            <span class="hint">Light</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="hero" id="inicio">
+        <div class="kicker">Informe anual · 2025</div>
+        <h1>Equipo de Product Design</h1>
+      </header>
+
+      <div class="layout">
+        <nav class="toc" aria-label="Contenido">
+          <h2>Contenido</h2>
+          <a href="#introduccion">Introducción<small>Contexto y alcance</small></a>
+          <a href="#aportaciones">Aportaciones del equipo<small>Impacto por persona</small></a>
+          <a href="#liderazgo">Liderazgo del área<small>Dirección y escalabilidad</small></a>
+          <a href="#retos">Pendientes y retos<small>Siguiente nivel de madurez</small></a>
+          <a href="#cierre">Cierre<small>Visión de equipo</small></a>
+        </nav>
+
+        <main>
+          <section id="introduccion">
+            <h3>Introducción</h3>
+            <p class="lead">
+              Este año representó un hito para el equipo de Product Design. El trabajo se centró en madurar la forma en
+              que el equipo opera, cómo se toman decisiones, cómo se reduce la incertidumbre antes de desarrollo y cómo el
+              diseño se conecta de manera más clara con los objetivos del usuario.
+            </p>
+            <p class="lead">
+              Este informe no incluye el trabajo operativo, seguimiento cotidiano, iteraciones y coordinación continua. Lo
+              que se muestra es una selección de lo más representativo del impacto logrado.
+            </p>
+            <p class="lead">
+              El contenido refleja decisiones, aprendizajes y avances que marcaron la dirección del área. Hay trabajo
+              importante que no aparece aquí por alcance (ajustes finos, seguimiento recurrente, coordinación diaria), pero
+              fue parte esencial para habilitar los resultados descritos.
+            </p>
+          </section>
+
+          <section id="aportaciones">
+            <h3>Aportaciones del equipo</h3>
+            <p class="lead">
+              A continuación, una síntesis por persona de los outcomes más representativos, enfocada en el impacto logrado
+              y en cómo el diseño habilitó decisiones mejor informadas y ejecución con menos riesgo.
+            </p>
+
+            <div class="bento" role="list">
+              <article class="card span-6" role="listitem" id="jeremy">
+                <h4>Jeremy <span class="pill pill--amber">Evidencia → decisión</span></h4>
+                <p>
+                  El trabajo de Jeremy se caracterizó por transformar contextos complejos y opiniones dispersas en evidencia
+                  clara para la toma de decisiones, especialmente en productos con alta fricción operacon usuarios.
+                </p>
+                <p>
+                  En el proyecto de rediseño CONTPAQi PW, condujo investigación cualitativa y validó un prototipo que
+                  demuestra que los casos de uso pueden resolverse de principio a fin dentro del mismo sistema, sin depender
+                  de validaciones externas. Este trabajo sentó bases para reducir dependencias de soporte y tiempos de
+                  atención, con impacto directo en eficiencia operativa.
+                </p>
+                <p>
+                  En CONTPAQi Colabora, su aportación permitió convertir feedback fragmentado en un diagnóstico validado,
+                  alineando a la tríada y priorizando cambios clave en onboarding, flujos críticos y confirmaciones. Esto
+                  redujo el riesgo de errores en producción y ajustes tardíos.
+                </p>
+                <p>
+                  En CONTPAQi Contabiliza, lideró pruebas de usabilidad y amplió la investigación para identificar tanto
+                  fricciones estructurales como fortalezas del producto. A partir de esta evidencia, se construyó un backlog
+                  priorizado que permitió ajustar el alcance disminuyendo retrabajo y costo de cambios posteriores.
+                </p>
+                <div class="quote">
+                  <p>Su impacto estuvo en habilitar decisiones mejor informadas y productos más preparados antes de ejecución.</p>
+                </div>
+              </article>
+
+              <article class="card span-6" role="listitem" id="jonathan">
+                <h4>Jonathan <span class="pill pill--amber">Rediseño → adopción</span></h4>
+                <p>
+                  Aportó una visión consistente de rediseño orientado a adopción, percepción y escalabilidad, combinando
+                  criterio de producto con ejecución sólida.
+                </p>
+                <p>
+                  Durante el año lideró el rediseño de Colabora, enfocándose en mejorar flujos críticos y arquitectura de
+                  información. El resultado fue una experiencia más clara, moderna y mejor aceptada por usuarios y
+                  stakeholders, impactando positivamente en adopción y percepción del producto.
+                </p>
+                <p>
+                  Participó además en una iniciativa de Micro Frontends y MCP, trabajando de forma cercana con desarrollo
+                  para validar la viabilidad de nuevas aproximaciones técnicas desde la perspectiva de experiencia. Este
+                  trabajo permitirá implementar y actualizar el nuevo Design System de manera más automatizada y reducirá
+                  riesgos técnicos y de experiencia de usuario.
+                </p>
+                <p>
+                  Jonathan también diseñó el portal Mi Facturación, construyendo un MVP claro, con un flujo de pocos pasos y
+                  menor probabilidad de error.
+                </p>
+                <p>
+                  Adicionalmente, lideró el rediseño del módulo de Pólizas en Contabiliza, donde la simplificación de flujos
+                  y mejora visual apoya directamente la retención y continuidad de uso.
+                </p>
+                <div class="quote">
+                  <p>Su aporte se distinguió por mantener coherencia entre visión de producto y ejecución diaria.</p>
+                </div>
+              </article>
+
+              <article class="card span-6" role="listitem" id="maritza">
+                <h4>Maritza <span class="pill pill--amber">Ambigüedad → claridad</span></h4>
+                <p>
+                  Su trabajo se enfocó en dar estructura y claridad en iniciativas con alta ambigüedad y visibilidad
+                  estratégica, habilitando avance con mayor certeza.
+                </p>
+                <p>
+                  En Analiza, contribuyó a convertir una idea inicial en un concepto claro y validado rápidamente,
+                  permitiendo a dirección evaluar la iniciativa con base en evidencia y avanzar a pruebas tempranas Esto
+                  aceleró la toma de decisiones y evitó inversión temprana sin validación suficiente.
+                </p>
+                <p>
+                  También participó en la definición de lineamientos visuales con la propuesta de un nuevo look n feel y
+                  Design System, que hoy funcionan como referencia transversal para distintos productos y reducen dispersión
+                  y esfuerzos duplicados.
+                </p>
+                <p>
+                  Además, colaboró en la evolución de productos como Optimiza, Contabilidad y Tesorería, así como en
+                  exploraciones de nuevas interacciones, aportando criterio de experiencia en contextos donde UX comenzaba a
+                  integrarse de forma más temprana.
+                </p>
+                <div class="quote">
+                  <p>Su impacto estuvo en ordenar, clarificar y habilitar avance oportuno.</p>
+                </div>
+              </article>
+
+              <article class="card span-6" role="listitem" id="itzel">
+                <h4>Itzel <span class="pill pill--amber">Coherencia → base reusable</span></h4>
+                <p>
+                  El aporte de Itzel se caracterizó por ordenar, simplificar y dejar bases reutilizables dentro de productos
+                  existentes, cuidando siempre la coherencia entre experiencia y limitaciones técnicas.
+                </p>
+                <p>
+                  A lo largo del año, trabajó en la mejora del Asistente de Activación, Escritorios Virtuales y módulos
+                  comerciales y contables, transformando interfaces complicadas o sobrecargadas en experiencias más claras y
+                  usables.
+                </p>
+                <p>
+                  Fue clave en la homologación de módulos compartidos entre distintos productos, estableciendo una base
+                  común que reduce inconsistencias, facilita mantenimiento y permite escalar funcionalidades sin romper la
+                  experiencia existente.
+                </p>
+                <p>
+                  Además, exploró optimizaciones en componentes del Design System mediante la integración de variables y
+                  condicionales, logrando soluciones que aportan escalabilidad al sistema de diseño.
+                </p>
+                <div class="quote">
+                  <p>Su trabajo dejó valor estructural más allá de entregables puntuales.</p>
+                </div>
+              </article>
+
+              <article class="card span-6 span-all" role="listitem" id="daniel">
+                <h4>Daniel <span class="pill pill--amber">Descubrimiento → ejecución</span></h4>
+                <p>
+                  Daniel centró su aporte en reducir incertidumbre antes de desarrollo, utilizando investigación y definición
+                  clara del alcance como herramientas principales.
+                </p>
+                <p>
+                  En XML en Línea, lideró el proceso de descubrimiento que permitió entender el panorama completo del
+                  producto, generar prototipos claros y eliminar ambigüedad antes de escribir código, reduciendo riesgos
+                  técnicos y costos asociados a cambios tardíos.
+                </p>
+                <p>
+                  En Mi Gestión, trabajó en la modernización de la experiencia, redefiniendo pantallas, correos y flujos
+                  clave, y alineando a la tríada con un cronograma claro para desarrollo, mejorando previsibilidad y
+                  eficiencia en ejecución.
+                </p>
+                <p>
+                  También colaboró en Portal Web, traducciendo investigación en pantallas refinadas y listas para validación
+                  y ejecución.
+                </p>
+              </article>
+            </div>
+
+            <p class="footer-note">
+              Nota: esta sección resume outcomes representativos; no incluye todo el trabajo operativo, iteraciones y
+              coordinación cotidiana que habilitó estos resultados.
+            </p>
+          </section>
+
+          <section id="liderazgo">
+            <h3>Aportaciones desde el liderazgo del área</h3>
+            <p class="lead">
+              Desde la gestión del área, el foco principal estuvo en construir el contexto correcto para que el equipo
+              pudiera rendir mejor, más allá de la ejecución individual.
+            </p>
+            <div class="lead-block">
+              <p class="lead lead-title">Reposicionamiento de UX/UI como función estratégica</p>
+              <p class="lead lead-body">
+                Se trabajó activamente en mover al equipo de UX/UI de un rol principalmente operativo a una función con mayor
+                peso en la definición de problemas, priorización y toma de decisiones. Esto implicó establecer expectativas
+                claras sobre el valor del diseño, así como alinear conversaciones con producto y desarrollo hacia impacto y
+                no solo entregables. También esto permitió que decisiones relevantes se tomaran antes y con mayor
+                información, reduciendo el costo de correcciones posteriores.
+              </p>
+            </div>
+            <div class="lead-block">
+              <p class="lead lead-title">Orden y estructura en un entorno de alta complejidad</p>
+              <p class="lead lead-body">
+                Se definieron marcos de trabajo, procesos y criterios claros para operar diseño en productos legacy y
+                contextos con fuertes restricciones técnicas. Al reducir ambigüedad y decisiones improvisadas, se disminuyo
+                la fricción organizacional, el equipo pudo avanzar con mayor consistencia y menor retrabajo, incluso en
+                escenarios complejos.
+              </p>
+            </div>
+            <div class="lead-block">
+              <p class="lead lead-title">Dirección estratégica de la evolución de experiencia</p>
+              <p class="lead lead-body">
+                Se establecieron líneas claras sobre cómo debían evolucionar la experiencia y los flujos en productos clave,
+                dando al equipo un norte compartido. Esto permitió enfocar esfuerzos en iniciativas con mayor impacto y
+                evitar soluciones aisladas de bajo retorno que antes podían sentirse desconectadas.
+              </p>
+            </div>
+            <div class="lead-block">
+              <p class="lead lead-title">Bases para escalabilidad y sostenibilidad</p>
+              <p class="lead lead-body">
+                Se impulsó la construcción de un nuevo look n’ feel y un design system que incluye convenciones, gobernanza,
+                criterios de calidad y flujos de trabajo alineados con desarrollo. Esto habilitó mayor eficiencia en diseño y
+                desarrollo, reduciendo dependencia de esfuerzos individuales.
+              </p>
+            </div>
+            <div class="lead-block">
+              <p class="lead lead-title">Elevación del estándar profesional y de accountability</p>
+              <p class="lead lead-body">
+                Se definieron métricas claras para evaluar desempeño senior, sustentadas en evidencias del trabajo diario
+                como cumplimiento de compromisos, calidad, claridad en handoffs, reducción de retrabajo y mejora progresiva
+                de la experiencia. Esto mejoró previsibilidad, calidad y consistencia en la entrega, con impacto directo en
+                eficiencia operativa.
+              </p>
+            </div>
+            <div class="lead-block">
+              <p class="lead lead-title">Gestión de personas y salud del equipo</p>
+              <p class="lead lead-body">
+                Se abordaron de forma directa situaciones de desalineación, bajo desempeño o fricción cultural, priorizando
+                la salud del equipo y la sostenibilidad del área. Esto ayudó a prevenir impactos negativos en desempeño y
+                continuidad del trabajo.
+              </p>
+            </div>
+            <div class="lead-block">
+              <p class="lead lead-title">Construcción de lenguaje común</p>
+              <p class="lead lead-body">
+                Se impulsó un cambio de mentalidad hacia outcomes, claridad de objetivos y decisiones basadas en evidencia,
+                elevando la calidad de las conversaciones y acelerando acuerdos entre UX, Producto y Desarrollo. El resultado
+                fue un equipo más maduro, con mayor ownership, mejor alineación y mayor capacidad para enfrentar problemas
+                complejos.
+              </p>
+            </div>
+          </section>
+
+          <section id="retos">
+            <h3>Pendientes y retos como equipo</h3>
+            <p class="lead">A pesar del avance, existen áreas claras de oportunidad:</p>
+
+            <div class="bento">
+              <div class="card span-6">
+                <h4>Consistencia en planeación <span class="pill">Menos reactivo</span></h4>
+                <p>Mayor consistencia en planeación y anticipación, reduciendo trabajo reactivo.</p>
+              </div>
+              <div class="card span-6">
+                <h4>Medición de impacto <span class="pill">Diseño → negocio</span></h4>
+                <p>Medición más explícita del impacto del diseño en eficiencia operativa y resultados de negocio.</p>
+              </div>
+              <div class="card span-6">
+                <h4>Ownership end-to-end <span class="pill">De principio a fin</span></h4>
+                <p>Fortalecer el ownership de principio a fin en todos los proyectos.</p>
+              </div>
+              <div class="card span-6">
+                <h4>Procesos sostenibles <span class="pill">No dependiente</span></h4>
+                <p>Consolidar procesos para que el modelo no dependa de personas específicas.</p>
+              </div>
+            </div>
+
+            <p class="footer-note">Estos puntos representan el siguiente nivel de madurez del equipo.</p>
+          </section>
+
+          <section id="cierre">
+            <h3>Cierre – Visión de equipo</h3>
+            <p class="lead">
+              El cierre de este año deja a un equipo de Product Design en una posición más sólida que al inicio, no solo por
+              lo entregado, sino por cómo hoy se toman decisiones y se opera el diseño dentro de la organización. En términos
+              prácticos, hoy el equipo opera con mayor claridad para definir problemas, mayor criterio para priorizar, y una
+              mejor habilidad para reducir incertidumbre antes de comprometer desarrollo.
+            </p>
+            <p class="lead">
+              A lo largo del año se consolidó una manera de trabajar más consistente: decisiones más sustentadas, mejor
+              articulación con producto y desarrollo, y un enfoque más claro en impacto. Los outcomes descritos muestran un
+              impacto claro en experiencia de usuario, pero también en variables clave para el negocio: reducción de fricción
+              operativa, menor retrabajo, mejor previsibilidad en desarrollo y decisiones de producto tomadas con mayor
+              información y menor riesgo.
+            </p>
+            <p class="lead">
+              Detrás de estos resultados existe un trabajo constante de iteración, seguimiento y alineación que permitió
+              sostener el avance durante el año. Ese trabajo cotidiano fortaleció capacidades internas que hoy permiten al
+              equipo operar con mayor claridad, autonomía y foco.
+            </p>
+            <p class="lead">
+              De cara al siguiente año, el objetivo es profundizar este impacto: anticiparnos más, reaccionar menos, medir
+              mejor el valor del diseño y consolidar procesos que permitan escalar sin incrementar fricción ni complejidad.
+              Con la base actual, el siguiente ciclo puede enfocarse en convertir esta madurez en impacto sostenido y
+              replicable, manteniendo un estándar alto sin sacrificar salud de equipo ni claridad de ejecución.
+            </p>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
+
+

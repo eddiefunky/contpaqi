@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tokens y Componentes Detectados</title>
+    <style>
+        body {
+            font-family: 'Calibri', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        h1 {
+            color: #0428f4;
+            border-bottom: 3px solid #0428f4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #0520b9;
+            margin-top: 30px;
+            border-bottom: 2px solid #eaf1ff;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #003A70;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-size: 11pt;
+        }
+        th {
+            background-color: #0428f4;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .warning {
+            color: #caa502;
+            font-weight: bold;
+        }
+        .error {
+            color: #e14545;
+            font-weight: bold;
+        }
+        .correct {
+            color: #319835;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .summary-box {
+            background-color: #eaf1ff;
+            border-left: 4px solid #0428f4;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .legend {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .section {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <h1>LISTA DE TOKENS Y COMPONENTES DETECTADOS</h1>
+    <h2>Analiza 2.0 - Archivo Figma</h2>
+    
+    <p><strong>Nodos Analizados:</strong> 112:7258, 1:1151, 7221:96109</p>
+    <p><strong>Fecha:</strong> $(date)</p>
+    
+    <hr>
+    
+    <h2>ÍNDICE</h2>
+    <ol>
+        <li>Tokens de Color</li>
+        <li>Tokens de Tipografía</li>
+        <li>Tokens de Efectos</li>
+        <li>Variables de Estado (No Tokens)</li>
+        <li>Componentes Detectados</li>
+    </ol>
+    
+    <hr>
+    
+    <div class="section">
+        <h2>1. TOKENS DE COLOR</h2>
+        
+        <h3>1.1 Primary (Azul)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Primary default 500</code></td>
+                    <td><code>#0428f4</code></td>
+                    <td>rgb(4,40,244)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Primary 100</code></td>
+                    <td><code>#f3f7ff</code></td>
+                    <td>rgb(243,247,255)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Primary 200</code></td>
+                    <td><code>#eaf1ff</code></td>
+                    <td>rgb(234,241,255)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Primary 300</code></td>
+                    <td><code>#c7cfff</code></td>
+                    <td>rgb(199,207,255)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Primary 600</code></td>
+                    <td><code>#0520b9</code></td>
+                    <td>rgb(5,32,185)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Azul Contpaqi</code></td>
+                    <td><code>#0428f4</code></td>
+                    <td>rgb(4,40,244)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ DUPLICADO</td>
+                </tr>
+                <tr>
+                    <td><code>azul 200</code></td>
+                    <td><code>#eaf1ff</code></td>
+                    <td>rgb(234,241,255)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ DUPLICADO</td>
+                </tr>
+                <tr>
+                    <td><code>Contabilidad Light/Primary/PCP001L - Primary</code></td>
+                    <td><code>#003A70</code></td>
+                    <td>rgb(0,58,112)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 8 tokens</strong></p>
+        
+        <h3>1.2 Secondary (Púrpura)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Secundary default 500</code></td>
+                    <td><code>#8f77fd</code></td>
+                    <td>rgb(143,119,253)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ ORTOGRAFÍA</td>
+                </tr>
+                <tr>
+                    <td><code>Secundary 200</code></td>
+                    <td><code>#f1eeff</code></td>
+                    <td>rgb(241,238,255)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ ORTOGRAFÍA</td>
+                </tr>
+                <tr>
+                    <td><code>Secundary 300</code></td>
+                    <td><code>#ddd4ff</code></td>
+                    <td>rgb(221,212,255)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ ORTOGRAFÍA</td>
+                </tr>
+                <tr>
+                    <td><code>Secundary 600</code></td>
+                    <td><code>#6e4bff</code></td>
+                    <td>rgb(110,75,255)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ ORTOGRAFÍA</td>
+                </tr>
+                <tr>
+                    <td><code>secundario</code></td>
+                    <td><code>#650397</code></td>
+                    <td>rgb(101,3,151)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ DIFERENTE</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 5 tokens</strong></p>
+        
+        <h3>1.3 Text (Texto)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Text Light/Primary text</code></td>
+                    <td><code>#101010</code></td>
+                    <td>rgb(16,16,16)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Text/Primary text</code></td>
+                    <td><code>#101010</code></td>
+                    <td>rgb(16,16,16)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ DUPLICADO</td>
+                </tr>
+                <tr>
+                    <td><code>Text Light/Secondary text</code></td>
+                    <td><code>#757575</code></td>
+                    <td>rgb(117,117,117)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Text Light/Secundary text</code></td>
+                    <td><code>#757575</code></td>
+                    <td>rgb(117,117,117)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ ORTOGRAFÍA</td>
+                </tr>
+                <tr>
+                    <td><code>Text Light/White Icon, text</code></td>
+                    <td><code>#FFFFFF</code></td>
+                    <td>rgb(255,255,255)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Text/White Icon, text</code></td>
+                    <td><code>#FFFFFF</code></td>
+                    <td>rgb(255,255,255)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ DUPLICADO</td>
+                </tr>
+                <tr>
+                    <td><code>Text Light/Divider text</code></td>
+                    <td><code>#F0F0F0</code></td>
+                    <td>rgb(240,240,240)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>text primary</code></td>
+                    <td><code>#292829</code></td>
+                    <td>rgb(41,40,41)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>text tablas</code></td>
+                    <td><code>#000000</code></td>
+                    <td>rgb(0,0,0)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>texto soporte</code></td>
+                    <td><code>#737373</code></td>
+                    <td>rgb(115,115,115)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>texto secundario</code></td>
+                    <td><code>#151515b2</code></td>
+                    <td>rgba(21,21,21,70%)</td>
+                    <td>112:7258</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>text principal</code></td>
+                    <td><code>#262525</code></td>
+                    <td>rgb(38,37,37)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>tex deshabilitado</code></td>
+                    <td><code>#b0b0b0</code></td>
+                    <td>rgb(176,176,176)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ ORTOGRAFÍA</td>
+                </tr>
+                <tr>
+                    <td><code>Texto deshabilitado</code></td>
+                    <td><code>#c2c2c2</code></td>
+                    <td>rgb(194,194,194)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>support textos de apoyo</code></td>
+                    <td><code>#a7a7a7</code></td>
+                    <td>rgb(167,167,167)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Alerts/Text/Primary text</code></td>
+                    <td><code>#101010</code></td>
+                    <td>rgb(16,16,16)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Alerts/Text/White Icon, text</code></td>
+                    <td><code>#FFFFFF</code></td>
+                    <td>rgb(255,255,255)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Text Dark/Secondary text/Matices/PCTDM003D</code></td>
+                    <td><code>#ACACAC</code></td>
+                    <td>rgb(172,172,172)</td>
+                    <td>1:1151</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 18 tokens</strong></p>
+        
+        <h3>1.4 Alert - Success (Verde)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Alert success 600</code></td>
+                    <td><code>#319835</code></td>
+                    <td>rgb(49,152,53)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert success 300</code></td>
+                    <td><code>#b3ebb5</code></td>
+                    <td>rgb(179,235,181)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert success 200</code></td>
+                    <td><code>#e6f8e6</code></td>
+                    <td>rgb(230,248,230)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert success 100</code></td>
+                    <td><code>#e9fbea</code></td>
+                    <td>rgb(233,251,234)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert green default 500</code></td>
+                    <td><code>#2bbf30</code></td>
+                    <td>rgb(43,191,48)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Alertas Light/Success/S001L - Success</code></td>
+                    <td><code>#3EC161</code></td>
+                    <td>rgb(62,193,97)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 6 tokens</strong></p>
+        
+        <h3>1.5 Alert - Warning (Amarillo)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Alert warning 600</code></td>
+                    <td><code>#caa502</code></td>
+                    <td>rgb(202,165,2)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert warning default 500</code></td>
+                    <td><code>#ffd10c</code></td>
+                    <td>rgb(255,209,12)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>warning 100</code></td>
+                    <td><code>#fff8dc</code></td>
+                    <td>rgb(255,248,220)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ FORMATO</td>
+                </tr>
+                <tr>
+                    <td><code>Alerta warning 300</code></td>
+                    <td><code>#ffefb0</code></td>
+                    <td>rgb(255,239,176)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ IDIOMA</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 4 tokens</strong></p>
+        
+        <h3>1.6 Alert - Danger (Rojo)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Alert danger default 500</code></td>
+                    <td><code>#e14545</code></td>
+                    <td>rgb(225,69,69)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert danger 100</code></td>
+                    <td><code>#ffecec</code></td>
+                    <td>rgb(255,236,236)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alerta danger 300</code></td>
+                    <td><code>#f9b7b7</code></td>
+                    <td>rgb(249,183,183)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ IDIOMA</td>
+                </tr>
+                <tr>
+                    <td><code>Alerta danger 600</code></td>
+                    <td><code>#d01414</code></td>
+                    <td>rgb(208,20,20)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ IDIOMA</td>
+                </tr>
+                <tr>
+                    <td><code>alert danger despachos</code></td>
+                    <td><code>#e14545</code></td>
+                    <td>rgb(225,69,69)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ CONTEXTO</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 5 tokens</strong></p>
+        
+        <h3>1.7 Alert - Standby (Azul)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Alert standby 600</code></td>
+                    <td><code>#0e7dad</code></td>
+                    <td>rgb(14,125,173)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert standby default 500</code></td>
+                    <td><code>#41b4e5</code></td>
+                    <td>rgb(65,180,229)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert standby 100</code></td>
+                    <td><code>#ecf9ff</code></td>
+                    <td>rgb(236,249,255)</td>
+                    <td>Todos</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Alert standby 200</code></td>
+                    <td><code>#d4f2f8</code></td>
+                    <td>rgb(212,242,248)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 4 tokens</strong></p>
+        
+        <h3>1.8 Background (Fondo)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>white background</code></td>
+                    <td><code>#ffffff</code></td>
+                    <td>rgb(255,255,255)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>background primario</code></td>
+                    <td><code>#fbfbfb</code></td>
+                    <td>rgb(251,251,251)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Background secundario</code></td>
+                    <td><code>#1515150d</code></td>
+                    <td>rgba(21,21,21,5%)</td>
+                    <td>Todos</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>background deshabilitado</code></td>
+                    <td><code>#f0f0f0</code></td>
+                    <td>rgb(240,240,240)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>gray background 100</code></td>
+                    <td><code>#f9f9f9</code></td>
+                    <td>rgb(249,249,249)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>back 100</code></td>
+                    <td><code>#f1f1f1</code></td>
+                    <td>rgb(241,241,241)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>back 200</code></td>
+                    <td><code>#eae9e9</code></td>
+                    <td>rgb(234,233,233)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 7 tokens</strong></p>
+        
+        <h3>1.9 Otros Colores</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Valor Hex</th>
+                    <th>RGB</th>
+                    <th>Presente en Nodos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>color/base</code></td>
+                    <td><code>#3AE180</code></td>
+                    <td>rgb(58,225,128)</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>deshabilitado</code></td>
+                    <td><code>#e3e3e3</code></td>
+                    <td>rgb(227,227,227)</td>
+                    <td>112:7258</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Contabilidad Light/Primary/Sombras/PCPS005L</code></td>
+                    <td><code>#000C16</code></td>
+                    <td>rgb(0,12,22)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Contabilidad Dark/Primary Dark/Matices/PCPM005D</code></td>
+                    <td><code>#EBF5FF</code></td>
+                    <td>rgb(235,245,255)</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Total: 4 tokens</strong></p>
+        
+        <div class="summary-box">
+            <h3>RESUMEN TOKENS DE COLOR</h3>
+            <ul>
+                <li><strong>Primary:</strong> 8 tokens</li>
+                <li><strong>Secondary:</strong> 5 tokens</li>
+                <li><strong>Text:</strong> 18 tokens</li>
+                <li><strong>Alert Success:</strong> 6 tokens</li>
+                <li><strong>Alert Warning:</strong> 4 tokens</li>
+                <li><strong>Alert Danger:</strong> 5 tokens</li>
+                <li><strong>Alert Standby:</strong> 4 tokens</li>
+                <li><strong>Background:</strong> 7 tokens</li>
+                <li><strong>Otros:</strong> 4 tokens</li>
+            </ul>
+            <p><strong>TOTAL TOKENS DE COLOR: 61 tokens</strong></p>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="section">
+        <h2>2. TOKENS DE TIPOGRAFÍA</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Familia</th>
+                    <th>Estilo</th>
+                    <th>Tamaño</th>
+                    <th>Peso</th>
+                    <th>Line Height</th>
+                    <th>Letter Spacing</th>
+                    <th>Presente en</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Textos nube/Button</code></td>
+                    <td>Karla</td>
+                    <td>Bold</td>
+                    <td>16px</td>
+                    <td>700</td>
+                    <td>20px</td>
+                    <td>0.1px</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="warning">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>texto boton</code></td>
+                    <td>Manrope</td>
+                    <td>Bold</td>
+                    <td>16px</td>
+                    <td>700</td>
+                    <td>24px</td>
+                    <td>0.1px</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ DUPLICADO</td>
+                </tr>
+                <tr>
+                    <td><code>Textos nube/Párrafos</code></td>
+                    <td>Karla</td>
+                    <td>Regular</td>
+                    <td>14px</td>
+                    <td>400</td>
+                    <td>20px</td>
+                    <td>0.25px</td>
+                    <td>1:1151</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>Párrafos</code></td>
+                    <td>Karla</td>
+                    <td>Regular</td>
+                    <td>14px</td>
+                    <td>400</td>
+                    <td>100px</td>
+                    <td>0px</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ ERROR</td>
+                </tr>
+                <tr>
+                    <td><code>Textos nube/H3 - Subtítulo</code></td>
+                    <td>Karla</td>
+                    <td>Bold</td>
+                    <td>24px</td>
+                    <td>700</td>
+                    <td>100px</td>
+                    <td>0px</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ ERROR</td>
+                </tr>
+                <tr>
+                    <td><code>Sidebar - Placeholder</code></td>
+                    <td>Karla</td>
+                    <td>Regular</td>
+                    <td>16px</td>
+                    <td>400</td>
+                    <td>100px</td>
+                    <td>0px</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️ ERROR</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>TOTAL TOKENS DE TIPOGRAFÍA: 6 tokens</strong></p>
+        <p><strong>Familias de Fuente Detectadas:</strong></p>
+        <ul>
+            <li><strong>Karla:</strong> 5 tokens</li>
+            <li><strong>Manrope:</strong> 1 token</li>
+        </ul>
+    </div>
+    
+    <hr>
+    
+    <div class="section">
+        <h2>3. TOKENS DE EFECTOS</h2>
+        <h3>3.1 Elevation/Shadows</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Tipo</th>
+                    <th>Color</th>
+                    <th>Offset</th>
+                    <th>Radius</th>
+                    <th>Spread</th>
+                    <th>Presente en</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Elevation Light/Elevation 3</code></td>
+                    <td>DROP_SHADOW (x2)</td>
+                    <td>#000000 (neutro)</td>
+                    <td>(0,1), (0,4)</td>
+                    <td>3, 8</td>
+                    <td>0, 3</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="correct">✓</td>
+                </tr>
+                <tr>
+                    <td><code>cards</code></td>
+                    <td>DROP_SHADOW (x2)</td>
+                    <td>#003A70 (azul)</td>
+                    <td>(0,4), (0,0)</td>
+                    <td>8, 4</td>
+                    <td>0, 0</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️</td>
+                </tr>
+                <tr>
+                    <td><code>Elevation 1 Blue</code></td>
+                    <td>DROP_SHADOW (x2)</td>
+                    <td>#003A70 (azul)</td>
+                    <td>(0,2), (0,1)</td>
+                    <td>6, 2</td>
+                    <td>2, 0</td>
+                    <td>1:1151, 7221:96109</td>
+                    <td class="error">⚠️</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>TOTAL TOKENS DE EFECTOS: 3 tokens</strong></p>
+    </div>
+    
+    <hr>
+    
+    <div class="section">
+        <h2>4. VARIABLES DE ESTADO (NO TOKENS)</h2>
+        <p>Estas variables NO deberían ser tokens globales, son variables de estado de componentes específicos:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Valor</th>
+                    <th>Presente en</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>setVisibleIngresos</code></td>
+                    <td>true</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>setVisibleEgresos</code></td>
+                    <td>true</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>Ingresos PUE todos</code></td>
+                    <td>true</td>
+                    <td>7221:96109</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>ingreso PPD</code></td>
+                    <td>true</td>
+                    <td>7221:96109</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>ingresos cancelados</code></td>
+                    <td>true</td>
+                    <td>7221:96109</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>ingresos vigentes</code></td>
+                    <td>true</td>
+                    <td>7221:96109</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>todos default</code></td>
+                    <td>true</td>
+                    <td>7221:96109</td>
+                    <td class="error">⚠️ NO ES TOKEN</td>
+                </tr>
+                <tr>
+                    <td><code>Opción activa</code></td>
+                    <td>"none"</td>
+                    <td>Todos</td>
+                    <td class="error">⚠️ CONTRADICTORIO</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>TOTAL VARIABLES DE ESTADO: 8 variables</strong></p>
+    </div>
+    
+    <hr>
+    
+    <div class="section">
+        <h2>5. COMPONENTES DETECTADOS</h2>
+        
+        <h3>5.1 Componentes de Entrada (Inputs)</h3>
+        <h4>Campos de Texto</h4>
+        <ul>
+            <li><strong>Estados detectados:</strong> Default, Active, Disabled</li>
+            <li><strong>Variaciones:</strong>
+                <ul>
+                    <li>Campo de texto simple</li>
+                    <li>Campo con placeholder</li>
+                    <li>Campo con icono</li>
+                    <li>Campo de búsqueda</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h4>Checkboxes</h4>
+        <ul>
+            <li><strong>Estados detectados:</strong> Checked, Unchecked, Disabled</li>
+            <li><strong>Variaciones:</strong> Múltiples tamaños</li>
+        </ul>
+        
+        <h4>Radio Buttons</h4>
+        <ul>
+            <li><strong>Estados detectados:</strong> Selected, Unselected, Disabled</li>
+            <li><strong>Variaciones:</strong> Múltiples tamaños</li>
+        </ul>
+        
+        <h4>Toggles/Switches</h4>
+        <ul>
+            <li><strong>Estados detectados:</strong> On, Off</li>
+            <li><strong>Variaciones:</strong>
+                <ul>
+                    <li>Múltiples tamaños</li>
+                    <li>Colores: Azul y Gris</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Total Componentes de Entrada: 4 tipos</strong></p>
+        
+        <h3>5.2 Componentes de Navegación</h3>
+        <h4>Tabs</h4>
+        <ul>
+            <li><strong>Estados detectados:</strong> Active, Inactive</li>
+            <li><strong>Características:</strong> Indicadores visuales de estado activo</li>
+        </ul>
+        
+        <h4>Dropdowns/Selects</h4>
+        <ul>
+            <li><strong>Estados detectados:</strong> Default, Open, Selected</li>
+            <li><strong>Variaciones:</strong> Múltiples estilos visuales</li>
+        </ul>
+        <p><strong>Total Componentes de Navegación: 2 tipos</strong></p>
+        
+        <h3>5.3 Componentes de Acción</h3>
+        <h4>Buttons</h4>
+        <ul>
+            <li><strong>Variaciones detectadas:</strong>
+                <ul>
+                    <li>Primary (azul sólido)</li>
+                    <li>Secondary (blanco con borde)</li>
+                    <li>Text only (sin fondo)</li>
+                    <li>Ghost (transparente)</li>
+                </ul>
+            </li>
+            <li><strong>Tamaños:</strong> Al menos 3 variaciones (small, medium, large)</li>
+            <li><strong>Problema:</strong> Dos fuentes diferentes (Karla y Manrope) sin criterio</li>
+        </ul>
+        <p><strong>Total Componentes de Acción: 1 tipo (con múltiples variaciones)</strong></p>
+        
+        <h3>5.4 Componentes de Datos</h3>
+        <h4>Tablas</h4>
+        <ul>
+            <li><strong>Variaciones detectadas:</strong>
+                <ul>
+                    <li>Con headers claramente definidos</li>
+                    <li>Sin headers (simple list)</li>
+                    <li>Scrollables (con scrollbar visible)</li>
+                    <li>Con acciones por fila</li>
+                </ul>
+            </li>
+            <li><strong>Estilos:</strong> Múltiples variaciones visuales</li>
+        </ul>
+        
+        <h4>Gráficos de Barras</h4>
+        <ul>
+            <li><strong>Cantidad:</strong> Aproximadamente 30-40 variaciones individuales</li>
+            <li><strong>Estructura:</strong> Cada gráfico tiene 3-4 barras verticales</li>
+            <li><strong>Paletas de color identificadas:</strong>
+                <ul>
+                    <li>Azul (múltiples tonos)</li>
+                    <li>Teal/Cyan (gradientes y tonos sólidos)</li>
+                    <li>Verde (varios matices)</li>
+                    <li>Amarillo/Naranja (tonos cálidos)</li>
+                    <li>Púrpura (diferentes saturaciones)</li>
+                </ul>
+            </li>
+            <li><strong>Característica:</strong> Cada gráfico tiene paleta asociada (4-6 colores)</li>
+        </ul>
+        <p><strong>Total Componentes de Datos: 2 tipos</strong></p>
+        
+        <h3>5.5 Componentes de Feedback</h3>
+        <h4>Alertas/Status</h4>
+        <ul>
+            <li><strong>Tipos detectados:</strong>
+                <ul>
+                    <li>Success (verde)</li>
+                    <li>Warning (amarillo)</li>
+                    <li>Danger (rojo)</li>
+                    <li>Standby (azul)</li>
+                </ul>
+            </li>
+            <li><strong>Variaciones:</strong> Diferentes niveles de intensidad</li>
+        </ul>
+        
+        <h4>Badges/Tags</h4>
+        <ul>
+            <li><strong>Características:</strong> Diferentes colores de fondo y texto</li>
+            <li><strong>Nota:</strong> No identificados claramente como componentes reutilizables</li>
+        </ul>
+        <p><strong>Total Componentes de Feedback: 2 tipos</strong></p>
+        
+        <h3>5.6 Otros Componentes</h3>
+        <h4>Cards</h4>
+        <ul>
+            <li><strong>Características:</strong> Componentes tipo tarjeta con sombras</li>
+            <li><strong>Problema:</strong> Token de sombra genérico (<code>cards</code>)</li>
+        </ul>
+        
+        <h4>Formularios</h4>
+        <ul>
+            <li><strong>Elementos:</strong> Campos agrupados, labels, validación</li>
+            <li><strong>Nota:</strong> No completamente documentados como componentes</li>
+        </ul>
+        <p><strong>Total Otros Componentes: 2 tipos</strong></p>
+    </div>
+    
+    <hr>
+    
+    <div class="summary-box">
+        <h2>RESUMEN GENERAL</h2>
+        
+        <h3>Tokens Totales</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Color - Primary</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Color - Secondary</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Color - Text</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>Color - Alert Success</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Color - Alert Warning</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Color - Alert Danger</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Color - Alert Standby</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Color - Background</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>Color - Otros</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtotal Color</strong></td>
+                    <td><strong>61</strong></td>
+                </tr>
+                <tr>
+                    <td>Tipografía</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Efectos</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><strong>TOTAL TOKENS</strong></td>
+                    <td><strong>70</strong></td>
+                </tr>
+                <tr>
+                    <td>Variables de Estado (No Tokens)</td>
+                    <td>8</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Componentes Totales</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Entrada (Inputs)</td>
+                    <td>4 tipos</td>
+                </tr>
+                <tr>
+                    <td>Navegación</td>
+                    <td>2 tipos</td>
+                </tr>
+                <tr>
+                    <td>Acción</td>
+                    <td>1 tipo</td>
+                </tr>
+                <tr>
+                    <td>Datos</td>
+                    <td>2 tipos</td>
+                </tr>
+                <tr>
+                    <td>Feedback</td>
+                    <td>2 tipos</td>
+                </tr>
+                <tr>
+                    <td>Otros</td>
+                    <td>2 tipos</td>
+                </tr>
+                <tr>
+                    <td><strong>TOTAL COMPONENTES</strong></td>
+                    <td><strong>13 tipos</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Estadísticas</h3>
+        <ul>
+            <li><strong>Total de tokens únicos:</strong> ~70</li>
+            <li><strong>Total de tokens con problemas:</strong> ~25 (duplicados, errores, inconsistencias)</li>
+            <li><strong>Total de componentes identificados:</strong> 13 tipos</li>
+            <li><strong>Gráficos de barras:</strong> 30-40 variaciones (sin documentar como tokens)</li>
+            <li><strong>Paletas de colores para gráficos:</strong> 30-40 (sin documentar)</li>
+        </ul>
+    </div>
+    
+    <hr>
+    
+    <div class="legend">
+        <h2>LEGENDA DE ESTADOS</h2>
+        <ul>
+            <li><span class="correct">✓ Correcto:</span> Token/componente sin problemas detectados</li>
+            <li><span class="warning">⚠️ Advertencia:</span> Token/componente con problemas menores o inconsistencias</li>
+            <li><span class="error">⚠️ Error:</span> Token/componente con errores críticos que requieren corrección</li>
+        </ul>
+    </div>
+    
+    <hr>
+    
+    <p><em>Documento generado el: $(date)</em></p>
+    <p><em>Basado en análisis de nodos: 112:7258, 1:1151, 7221:96109</em></p>
+    
+</body>
+</html>
+
