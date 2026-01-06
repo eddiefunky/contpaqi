@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" class="theme-dark">
+<html lang="es" class="theme-light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,7 +16,7 @@
       (() => {
         const STORAGE_KEY = "report-theme";
         const stored = localStorage.getItem(STORAGE_KEY);
-        const theme = stored === "light" ? "light" : "dark"; // dark is default
+        const theme = stored === "dark" ? "dark" : "light"; // light is default
         const root = document.documentElement;
         root.classList.toggle("theme-light", theme === "light");
         root.classList.toggle("theme-dark", theme !== "light");
@@ -183,6 +183,7 @@
 
       .wrap {
         width: calc(100% - 160px);
+        max-width: 1440px;
         margin: 0 auto;
         padding: 26px 0 72px;
       }
@@ -684,18 +685,10 @@
           <section id="introduccion">
             <h3>Introducción</h3>
             <p class="lead">
-              Este año representó un hito para el equipo de Product Design. El trabajo se centró en madurar la forma en
-              que el equipo opera, cómo se toman decisiones, cómo se reduce la incertidumbre antes de desarrollo y cómo el
-              diseño se conecta de manera más clara con los objetivos del usuario.
+              El trabajo se centró en madurar la forma en que el equipo opera, cómo se toman decisiones, cómo se reduce la incertidumbre antes de desarrollo y cómo el diseño se conecta de manera más clara con los objetivos del usuario.
             </p>
             <p class="lead">
-              Este informe no incluye el trabajo operativo, seguimiento cotidiano, iteraciones y coordinación continua. Lo
-              que se muestra es una selección de lo más representativo del impacto logrado.
-            </p>
-            <p class="lead">
-              El contenido refleja decisiones, aprendizajes y avances que marcaron la dirección del área. Hay trabajo
-              importante que no aparece aquí por alcance (ajustes finos, seguimiento recurrente, coordinación diaria), pero
-              fue parte esencial para habilitar los resultados descritos.
+              El contenido refleja decisiones, aprendizajes y avances que marcaron la dirección del área. Hay trabajo importante que no aparece aquí por alcance (ajustes finos, seguimiento recurrente, coordinación diaria), pero fue parte esencial para habilitar los resultados descritos.
             </p>
           </section>
 
@@ -710,130 +703,95 @@
               <article class="card span-6" role="listitem" id="jeremy">
                 <h4>Jeremy <span class="pill pill--amber">Evidencia → decisión</span></h4>
                 <p>
-                  El trabajo de Jeremy se caracterizó por transformar contextos complejos y opiniones dispersas en evidencia
-                  clara para la toma de decisiones, especialmente en productos con alta fricción operacon usuarios.
+                  El trabajo de Jeremy se caracterizó por transformar contextos complejos y opiniones dispersas en evidencia clara para la toma de decisiones, especialmente en productos con alta fricción.
                 </p>
                 <p>
-                  En el proyecto de rediseño CONTPAQi PW, condujo investigación cualitativa y validó un prototipo que
-                  demuestra que los casos de uso pueden resolverse de principio a fin dentro del mismo sistema, sin depender
-                  de validaciones externas. Este trabajo sentó bases para reducir dependencias de soporte y tiempos de
-                  atención, con impacto directo en eficiencia operativa.
+                  En CONTPAQi PW, condujo investigación cualitativa y validó prototipos que demuestran que los casos de uso pueden resolverse de principio a fin dentro del mismo sistema y sin depender de validaciones externas. Este trabajo sentó bases para reducir dependencias de soporte y tiempos de atención, con impacto directo en <b>eficiencia operativa</b>.
                 </p>
                 <p>
-                  En CONTPAQi Colabora, su aportación permitió convertir feedback fragmentado en un diagnóstico validado,
-                  alineando a la tríada y priorizando cambios clave en onboarding, flujos críticos y confirmaciones. Esto
-                  redujo el riesgo de errores en producción y ajustes tardíos.
+                  En CONTPAQi Colabora, su aportación permitió convertir feedback fragmentado en un diagnóstico validado, alineando a la tríada y priorizando cambios clave en flujos críticos.
                 </p>
                 <p>
-                  En CONTPAQi Contabiliza, lideró pruebas de usabilidad y amplió la investigación para identificar tanto
-                  fricciones estructurales como fortalezas del producto. A partir de esta evidencia, se construyó un backlog
-                  priorizado que permitió ajustar el alcance disminuyendo retrabajo y costo de cambios posteriores.
+                  En CONTPAQi Contabiliza, lideró pruebas de usabilidad y amplió la investigación para identificar tanto fricciones estructurales como fortalezas del producto. A partir de esta evidencia, se construyó un backlog que permitió <b>ajustar el alcance disminuyendo retrabajo</b>.
                 </p>
                 <div class="quote">
-                  <p>Su impacto estuvo en habilitar decisiones mejor informadas y productos más preparados antes de ejecución.</p>
+                  <p><b>Su impacto:</b> habilitar decisiones mejor informadas y productos más preparados antes de ejecución.</p>
                 </div>
               </article>
 
               <article class="card span-6" role="listitem" id="jonathan">
                 <h4>Jonathan <span class="pill pill--amber">Rediseño → adopción</span></h4>
                 <p>
-                  Aportó una visión consistente de rediseño orientado a adopción, percepción y escalabilidad, combinando
-                  criterio de producto con ejecución sólida.
+                  Aportó una visión consistente de rediseño orientado a adopción, percepción y escalabilidad, combinando criterio de producto con ejecución sólida.
                 </p>
                 <p>
-                  Durante el año lideró el rediseño de Colabora, enfocándose en mejorar flujos críticos y arquitectura de
-                  información. El resultado fue una experiencia más clara, moderna y mejor aceptada por usuarios y
-                  stakeholders, impactando positivamente en adopción y percepción del producto.
+                  Lideró el rediseño de CONTPAQi Colabora, enfocándose en mejorar flujos críticos y arquitectura de información. El resultado fue una experiencia clara, moderna y mejor aceptada por usuarios y stakeholders, impactando positivamente en <b>adopción y percepción del producto</b>.
                 </p>
                 <p>
-                  Participó además en una iniciativa de Micro Frontends y MCP, trabajando de forma cercana con desarrollo
-                  para validar la viabilidad de nuevas aproximaciones técnicas desde la perspectiva de experiencia. Este
-                  trabajo permitirá implementar y actualizar el nuevo Design System de manera más automatizada y reducirá
-                  riesgos técnicos y de experiencia de usuario.
+                  Participó en la iniciativa de Micro Frontends y MCP, trabajando de forma cercana con desarrollo para validar la viabilidad de nuevas aproximaciones técnicas desde la perspectiva de experiencia. Este trabajo permitirá <b>implementar y actualizar el nuevo Design System de manera más automatizada</b> y reducirá riesgos técnicos y de experiencia de usuario.
                 </p>
                 <p>
-                  Jonathan también diseñó el portal Mi Facturación, construyendo un MVP claro, con un flujo de pocos pasos y
-                  menor probabilidad de error.
+                  Diseñó el portal CONTPAQi Mi Facturación, construyendo un MVP claro, con un flujo de pocos pasos y menor probabilidad de error.
                 </p>
                 <p>
-                  Adicionalmente, lideró el rediseño del módulo de Pólizas en Contabiliza, donde la simplificación de flujos
-                  y mejora visual apoya directamente la retención y continuidad de uso.
+                  Lideró el rediseño del módulo de Pólizas en Contabiliza, donde la simplificación de flujos y mejora visual apoya directamente la <b>retención y continuidad de uso</b>.
                 </p>
                 <div class="quote">
-                  <p>Su aporte se distinguió por mantener coherencia entre visión de producto y ejecución diaria.</p>
+                  <p><b>Su aporte:</b> mantener coherencia entre visión de producto y ejecución diaria.</p>
                 </div>
               </article>
 
               <article class="card span-6" role="listitem" id="maritza">
                 <h4>Maritza <span class="pill pill--amber">Ambigüedad → claridad</span></h4>
                 <p>
-                  Su trabajo se enfocó en dar estructura y claridad en iniciativas con alta ambigüedad y visibilidad
-                  estratégica, habilitando avance con mayor certeza.
+                  El trabajo de Maritza se enfocó en dar estructura y claridad en iniciativas con alta ambigüedad y visibilidad estratégica, ayudando a que el equipo pudiera avanzar con mayor certeza.
                 </p>
                 <p>
-                  En Analiza, contribuyó a convertir una idea inicial en un concepto claro y validado rápidamente,
-                  permitiendo a dirección evaluar la iniciativa con base en evidencia y avanzar a pruebas tempranas Esto
-                  aceleró la toma de decisiones y evitó inversión temprana sin validación suficiente.
+                  En CONTPAQi Analiza, contribuyó a convertir una idea inicial en un <b>concepto claro y validado rápidamente</b>, permitiendo a dirección evaluar la iniciativa con base en evidencia y avanzar a pruebas tempranas. Esto <b>aceleró la toma de decisiones</b> y evitó inversión temprana sin validación suficiente.
                 </p>
                 <p>
-                  También participó en la definición de lineamientos visuales con la propuesta de un nuevo look n feel y
-                  Design System, que hoy funcionan como referencia transversal para distintos productos y reducen dispersión
-                  y esfuerzos duplicados.
+                  Participó en la definición de lineamientos visuales con la propuesta de un nuevo look n feel y Design System, que hoy funcionan como <b>referencia transversal para distintos productos</b> y reducen dispersión y esfuerzos duplicados.
                 </p>
                 <p>
-                  Además, colaboró en la evolución de productos como Optimiza, Contabilidad y Tesorería, así como en
-                  exploraciones de nuevas interacciones, aportando criterio de experiencia en contextos donde UX comenzaba a
-                  integrarse de forma más temprana.
+                  Colaboró en la evolución de productos como CONTPAQi Optimiza, CONTPAQi Contabilidad y CONTPAQi Tesorería, así como en exploraciones de nuevas interacciones, aportando criterio de experiencia en contextos donde <b>UX comenzaba a integrarse de forma más temprana</b>.
                 </p>
                 <div class="quote">
-                  <p>Su impacto estuvo en ordenar, clarificar y habilitar avance oportuno.</p>
+                  <p><b>Su impacto:</b> ordenar, clarificar y habilitar avance oportuno.</p>
                 </div>
               </article>
 
               <article class="card span-6" role="listitem" id="itzel">
                 <h4>Itzel <span class="pill pill--amber">Coherencia → base reusable</span></h4>
                 <p>
-                  El aporte de Itzel se caracterizó por ordenar, simplificar y dejar bases reutilizables dentro de productos
-                  existentes, cuidando siempre la coherencia entre experiencia y limitaciones técnicas.
+                  Su aporte se caracterizó por ordenar, simplificar y dejar bases reutilizables dentro de productos existentes, cuidando siempre la coherencia entre experiencia y limitaciones técnicas.
                 </p>
                 <p>
-                  A lo largo del año, trabajó en la mejora del Asistente de Activación, Escritorios Virtuales y módulos
-                  comerciales y contables, transformando interfaces complicadas o sobrecargadas en experiencias más claras y
-                  usables.
+                  A lo largo del año, trabajó en la mejora del Asistente de Activación, Escritorios Virtuales y módulos comerciales y contables, transformando interfaces complicadas o sobrecargadas en experiencias más claras y usables.
                 </p>
                 <p>
-                  Fue clave en la homologación de módulos compartidos entre distintos productos, estableciendo una base
-                  común que reduce inconsistencias, facilita mantenimiento y permite escalar funcionalidades sin romper la
-                  experiencia existente.
+                  Fue clave en la homologación de módulos compartidos entre distintos productos, estableciendo una base común que <b>reduce inconsistencias, facilita mantenimiento</b> y permite escalar funcionalidades sin romper la experiencia existente.
                 </p>
                 <p>
-                  Además, exploró optimizaciones en componentes del Design System mediante la integración de variables y
-                  condicionales, logrando soluciones que aportan escalabilidad al sistema de diseño.
+                  Además, exploró optimizaciones en componentes del Design System mediante la integración de variables y condicionales, logrando soluciones que aportan <b>escalabilidad al Design System</b>.
                 </p>
                 <div class="quote">
-                  <p>Su trabajo dejó valor estructural más allá de entregables puntuales.</p>
+                  <p><b>Su trabajo:</b> valor estructural más allá de entregables puntuales.</p>
                 </div>
               </article>
 
               <article class="card span-6 span-all" role="listitem" id="daniel">
                 <h4>Daniel <span class="pill pill--amber">Descubrimiento → ejecución</span></h4>
                 <p>
-                  Daniel centró su aporte en reducir incertidumbre antes de desarrollo, utilizando investigación y definición
-                  clara del alcance como herramientas principales.
+                  Centró su aporte en reducir incertidumbre antes de desarrollo, utilizando investigación y definición clara del alcance como herramientas principales.
                 </p>
                 <p>
-                  En XML en Línea, lideró el proceso de descubrimiento que permitió entender el panorama completo del
-                  producto, generar prototipos claros y eliminar ambigüedad antes de escribir código, reduciendo riesgos
-                  técnicos y costos asociados a cambios tardíos.
+                  En CONTPAQi XML en Línea, participó en el proceso de re-descubrimiento que permitió entender el panorama completo del producto, generar prototipos claros y <b>eliminar ambigüedad antes de escribir código</b>, <b>reduciendo riesgos técnicos y costos asociados a cambios tardíos</b>.
                 </p>
                 <p>
-                  En Mi Gestión, trabajó en la modernización de la experiencia, redefiniendo pantallas, correos y flujos
-                  clave, y alineando a la tríada con un cronograma claro para desarrollo, mejorando previsibilidad y
-                  eficiencia en ejecución.
+                  En CONTPAQi Mi Gestión, trabajó en la modernización de la experiencia, redefiniendo pantallas, correos y flujos clave, y alineando a la tríada con un cronograma claro para desarrollo, mejorando <b>previsibilidad y eficiencia en ejecución</b>.
                 </p>
                 <p>
-                  También colaboró en Portal Web, traducciendo investigación en pantallas refinadas y listas para validación
-                  y ejecución.
+                  También colaboró en CONTPAQi PW, traducciendo investigación en pantallas refinadas y listas para validación y ejecución.
                 </p>
               </article>
             </div>
@@ -853,69 +811,50 @@
             <div class="lead-block">
               <p class="lead lead-title">Reposicionamiento de UX/UI como función estratégica</p>
               <p class="lead lead-body">
-                Se trabajó activamente en mover al equipo de UX/UI de un rol principalmente operativo a una función con mayor
-                peso en la definición de problemas, priorización y toma de decisiones. Esto implicó establecer expectativas
-                claras sobre el valor del diseño, así como alinear conversaciones con producto y desarrollo hacia impacto y
-                no solo entregables. También esto permitió que decisiones relevantes se tomaran antes y con mayor
-                información, reduciendo el costo de correcciones posteriores.
+                Se trabajó activamente en mover al equipo de UX/UI de un rol principalmente operativo a una función con mayor peso en la definición de problemas, priorización y toma de decisiones. Esto implicó establecer expectativas claras sobre el valor del diseño, así como alinear conversaciones con producto y desarrollo hacia <b>impacto y no solo entregables</b>.
               </p>
             </div>
             <div class="lead-block">
               <p class="lead lead-title">Orden y estructura en un entorno de alta complejidad</p>
               <p class="lead lead-body">
-                Se definieron marcos de trabajo, procesos y criterios claros para operar diseño en productos legacy y
-                contextos con fuertes restricciones técnicas. Al reducir ambigüedad y decisiones improvisadas, se disminuyo
-                la fricción organizacional, el equipo pudo avanzar con mayor consistencia y menor retrabajo, incluso en
-                escenarios complejos.
+                Se definieron marcos de trabajo, procesos y criterios claros para operar diseño en productos y contextos con fuertes restricciones técnicas. Al reducir ambigüedad y decisiones improvisadas, se disminuyó la fricción, el equipo pudo avanzar con <b>mayor consistencia y menor retrabajo</b> en escenarios complejos.
               </p>
             </div>
             <div class="lead-block">
               <p class="lead lead-title">Dirección estratégica de la evolución de experiencia</p>
               <p class="lead lead-body">
-                Se establecieron líneas claras sobre cómo debían evolucionar la experiencia y los flujos en productos clave,
-                dando al equipo un norte compartido. Esto permitió enfocar esfuerzos en iniciativas con mayor impacto y
-                evitar soluciones aisladas de bajo retorno que antes podían sentirse desconectadas.
+                Se establecieron líneas claras sobre cómo debían evolucionar la experiencia y los flujos en productos clave, dando al equipo un norte compartido. Esto permitió enfocar esfuerzos en iniciativas con mayor impacto y evitar soluciones aisladas que antes podían sentirse desconectadas.
               </p>
             </div>
             <div class="lead-block">
               <p class="lead lead-title">Bases para escalabilidad y sostenibilidad</p>
               <p class="lead lead-body">
-                Se impulsó la construcción de un nuevo look n’ feel y un design system que incluye convenciones, gobernanza,
-                criterios de calidad y flujos de trabajo alineados con desarrollo. Esto habilitó mayor eficiencia en diseño y
-                desarrollo, reduciendo dependencia de esfuerzos individuales.
+                Se impulsó la construcción de un nuevo look n' feel y un design system que incluye convenciones, gobernanza, criterios de calidad y flujos de trabajo alineados con desarrollo. Esto habilitará <b>mayor eficiencia en diseño y desarrollo</b>, reduciendo dependencia de esfuerzos individuales.
               </p>
             </div>
             <div class="lead-block">
               <p class="lead lead-title">Elevación del estándar profesional y de accountability</p>
               <p class="lead lead-body">
-                Se definieron métricas claras para evaluar desempeño senior, sustentadas en evidencias del trabajo diario
-                como cumplimiento de compromisos, calidad, claridad en handoffs, reducción de retrabajo y mejora progresiva
-                de la experiencia. Esto mejoró previsibilidad, calidad y consistencia en la entrega, con impacto directo en
-                eficiencia operativa.
+                Se definieron métricas claras para evaluar desempeño senior, sustentadas en evidencias del trabajo diario como cumplimiento de compromisos, calidad, reducción de retrabajo y mejora progresiva. Esto mejoró <b>previsibilidad, calidad y consistencia</b> en la entrega, con impacto directo en eficiencia operativa.
               </p>
             </div>
             <div class="lead-block">
               <p class="lead lead-title">Gestión de personas y salud del equipo</p>
               <p class="lead lead-body">
-                Se abordaron de forma directa situaciones de desalineación, bajo desempeño o fricción cultural, priorizando
-                la salud del equipo y la sostenibilidad del área. Esto ayudó a prevenir impactos negativos en desempeño y
-                continuidad del trabajo.
+                Se abordaron de forma directa situaciones de desalineación, bajo desempeño o fricción cultural, priorizando la salud del equipo y la sostenibilidad del área. Esto ayudó a prevenir impactos negativos en desempeño y continuidad del trabajo.
               </p>
             </div>
             <div class="lead-block">
               <p class="lead lead-title">Construcción de lenguaje común</p>
               <p class="lead lead-body">
-                Se impulsó un cambio de mentalidad hacia outcomes, claridad de objetivos y decisiones basadas en evidencia,
-                elevando la calidad de las conversaciones y acelerando acuerdos entre UX, Producto y Desarrollo. El resultado
-                fue un equipo más maduro, con mayor ownership, mejor alineación y mayor capacidad para enfrentar problemas
-                complejos.
+                Se impulsó un cambio de mentalidad hacia outcomes, claridad de objetivos y decisiones basadas en evidencia, elevando la calidad de las conversaciones y acelerando acuerdos entre UX, Producto y Desarrollo. El resultado fue un <b>equipo más maduro, con mayor ownership, mejor alineación</b> y mayor capacidad para enfrentar problemas complejos.
               </p>
             </div>
           </section>
 
           <section id="retos">
             <h3>Pendientes y retos como equipo</h3>
-            <p class="lead">A pesar del avance, existen áreas claras de oportunidad:</p>
+            <p class="lead">Más allá del avance, existen áreas claras de oportunidad:</p>
 
             <div class="bento">
               <div class="card span-6">
@@ -942,28 +881,16 @@
           <section id="cierre">
             <h3>Cierre – Visión de equipo</h3>
             <p class="lead">
-              El cierre de este año deja a un equipo de Product Design en una posición más sólida que al inicio, no solo por
-              lo entregado, sino por cómo hoy se toman decisiones y se opera el diseño dentro de la organización. En términos
-              prácticos, hoy el equipo opera con mayor claridad para definir problemas, mayor criterio para priorizar, y una
-              mejor habilidad para reducir incertidumbre antes de comprometer desarrollo.
+              A lo largo del 2025 se consolidó una manera de trabajar más consistente con decisiones más sustentadas, mejor articulación con producto y desarrollo, y un enfoque más claro en impacto. Los outcomes descritos muestran un impacto claro en experiencia de usuario, pero también en puntos clave para el negocio como son reducción de fricción operativa, menor retrabajo, mejor previsibilidad en desarrollo y decisiones de producto tomadas con mayor información.
             </p>
             <p class="lead">
-              A lo largo del año se consolidó una manera de trabajar más consistente: decisiones más sustentadas, mejor
-              articulación con producto y desarrollo, y un enfoque más claro en impacto. Los outcomes descritos muestran un
-              impacto claro en experiencia de usuario, pero también en variables clave para el negocio: reducción de fricción
-              operativa, menor retrabajo, mejor previsibilidad en desarrollo y decisiones de producto tomadas con mayor
-              información y menor riesgo.
+              Detrás de estos resultados existe un trabajo constante de iteración, seguimiento y alineación que permitió sostener el avance durante el año.
             </p>
             <p class="lead">
-              Detrás de estos resultados existe un trabajo constante de iteración, seguimiento y alineación que permitió
-              sostener el avance durante el año. Ese trabajo cotidiano fortaleció capacidades internas que hoy permiten al
-              equipo operar con mayor claridad, autonomía y foco.
+              Hoy el equipo opera con mayor claridad para definir problemas, mayor criterio para priorizar, y una mejor habilidad para reducir incertidumbre antes de comprometer desarrollo.
             </p>
             <p class="lead">
-              De cara al siguiente año, el objetivo es profundizar este impacto: anticiparnos más, reaccionar menos, medir
-              mejor el valor del diseño y consolidar procesos que permitan escalar sin incrementar fricción ni complejidad.
-              Con la base actual, el siguiente ciclo puede enfocarse en convertir esta madurez en impacto sostenido y
-              replicable, manteniendo un estándar alto sin sacrificar salud de equipo ni claridad de ejecución.
+              Para 2026, el objetivo es profundizar en el impacto, <b>anticiparnos más, reaccionar menos</b>, medir mejor el valor del diseño y consolidar procesos que permitan escalar sin incrementar fricción ni complejidad.
             </p>
           </section>
         </main>
