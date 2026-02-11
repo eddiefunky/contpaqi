@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Self-Service UX Research — Para POs (no UXR)</title>
+  <style>
+    :root {
+      --bg: #101018;
+      --surface: #181820;
+      --surface2: #202030;
+      --border: #333344;
+      --text: #f4f4ff;
+      --muted: #a4a7c7;
+      --accent: #9aaeff;
+      --accent-hover: #b5c3ff;
+      --success: #8fd3a4;
+      --warning: #e5c07b;
+      --card: #1a1a26;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+    .container { max-width: 920px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+    h1 { font-size: 1.35rem; font-weight: 600; margin: 0 0 0.25rem 0; letter-spacing: -0.02em; }
+    .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .tabs {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .tabs button {
+      padding: 0.6rem 1rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: -1px;
+    }
+    .tabs button:hover { color: var(--text); }
+    .tabs button.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Guide */
+    .phase {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    .phase-head {
+      padding: 0.9rem 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+    .phase-head:hover { background: var(--surface2); }
+    .phase-head .num { color: var(--accent); margin-right: 0.5rem; }
+    .phase-body {
+      padding: 0 1rem 1rem 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .phase-body ul { margin: 0.5rem 0 0 1.25rem; padding: 0; }
+    .phase-body li { margin-bottom: 0.35rem; }
+    .phase-body strong { color: var(--text); }
+    .phase-body .output { margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: var(--surface); border-radius: 6px; font-size: 0.85rem; }
+    .checkpoint .phase-head { border-left: 3px solid var(--warning); }
+
+    /* Selector */
+    .step { display: none; }
+    .step.visible { display: block; }
+    .step h3 { font-size: 1.05rem; margin: 0 0 1rem 0; font-weight: 600; }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .option {
+      display: block;
+      width: 100%;
+      padding: 1rem 1.1rem;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .option:hover { border-color: var(--accent); background: var(--surface2); }
+    .option strong { display: block; margin-bottom: 0.25rem; color: var(--accent); }
+    .option span { color: var(--muted); font-size: 0.85rem; }
+    .selector-actions { margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center; }
+    .selector-actions button {
+      padding: 0.5rem 1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .selector-actions button:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Result card */
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.25rem 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .result-card h4 { margin: 0 0 0.5rem 0; font-size: 1rem; color: var(--accent); }
+    .result-card .study-type { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .result-card .tools { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .result-card .next { font-size: 0.9rem; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+    .result-card .next strong { color: var(--success); }
+    .result-card ul { margin: 0.35rem 0 0 1rem; padding: 0; }
+    .result-card li { margin-bottom: 0.25rem; }
+    .reset-btn {
+      margin: 1.5rem auto 0 auto;
+      padding: 0.75rem 1.75rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: block;
+    }
+    .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Study form */
+    .study-form {
+      margin-top: 1.5rem;
+      padding: 1.1rem 1.1rem;
+      background: var(--surface);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .study-form h4 {
+      margin: 0 0 0.35rem 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .study-form-hint {
+      margin: 0 0 0.8rem 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .study-row {
+      margin-bottom: 0.75rem;
+    }
+    .study-row label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .study-row input,
+    .study-row textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+    .study-row textarea {
+      min-height: 72px;
+    }
+    .study-form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .study-form-actions button {
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .study-form-actions button:hover {
+      border-color: var(--accent-hover);
+      background: var(--accent-hover);
+    }
+
+    /* Glossary */
+    .glossary-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .glossary-section h3 {
+      margin: 0 0 0.6rem 0;
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .glossary-section p,
+    .glossary-section ul { color: var(--muted); margin: 0.35rem 0 0 0; }
+    .glossary-section ul { padding-left: 1.25rem; }
+    .glossary-section li { margin-bottom: 0.3rem; }
+    .glossary-section strong { color: var(--text); }
+    .glossary-step {
+      margin-top: 0.6rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--accent);
+    }
+    .glossary-step-num { font-weight: 600; color: var(--accent); }
+
+    /* Checkpoint forms (inside guide phases) */
+    .checkpoint-form {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--surface);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .checkpoint-form h5 { margin: 0 0 0.6rem 0; font-size: 0.9rem; color: var(--text); }
+    .checkpoint-form .study-row { margin-bottom: 0.6rem; }
+    .checkpoint-form .study-row:last-of-type { margin-bottom: 0; }
+    .checkpoint-form .study-form-actions { margin-top: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CONTPAQi · Guía Self-Service UX Research</h1>
+    <p class="subtitle">Para POs y equipos que no son UXR: proceso paso a paso y herramienta para elegir el tipo de estudio.</p>
+
+    <div class="tabs">
+      <button type="button" id="tabGuide" class="active" aria-pressed="true">Guía del proceso</button>
+      <button type="button" id="tabSelector" aria-pressed="false">¿Qué estudio hacer?</button>
+      <button type="button" id="tabGlossary" aria-pressed="false">Glosario y guía IA</button>
+    </div>
+
+    <!-- Panel: Guía -->
+    <div id="panelGuide" class="panel active">
+      <div class="phase">
+        <div class="phase-head" data-phase="0">
+          <span><span class="num">Fase 0</span> Entendimiento y selección de estudio</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <strong>Objetivo:</strong> Definir qué estudio necesitas (no asumir “entrevista” por defecto).<br>
+          <ul>
+            <li>Completa el árbol de decisión (usa la herramienta “¿Qué estudio hacer?” en la pestaña de al lado).</li>
+            <li>Opcional: sesión rápida con UXR para que te recomiende método según tu problema u objetivo.</li>
+            <li>Entregable: ficha o form con propósito, target y momento (concept, usabilidad, etc.).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head" data-phase="1">
+          <span><span class="num">Fase 1</span> Logística y reclutamiento</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <strong>Objetivo:</strong> Tener usuarios reales listos para el estudio.<br>
+          <ul>
+            <li>Herramienta clave: User Interviews (plantilla maestra, ej. contadores fiscalistas MX).</li>
+            <li>UXR configura la plantilla de reclutamiento; el sistema filtra por perfil verificado y enlaza tu calendario.</li>
+            <li>Agendamiento y pago de incentivos automáticos; la herramienta evita contactar al mismo usuario dos veces seguidas.</li>
+          </ul>
+          <div class="output"><strong>Output:</strong> Usuarios finales reales listos para el estudio.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head" data-phase="2">
+          <span><span class="num">Fase 2</span> Preparación del estudio</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <strong>Dos caminos:</strong><br>
+          <ul>
+            <li><strong>Asíncrono (Sondar.ai):</strong> Das contexto a la herramienta (qué validar, por qué, riesgos, objetivos), subes prototipo de Figma; la IA propone tareas y escenarios; tú validas. Contactas al DM antes de disparar reclutamiento.</li>
+            <li><strong>Síncrono (entrevista en vivo):</strong> Preparas guion usando la librería de preguntas y tareas aprobadas por UXR (evita sesgos como “¿te gusta?”). Preparas protocolo y contactas al DM.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase checkpoint">
+        <div class="phase-head" data-phase="c1">
+          <span><span class="num">Check 1</span> Validación / liberación (antes de ejecutar)</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li>Revisión del estudio en Sondar: tareas sin sesgo, orden lógico, prototipo funcional.</li>
+            <li>Formato de aprobación: pregunta de negocio, método elegido, link al prototipo, link al screener, script de PU.</li>
+            <li>Solo después de este checkpoint se da el <strong>GO</strong> para generar link (Sondar) o disparar reclutamiento (User Interviews).</li>
+          </ul>
+          <div class="checkpoint-form">
+            <h5>Formulario de aprobación (Check 1)</h5>
+            <div class="study-row">
+              <label for="c1BusinessQuestion">Pregunta de negocio</label>
+              <textarea id="c1BusinessQuestion" required placeholder="¿Qué decisión de negocio depende de este estudio?"></textarea>
+            </div>
+            <div class="study-row">
+              <label for="c1Method">Método elegido</label>
+              <input id="c1Method" type="text" required placeholder="Ej. Usability testing asíncrono, Concept testing síncrono" />
+            </div>
+            <div class="study-row">
+              <label for="c1PrototypeLink">Link al prototipo</label>
+              <input id="c1PrototypeLink" type="url" required placeholder="https://..." />
+            </div>
+            <div class="study-row">
+              <label for="c1ScreenerLink">Link al screener (a quién reclutamos)</label>
+              <input id="c1ScreenerLink" type="url" required placeholder="https://..." />
+            </div>
+            <div class="study-row">
+              <label for="c1Script">Script o guion de la prueba</label>
+              <textarea id="c1Script" required placeholder="Tareas y preguntas que seguirá el participante."></textarea>
+            </div>
+            <div class="study-row">
+              <label for="c1Email">Tu email (para copia)</label>
+              <input id="c1Email" type="email" required placeholder="tu@empresa.com" />
+            </div>
+            <div class="study-form-actions">
+              <button type="button" id="btnSendCheck1">Enviar formulario Check 1</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head" data-phase="3">
+          <span><span class="num">Fase 3</span> Ejecución y moderación</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li><strong>Asíncrono:</strong> DM envía enlace único a la base de User Interviews; el participante abre el link; la IA de Sondar analiza la interacción. No hay que coordinar agendas.</li>
+            <li><strong>Síncrono:</strong> Sesión en vivo (Teams); el participante agenda slot (30–60 min); compartir pantalla; grabar y transcribir para usar después con IA. User Interviews gestiona el incentivo.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head" data-phase="4">
+          <span><span class="num">Fase 4</span> Análisis y recomendaciones</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li><strong>Asíncrono:</strong> Lees el resumen de la IA y revisas 3 clips aleatorios para validar que no hubo “alucinación”. Output: captura del dashboard de patrones + 1 clip de evidencia.</li>
+            <li><strong>Síncrono:</strong> Usas transcripciones + IA para detectar patrones; plantilla de análisis UXR; micro-reporte. User Interviews paga el incentivo automáticamente.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase checkpoint">
+        <div class="phase-head" data-phase="c2">
+          <span><span class="num">Check 2</span> Validación / liberación (después del estudio)</span>
+          <span aria-hidden="true">▼</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li>PO muestra micro-reporte; revisión de reporte, detección de sesgos y revisión detallada de recomendaciones.</li>
+            <li>Revisión de posibles alucinaciones de la herramienta: revisar resumen, reproducir clips y evidencia compartida.</li>
+          </ul>
+          <div class="checkpoint-form">
+            <h5>Formulario de cierre (Check 2)</h5>
+            <div class="study-row">
+              <label for="c2ReportReview">Revisión del reporte (resumen de hallazgos)</label>
+              <textarea id="c2ReportReview" required placeholder="Breve resumen de lo que validaste y si el reporte refleja los hallazgos."></textarea>
+            </div>
+            <div class="study-row">
+              <label for="c2BiasCheck">Detección de posibles sesgos</label>
+              <textarea id="c2BiasCheck" required placeholder="¿Algún hallazgo podría estar sesgado? ¿Revisaste evidencia (clips)?"></textarea>
+            </div>
+            <div class="study-row">
+              <label for="c2Recommendations">Revisión de recomendaciones</label>
+              <textarea id="c2Recommendations" required placeholder="Principales recomendaciones y próximos pasos acordados."></textarea>
+            </div>
+            <div class="study-row">
+              <label for="c2EvidenceReview">Revisión de evidencia (clips / capturas)</label>
+              <textarea id="c2EvidenceReview" required placeholder="¿Revisaste al menos 1 clip o captura para validar que la IA no alucinó?"></textarea>
+            </div>
+            <div class="study-row">
+              <label for="c2Email">Tu email (para copia)</label>
+              <input id="c2Email" type="email" required placeholder="tu@empresa.com" />
+            </div>
+            <div class="study-form-actions">
+              <button type="button" id="btnSendCheck2">Enviar formulario Check 2</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Selector -->
+    <div id="panelSelector" class="panel">
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem;">Responde 2–3 preguntas; te sugeriremos el tipo de estudio y el camino (asíncrono o síncrono) según el marco self-service UXR.</p>
+
+      <div id="step1" class="step visible">
+        <h3>1. ¿En qué etapa estás?</h3>
+        <div class="options">
+          <button type="button" class="option" data-next="discovery" data-step="1">
+            <strong>Discovery (descubrimiento)</strong>
+            <span>Tengo una duda vaga, quiero entender un problema o una necesidad. Aún no tengo algo concreto que validar.</span>
+          </button>
+          <button type="button" class="option" data-next="validation" data-step="1">
+            <strong>Validación</strong>
+            <span>Ya tengo un prototipo o una idea clara. Quiero validar algo concreto con usuarios.</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="step2" class="step">
+        <h3>2. ¿Qué quieres saber en esta validación?</h3>
+        <div class="options">
+          <button type="button" class="option" data-next="usability" data-step="2">
+            <strong>Usability testing</strong>
+            <span>Si el flujo o la interfaz se entienden; si la gente puede completar tareas con el prototipo.</span>
+          </button>
+          <button type="button" class="option" data-next="concept" data-step="2">
+            <strong>Concept testing</strong>
+            <span>Si el usuario pagaría por esto, le interesa la propuesta de valor o la idea del producto.</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="step3" class="step">
+        <h3>3. ¿Cómo prefieres ejecutar el estudio?</h3>
+        <div class="options">
+          <button type="button" class="option" data-next="async" data-step="3">
+            <strong>Asíncrono</strong>
+            <span>Sin coordinar agendas; el usuario responde cuando pueda. Más rápido, menos profundidad en tiempo real.</span>
+          </button>
+          <button type="button" class="option" data-next="sync" data-step="3">
+            <strong>Síncrono</strong>
+            <span>Sesión en vivo (videollamada). Más tiempo de coordinación, pero puedes ver pantalla y profundizar en el momento.</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="stepResult" class="step">
+        <div id="resultContent" class="result-card"></div>
+
+        <div class="study-form">
+          <h4>Ficha de estudio</h4>
+          <p class="study-form-hint">Completa esta ficha corta; al enviarla se notificará al equipo correspondiente y recibirás una copia en tu correo.</p>
+          <div class="study-row">
+            <label for="sfName">Tu nombre</label>
+            <input id="sfName" type="text" placeholder="Ej. Ana Pérez" required />
+          </div>
+          <div class="study-row">
+            <label for="sfArea">Área</label>
+            <input id="sfArea" type="text" placeholder="Ej. Producto, Ingeniería, Comercial" required />
+          </div>
+          <div class="study-row">
+            <label for="sfRole">Cargo</label>
+            <input id="sfRole" type="text" placeholder="Ej. Product Owner, PM, Líder Técnico" required />
+          </div>
+          <div class="study-row">
+            <label for="sfProject">Proyecto / iniciativa</label>
+            <input id="sfProject" type="text" placeholder="Ej. Validación flujo de facturación para contadores" required />
+          </div>
+          <div class="study-row">
+            <label for="sfPurpose">Propósito (¿para qué?)</label>
+            <textarea id="sfPurpose" placeholder="Qué decisión quieres tomar con este estudio, qué quieres saber." required></textarea>
+          </div>
+          <div class="study-row">
+            <label for="sfTarget">Usuarios / target</label>
+            <textarea id="sfTarget" placeholder="Quiénes son los usuarios o segmentos que quieres incluir." required></textarea>
+          </div>
+          <div class="study-row">
+            <label for="sfProblem">Problema / hipótesis</label>
+            <textarea id="sfProblem" placeholder="Problema que quieres entender o hipótesis que quieres validar." required></textarea>
+          </div>
+          <div class="study-row">
+            <label for="sfMoment">Momento (concept, usabilidad, pricing, etc.)</label>
+            <input id="sfMoment" type="text" placeholder="Ej. Usabilidad de flujo, concept testing de nueva funcionalidad" required />
+          </div>
+          <div class="study-row">
+            <label for="sfRisks">Riesgos / supuestos relevantes</label>
+            <textarea id="sfRisks" placeholder="Riesgos si tomamos una mala decisión; supuestos clave." required></textarea>
+          </div>
+          <div class="study-row">
+            <label for="sfLinksProto">Links relevantes (prototipo, screener, docs)</label>
+            <textarea id="sfLinksProto" placeholder="Links a Figma, screener de User Interviews, documentación, etc." required></textarea>
+          </div>
+          <div class="study-row">
+            <label for="sfNotes">Notas adicionales</label>
+            <textarea id="sfNotes" placeholder="Cualquier contexto extra que quieras compartir." required></textarea>
+          </div>
+          <div class="study-row">
+            <label for="sfEmail">Tu email (para copia)</label>
+            <input id="sfEmail" type="email" placeholder="tucorreo@empresa.com" required />
+          </div>
+          <div class="study-form-actions">
+            <button type="button" id="btnSendStudy">Enviar</button>
+          </div>
+          <p class="study-form-hint" style="margin-top:0.4rem;">Al enviar, recibirás una copia de este requerimiento en tu correo.</p>
+        </div>
+
+        <button type="button" class="reset-btn" id="btnReset">← Elegir otro estudio</button>
+      </div>
+
+      <div class="selector-actions" id="selectorBack" style="display: none;">
+        <button type="button" id="btnBack">← Atrás</button>
+      </div>
+    </div>
+
+    <!-- Panel: Glosario y guía IA -->
+    <div id="panelGlossary" class="panel">
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem;">Glosario de herramientas con IA y guía paso a paso para micro-reportes y detección de patrones e insights (para no UXRs).</p>
+
+      <div class="glossary-section">
+        <h3>Herramientas con IA que se usan en el proceso</h3>
+        <p><strong>Sondar.ai</strong> — Plataforma para estudios de usabilidad y concept testing de forma asíncrona. La IA sugiere tareas y escenarios a partir de tu prototipo (p. ej. Figma), ejecuta el estudio cuando el usuario abre el link, y después analiza la interacción para generar un resumen de patrones y clips. Tú validas revisando 3 clips aleatorios para evitar confiar ciegamente en el texto (mitigar alucinaciones).</p>
+        <p><strong>User Interviews</strong> — No es una herramienta de IA en sí; sirve para reclutar participantes, agendar sesiones y gestionar incentivos. Se combina con Sondar (envío del link) o con sesiones en vivo (Teams). La IA entra después: con las transcripciones de las entrevistas en vivo puedes usar un asistente (p. ej. ChatGPT, Claude o el análisis que ofrezca tu equipo) para detectar patrones.</p>
+        <p><strong>Asistentes de IA para transcripciones</strong> — Para estudios síncronos: subes la transcripción (o el texto extraído de la grabación) a un asistente (ChatGPT, Claude, etc.) con un prompt que pida “extraer patrones, citas clave y recomendaciones”. Siempre contrasta el resumen con la evidencia cruda (revisar fragmentos de la transcripción o clips) para no dar por buenas “alucinaciones”.</p>
+      </div>
+
+      <div class="glossary-section">
+        <h3>Micro-reportes con apoyo de IA (paso a paso)</h3>
+        <p>Un micro-reporte es un resumen corto para stakeholders: qué se hizo, qué se encontró y qué se recomienda. Para no UXRs, sigue estos pasos:</p>
+        <div class="glossary-step"><span class="glossary-step-num">1.</span> Ten a la mano el <strong>resumen generado por la IA</strong> (Sondar o el asistente con transcripciones) y al menos <strong>1 clip o fragmento de evidencia</strong> que respalde los hallazgos.</div>
+        <div class="glossary-step"><span class="glossary-step-num">2.</span> Abre un doc (Notion, Google Docs, etc.) y escribe tres bloques: <strong>Objetivo del estudio</strong> (1–2 líneas), <strong>Hallazgos principales</strong> (3–5 bullets, en lenguaje claro; si la IA dio muchos puntos, elige los más relevantes para la decisión de negocio), <strong>Recomendaciones y próximos pasos</strong> (2–4 acciones concretas).</div>
+        <div class="glossary-step"><span class="glossary-step-num">3.</span> Revisa que cada hallazgo tenga respaldo: si mencionas “los usuarios no encontraron el botón”, asegúrate de haber visto un clip o cita donde se vea. Si no, quita o matiza ese punto para no propagar alucinaciones.</div>
+        <div class="glossary-step"><span class="glossary-step-num">4.</span> Comparte el micro-reporte con el equipo y, si aplica, complétalo con la <strong>revisión del Check 2</strong> (formulario en la pestaña Guía del proceso) para dejar registro de que se revisaron sesgos y evidencia.</div>
+      </div>
+
+      <div class="glossary-section">
+        <h3>Detección de patrones e insights con IA (paso a paso)</h3>
+        <p>Cuando tienes transcripciones o respuestas de usuarios y quieres extraer patrones sin ser UXR:</p>
+        <div class="glossary-step"><span class="glossary-step-num">1.</span> <strong>Prepara el texto:</strong> Une en un solo bloque las transcripciones o respuestas (por sesión o por pregunta). Si son muchas, puedes dividir por tema o por tarea y hacer varios análisis.</div>
+        <div class="glossary-step"><span class="glossary-step-num">2.</span> <strong>Prompt para el asistente:</strong> Pega el texto y pide algo como: “Resume los patrones recurrentes, las citas más representativas y las dificultades o frustraciones mencionadas. Lista en bullets y al final 3–5 recomendaciones de mejora.” No pidas números inventados (ej. “% de usuarios”) si no los tienes; pide tendencias cualitativas.</div>
+        <div class="glossary-step"><span class="glossary-step-num">3.</span> <strong>Verifica con la fuente:</strong> Revisa al menos 2–3 citas que la IA haya destacado buscándolas en la transcripción original. Si no coinciden o están sacadas de contexto, corrige el resumen o quita ese punto.</div>
+        <div class="glossary-step"><span class="glossary-step-num">4.</span> <strong>Usa una plantilla de análisis (si UXR la proporcionó):</strong> Si tu equipo tiene una plantilla (ej. por tipo de estudio: usabilidad vs concept), rellena los bloques con los patrones e insights ya filtrados. Así evitas sesgos y mantienes un formato estándar.</div>
+        <div class="glossary-step"><span class="glossary-step-num">5.</span> <strong>Cierra en micro-reporte:</strong> Lleva los patrones e insights validados al formato de micro-reporte (objetivo, hallazgos, recomendaciones) y comparte. Incluye en el Check 2 la revisión de evidencia para dejar trazabilidad.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var tabGuide = document.getElementById('tabGuide');
+      var tabSelector = document.getElementById('tabSelector');
+      var tabGlossary = document.getElementById('tabGlossary');
+      var panelGuide = document.getElementById('panelGuide');
+      var panelSelector = document.getElementById('panelSelector');
+      var panelGlossary = document.getElementById('panelGlossary');
+      var resultContent = document.getElementById('resultContent');
+      var btnReset = document.getElementById('btnReset');
+      var btnBack = document.getElementById('btnBack');
+      var selectorBack = document.getElementById('selectorBack');
+
+      var state = { stage: null, validationType: null, modality: null };
+      var stepOrder = ['step1', 'step2', 'step3', 'stepResult'];
+      var currentStepIndex = 0;
+      var historyStack = [];
+
+      function showPanel(panel) {
+        panelGuide.classList.toggle('active', panel === 'guide');
+        panelSelector.classList.toggle('active', panel === 'selector');
+        if (panelGlossary) panelGlossary.classList.toggle('active', panel === 'glossary');
+        tabGuide.classList.toggle('active', panel === 'guide');
+        tabSelector.classList.toggle('active', panel === 'selector');
+        if (tabGlossary) tabGlossary.classList.toggle('active', panel === 'glossary');
+      }
+      tabGuide.addEventListener('click', function () { showPanel('guide'); });
+      tabSelector.addEventListener('click', function () { showPanel('selector'); });
+      if (tabGlossary) tabGlossary.addEventListener('click', function () { showPanel('glossary'); });
+
+      function showStep(stepId) {
+        stepOrder.forEach(function (id) {
+          document.getElementById(id).classList.toggle('visible', id === stepId);
+        });
+        var idx = stepOrder.indexOf(stepId);
+        selectorBack.style.display = (idx > 0 && idx < stepOrder.length - 1) ? 'flex' : 'none';
+        currentStepIndex = idx;
+      }
+
+      function goBack() {
+        if (historyStack.length === 0) return;
+        var popped = historyStack.pop();
+        showStep(popped);
+        if (popped === 'step1') state.stage = null;
+        if (popped === 'step2') state.validationType = null;
+        if (popped === 'step3') state.modality = null;
+      }
+      btnBack.addEventListener('click', goBack);
+
+      var recommendations = {
+        discovery: {
+          title: 'Estudio de descubrimiento (entrevista cualitativa)',
+          tools: 'User Interviews (reclutamiento y agenda) + sesión en vivo (Teams) o, si tu equipo lo tiene, formato asíncrono con preguntas abiertas.',
+          next: [
+            'Completa la ficha de estudio (propósito, target, qué quieres descubrir).',
+            'Sesión opcional con UXR para afinar preguntas.',
+            'Fase 1: reclutamiento con User Interviews; Fase 2: guion con librería de preguntas aprobadas por UXR.'
+          ]
+        },
+        usability_async: {
+          title: 'Usability testing — Asíncrono',
+          tools: 'Sondar.ai (ejecución y análisis con IA) + User Interviews (reclutamiento y envío del link).',
+          next: [
+            'Fase 2: Prepara contexto y prototipo en Sondar; valida tareas/escenarios sugeridos por la herramienta.',
+            'Check 1: Revisión y formato de aprobación antes del GO.',
+            'Fase 3: DM envía link; participantes completan cuando puedan; IA analiza.',
+            'Fase 4: Revisa resumen IA + 3 clips; entrega captura de patrones + 1 clip de evidencia.'
+          ]
+        },
+        usability_sync: {
+          title: 'Usability testing — Síncrono',
+          tools: 'User Interviews (reclutamiento, agenda, incentivo) + Teams (sesión en vivo, compartir pantalla, grabación).',
+          next: [
+            'Fase 2: Prepara guion con librería de preguntas y tareas aprobadas por UXR; graba y transcribe para análisis con IA.',
+            'Check 1: Revisión y formato de aprobación antes del GO.',
+            'Fase 3: Sesiones en vivo; pide "comparte pantalla e intenta [tarea]".',
+            'Fase 4: Análisis con transcripciones + IA; plantilla UXR; micro-reporte.'
+          ]
+        },
+        concept_async: {
+          title: 'Concept testing — Asíncrono',
+          tools: 'Sondar.ai (ejecución y análisis con IA) + User Interviews (reclutamiento y envío del link).',
+          next: [
+            'Fase 2: Contexto y prototipo/concepto en Sondar; valida tareas/escenarios propuestos.',
+            'Check 1: Revisión y aprobación antes del GO.',
+            'Fase 3: Link a participantes; respuestas asíncronas; IA analiza.',
+            'Fase 4: Resumen IA + clips de evidencia; Check 2 antes de cerrar.'
+          ]
+        },
+        concept_sync: {
+          title: 'Concept testing — Síncrono',
+          tools: 'User Interviews (reclutamiento, agenda, incentivo) + Teams (sesión en vivo).',
+          next: [
+            'Fase 2: Guion con preguntas aprobadas por UXR (evitar "¿te gusta?").',
+            'Check 1: Aprobación antes del GO.',
+            'Fase 3: Entrevistas en vivo sobre la propuesta de valor o concepto.',
+            'Fase 4: Transcripciones + IA; plantilla de análisis; micro-reporte.'
+          ]
+        }
+      };
+
+      function renderResult() {
+        var key = state.stage;
+        if (state.stage === 'validation') key = (state.validationType || 'usability') + '_' + (state.modality || 'async');
+        var r = recommendations[key] || recommendations.discovery;
+        resultContent.innerHTML =
+          '<h4>Recomendación</h4>' +
+          '<div class="study-type">' + r.title + '</div>' +
+          '<div class="tools"><strong>Herramientas:</strong> ' + r.tools + '</div>' +
+          '<div class="next"><strong>Próximos pasos:</strong><ul>' + r.next.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>';
+      }
+
+      document.querySelectorAll('.option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var next = btn.getAttribute('data-next');
+          var step = btn.getAttribute('data-step');
+          if (step === '1') {
+            state.stage = next;
+            if (next === 'discovery') {
+              state.validationType = null;
+              state.modality = null;
+              historyStack = ['step1'];
+              showStep('stepResult');
+              state.stage = 'discovery';
+              renderResult();
+              return;
+            }
+            historyStack.push('step1');
+            showStep('step2');
+            return;
+          }
+          if (step === '2') {
+            state.validationType = next;
+            historyStack.push('step2');
+            showStep('step3');
+            return;
+          }
+          if (step === '3') {
+            state.modality = next;
+            historyStack.push('step3');
+            showStep('stepResult');
+            renderResult();
+          }
+        });
+      });
+
+      btnReset.addEventListener('click', function () {
+        state = { stage: null, validationType: null, modality: null };
+        historyStack = [];
+        showStep('step1');
+        selectorBack.style.display = 'none';
+      });
+
+      document.querySelectorAll('.phase-head').forEach(function (head) {
+        head.addEventListener('click', function () {
+          var body = this.nextElementSibling;
+          var isOpen = body.style.display !== 'none';
+          body.style.display = isOpen ? 'none' : 'block';
+          this.setAttribute('aria-expanded', !isOpen);
+        });
+      });
+      document.querySelectorAll('.phase-body').forEach(function (body) {
+        body.style.display = 'none';
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var c1BusinessQuestion = document.getElementById('c1BusinessQuestion');
+      var c1Method = document.getElementById('c1Method');
+      var c1PrototypeLink = document.getElementById('c1PrototypeLink');
+      var c1ScreenerLink = document.getElementById('c1ScreenerLink');
+      var c1Script = document.getElementById('c1Script');
+      var c1Email = document.getElementById('c1Email');
+      var btnSendCheck1 = document.getElementById('btnSendCheck1');
+      var c2ReportReview = document.getElementById('c2ReportReview');
+      var c2BiasCheck = document.getElementById('c2BiasCheck');
+      var c2Recommendations = document.getElementById('c2Recommendations');
+      var c2EvidenceReview = document.getElementById('c2EvidenceReview');
+      var c2Email = document.getElementById('c2Email');
+      var btnSendCheck2 = document.getElementById('btnSendCheck2');
+      var checkRecipient = 'alan.jasso@tecnoavance.mx';
+
+      function hasVal(el) { return el && el.value && el.value.trim().length > 0; }
+      function validEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((s || '').trim()); }
+
+      if (btnSendCheck1) {
+        btnSendCheck1.addEventListener('click', function () {
+          if (!hasVal(c1BusinessQuestion) || !hasVal(c1Method) || !hasVal(c1PrototypeLink) || !hasVal(c1ScreenerLink) || !hasVal(c1Script) || !hasVal(c1Email)) {
+            alert('Completa todos los campos del formulario Check 1.');
+            return;
+          }
+          if (!validEmail(c1Email.value.trim())) {
+            alert('Ingresa un correo válido para recibir la copia.');
+            return;
+          }
+          var body = [
+            'Formulario de aprobación Check 1 (antes de ejecutar)',
+            '',
+            'Pregunta de negocio:',
+            c1BusinessQuestion.value.trim(),
+            '',
+            'Método elegido:',
+            c1Method.value.trim(),
+            '',
+            'Link al prototipo:',
+            c1PrototypeLink.value.trim(),
+            '',
+            'Link al screener:',
+            c1ScreenerLink.value.trim(),
+            '',
+            'Script o guion de la prueba:',
+            c1Script.value.trim(),
+            '',
+            'Enviado desde la guía self-service UXR.'
+          ].join('\n');
+          var mailto = 'mailto:' + encodeURIComponent(checkRecipient) + '?subject=' + encodeURIComponent('[Self-service UXR] Check 1 - Aprobación antes de ejecutar') + '&body=' + encodeURIComponent(body) + '&cc=' + encodeURIComponent(c1Email.value.trim());
+          window.location.href = mailto;
+        });
+      }
+      if (btnSendCheck2) {
+        btnSendCheck2.addEventListener('click', function () {
+          if (!hasVal(c2ReportReview) || !hasVal(c2BiasCheck) || !hasVal(c2Recommendations) || !hasVal(c2EvidenceReview) || !hasVal(c2Email)) {
+            alert('Completa todos los campos del formulario Check 2.');
+            return;
+          }
+          if (!validEmail(c2Email.value.trim())) {
+            alert('Ingresa un correo válido para recibir la copia.');
+            return;
+          }
+          var body = [
+            'Formulario de cierre Check 2 (después del estudio)',
+            '',
+            'Revisión del reporte:',
+            c2ReportReview.value.trim(),
+            '',
+            'Detección de posibles sesgos:',
+            c2BiasCheck.value.trim(),
+            '',
+            'Revisión de recomendaciones:',
+            c2Recommendations.value.trim(),
+            '',
+            'Revisión de evidencia (clips/capturas):',
+            c2EvidenceReview.value.trim(),
+            '',
+            'Enviado desde la guía self-service UXR.'
+          ].join('\n');
+          var mailto = 'mailto:' + encodeURIComponent(checkRecipient) + '?subject=' + encodeURIComponent('[Self-service UXR] Check 2 - Cierre y validación') + '&body=' + encodeURIComponent(body) + '&cc=' + encodeURIComponent(c2Email.value.trim());
+          window.location.href = mailto;
+        });
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      var sfName = document.getElementById('sfName');
+      var sfArea = document.getElementById('sfArea');
+      var sfRole = document.getElementById('sfRole');
+      var sfProject = document.getElementById('sfProject');
+      var sfPurpose = document.getElementById('sfPurpose');
+      var sfTarget = document.getElementById('sfTarget');
+      var sfProblem = document.getElementById('sfProblem');
+      var sfMoment = document.getElementById('sfMoment');
+      var sfRisks = document.getElementById('sfRisks');
+      var sfLinksProto = document.getElementById('sfLinksProto');
+      var sfNotes = document.getElementById('sfNotes');
+      var sfEmail = document.getElementById('sfEmail');
+      var btnSendStudy = document.getElementById('btnSendStudy');
+
+      if (!btnSendStudy) return;
+
+      function hasValue(el) {
+        return el && el.value && el.value.trim().length > 0;
+      }
+
+      function buildStudyEmail() {
+        if (!hasValue(sfName) || !hasValue(sfArea) || !hasValue(sfRole) ||
+            !hasValue(sfProject) || !hasValue(sfPurpose) || !hasValue(sfTarget) ||
+            !hasValue(sfProblem) || !hasValue(sfMoment) || !hasValue(sfRisks) ||
+            !hasValue(sfLinksProto) || !hasValue(sfNotes) || !hasValue(sfEmail)) {
+          alert('Por favor completa todos los campos de la ficha, incluido tu correo.');
+          return;
+        }
+
+        var requester = sfEmail.value.trim();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(requester)) {
+          alert('Ingresa un correo válido para recibir la copia.');
+          return;
+        }
+
+        var name = sfName.value.trim();
+        var area = sfArea.value.trim();
+        var role = sfRole.value.trim();
+        var project = sfProject.value.trim();
+        var purpose = sfPurpose.value.trim();
+        var target = sfTarget.value.trim();
+        var problem = sfProblem.value.trim();
+        var moment = sfMoment.value.trim();
+        var risks = sfRisks.value.trim();
+        var links = sfLinksProto.value.trim();
+        var notes = sfNotes.value.trim();
+
+        var studyTypeEl = document.querySelector('#resultContent .study-type');
+        var studyTypeText = studyTypeEl ? studyTypeEl.textContent.trim() : 'No definido (usa el selector de estudio)';
+
+        var subject = '[Self-service UXR] Ficha de estudio - ' + project;
+
+        var bodyLines = [
+          'Hola,',
+          '',
+          'Te comparto la ficha de estudio para revisión:',
+          '',
+          'Nombre de quien solicita:',
+          name,
+          '',
+          'Área:',
+          area,
+          '',
+          'Cargo:',
+          role,
+          '',
+          'Proyecto / iniciativa:',
+          project,
+          '',
+          'Tipo de estudio sugerido:',
+          studyTypeText,
+          '',
+          'Propósito:',
+          purpose,
+          '',
+          'Usuarios / target:',
+          target,
+          '',
+          'Problema / hipótesis:',
+          problem,
+          '',
+          'Momento (concept, usabilidad, etc.):',
+          moment,
+          '',
+          'Riesgos / supuestos:',
+          risks,
+          '',
+          'Links relevantes:',
+          links,
+          '',
+          'Notas adicionales:',
+          notes,
+          '',
+          'Generado desde la guía self-service UXR.'
+        ];
+
+        var mailto = 'mailto:' + encodeURIComponent('alan.jasso@tecnoavance.mx') +
+          '?subject=' + encodeURIComponent(subject) +
+          '&body=' + encodeURIComponent(bodyLines.join('\n')) +
+          '&cc=' + encodeURIComponent(requester);
+
+        window.location.href = mailto;
+      }
+
+      btnSendStudy.addEventListener('click', buildStudyEmail);
+    })();
+  </script>
+</body>
+</html>
