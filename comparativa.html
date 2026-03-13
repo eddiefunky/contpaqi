@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sueldos UX/UI — México 2025–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f11;
+    --surface: #17171a;
+    --border: #2a2a2f;
+    --text: #e8e8ec;
+    --muted: #a0a0b2;
+    --accent: #7c6af7;
+    --accent2: #4fc4a0;
+    --red: #f76a6a;
+    --yellow: #f7c96a;
+    --green: #6af7a0;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17.5px;
+    line-height: 1.5;
+    padding: 48px 80px;
+    min-height: 100vh;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .header h1 {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .header p {
+    color: var(--muted);
+    font-size: 13px;
+    font-family: var(--mono);
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .tag-low { background: rgba(247,106,106,0.15); color: var(--red); border: 1px solid rgba(247,106,106,0.3); }
+  .tag-high { background: rgba(106,247,160,0.12); color: var(--green); border: 1px solid rgba(106,247,160,0.3); }
+  .tag-mid { background: rgba(124,106,247,0.12); color: var(--accent); border: 1px solid rgba(124,106,247,0.3); }
+  .tag-us { background: rgba(247,201,106,0.15); color: var(--yellow); border: 1px solid rgba(247,201,106,0.4); margin-top: 5px; }
+
+  .note {
+    background: rgba(124,106,247,0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin-bottom: 32px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    width: fit-content;
+  }
+
+  .note strong { color: var(--text); }
+
+  .section-title {
+    font-family: var(--mono);
+    font-size: 17px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 48px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 960px;
+  }
+
+  thead tr {
+    background: var(--bg);
+  }
+
+  thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  thead th:last-child {
+    border-right: none;
+  }
+
+  thead th:first-child {
+    color: var(--text);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background: rgba(255,255,255,0.025);
+  }
+
+  td {
+    padding: 14px 16px;
+    vertical-align: top;
+    border-right: 1px solid var(--border);
+  }
+
+  td:last-child {
+    border-right: none;
+  }
+
+  td:first-child {
+    min-width: 180px;
+  }
+
+  .company-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .company-examples {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .salary-range {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .salary-neto {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .beneficios-list {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .beneficios-list span {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .dot {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .bono-val {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent2);
+  }
+
+  .highlight-high td:first-child {
+    border-left: 2px solid var(--green);
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .sources {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 48px;
+  }
+
+  .sources h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .source-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .source-item:last-child {
+    border-bottom: none;
+  }
+
+  .source-num {
+    font-family: var(--mono);
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 22px;
+  }
+
+  .source-info { color: var(--muted); line-height: 1.5; }
+  .source-info a { color: var(--text); text-decoration: none; }
+  .source-info a:hover { color: var(--accent); }
+  .source-date { color: var(--muted); font-size: 12px; font-family: var(--mono); }
+
+  .isr-note {
+    background: rgba(247,201,106,0.05);
+    border: 1px solid rgba(247,201,106,0.2);
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    width: fit-content;
+  }
+
+  .isr-note strong { color: var(--yellow); }
+
+  @media (max-width: 600px) {
+    body { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Sueldos UX/UI — México 2025–2026</h1>
+  <p>Reporte comparativo por tipo de empresa · Jr / Middle / Sr / Gerencia · MXN bruto mensual</p>
+</div>
+
+<div class="note">
+  <strong>Nota metodológica:</strong> La tabla está organizada por <strong>tipo de empresa</strong> con nombres representativos del segmento, lo que da rangos más robustos y accionables.<br>Las cifras son <strong>sueldo bruto mensual en MXN</strong>. El neto estimado considera ISR + cuotas IMSS trabajador (~18–33% según rango).
+</div>
+
+<p class="section-title">Comparativa salarial por tipo de empresa</p>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot" style="background: var(--red);"></div>
+    <span>Paga menos en el segmento</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background: var(--green);"></div>
+    <span>Paga más en el segmento</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background: var(--yellow);"></div>
+    <span>Posición actual de la empresa</span>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Empresa / Segmento</th>
+        <th>Jr · 0–2 años</th>
+        <th>Middle · 2–5 años</th>
+        <th>Sr · 5+ años</th>
+        <th>Gerente / Lead</th>
+        <th>Bono anual</th>
+        <th>Beneficios destacados</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- AGENCIAS -->
+      <tr class="highlight-low">
+        <td>
+          <div class="company-name">🎨 Agencia de Diseño</div>
+          <div class="company-examples">Multiplica, Frog, Huge, BBVA Design Center</div>
+          <div style="margin-top:6px;"><span class="tag tag-low">Paga menos</span></div>
+        </td>
+        <td>
+          <div class="salary-range">$15,000 – $22,000</div>
+          <div class="salary-neto">Neto ~$12,500–$17,800</div>
+        </td>
+        <td>
+          <div class="salary-range">$22,000 – $35,000</div>
+          <div class="salary-neto">Neto ~$17,200–$26,500</div>
+          <span class="tag tag-us">← Nosotros ~$25k neto</span>
+        </td>
+        <td>
+          <div class="salary-range">$35,000 – $50,000</div>
+          <div class="salary-neto">Neto ~$26,000–$37,000</div>
+          <span class="tag tag-us">← Nosotros ~$28.5k–$30.7k neto</span>
+        </td>
+        <td>
+          <div class="salary-range">$50,000 – $70,000</div>
+          <div class="salary-neto">Neto ~$35,000–$49,000</div>
+          <span class="tag tag-us">← Nosotros ~$33.5k neto ↓ piso</span>
+        </td>
+        <td>
+          <div class="bono-val">0 – 0.5 meses</div>
+          <div class="salary-neto">PTU variable</div>
+        </td>
+        <td>
+          <div class="beneficios-list">
+            <span><span class="dot">·</span>IMSS / Ley Federal</span>
+            <span><span class="dot">·</span>Seguro médico básico</span>
+            <span><span class="dot">·</span>Home office parcial</span>
+            <span><span class="dot">·</span>Proyectos variados</span>
+          </div>
+        </td>
+      </tr>
+
+      <!-- SOFTWARE EMPRESARIAL -->
+      <tr>
+        <td>
+          <div class="company-name">🏢 Software Empresarial / ERP</div>
+          <div class="company-examples">Aspel, SAP Mexico, ORACLE MX, Intelisis</div>
+        </td>
+        <td>
+          <div class="salary-range">$18,000 – $26,000</div>
+          <div class="salary-neto">Neto ~$14,800–$20,300</div>
+        </td>
+        <td>
+          <div class="salary-range">$28,000 – $40,000</div>
+          <div class="salary-neto">Neto ~$21,800–$30,400</div>
+        </td>
+        <td>
+          <div class="salary-range">$40,000 – $58,000</div>
+          <div class="salary-neto">Neto ~$29,600–$41,800</div>
+        </td>
+        <td>
+          <div class="salary-range">$60,000 – $90,000</div>
+          <div class="salary-neto">Neto ~$42,600–$62,100</div>
+        </td>
+        <td>
+          <div class="bono-val">0.5 – 1 mes</div>
+          <div class="salary-neto">PTU + bono performance</div>
+        </td>
+        <td>
+          <div class="beneficios-list">
+            <span><span class="dot">·</span>SGMM colectivo</span>
+            <span><span class="dot">·</span>Vales de despensa</span>
+            <span><span class="dot">·</span>Fondo de ahorro</span>
+            <span><span class="dot">·</span>Días adicionales</span>
+          </div>
+        </td>
+      </tr>
+
+      <!-- FINTECH STARTUP -->
+      <tr>
+        <td>
+          <div class="company-name">⚡ Fintech / Startup Tech</div>
+          <div class="company-examples">Clip, Kueski, Clara, Conekta, Bitso</div>
+        </td>
+        <td>
+          <div class="salary-range">$25,000 – $36,000</div>
+          <div class="salary-neto">Neto ~$19,800–$27,400</div>
+        </td>
+        <td>
+          <div class="salary-range">$38,000 – $54,000</div>
+          <div class="salary-neto">Neto ~$28,500–$38,900</div>
+        </td>
+        <td>
+          <div class="salary-range">$55,000 – $78,000</div>
+          <div class="salary-neto">Neto ~$38,500–$54,600</div>
+        </td>
+        <td>
+          <div class="salary-range">$80,000 – $115,000</div>
+          <div class="salary-neto">Neto ~$54,400–$78,200</div>
+        </td>
+        <td>
+          <div class="bono-val">1 – 2 meses</div>
+          <div class="salary-neto">PTU + equity / stock options</div>
+        </td>
+        <td>
+          <div class="beneficios-list">
+            <span><span class="dot">·</span>SGMM premium</span>
+            <span><span class="dot">·</span>Budget desarrollo</span>
+            <span><span class="dot">·</span>Home office total</span>
+            <span><span class="dot">·</span>Stock options / equity</span>
+          </div>
+        </td>
+      </tr>
+
+      <!-- CORPORATIVO / BANCA -->
+      <tr>
+        <td>
+          <div class="company-name">🏦 Corporativo / Banca</div>
+          <div class="company-examples">BBVA México, Banorte, Citibanamex, HSBC MX</div>
+        </td>
+        <td>
+          <div class="salary-range">$20,000 – $30,000</div>
+          <div class="salary-neto">Neto ~$16,200–$23,100</div>
+        </td>
+        <td>
+          <div class="salary-range">$32,000 – $46,000</div>
+          <div class="salary-neto">Neto ~$24,600–$34,100</div>
+        </td>
+        <td>
+          <div class="salary-range">$48,000 – $68,000</div>
+          <div class="salary-neto">Neto ~$34,600–$47,600</div>
+        </td>
+        <td>
+          <div class="salary-range">$72,000 – $105,000</div>
+          <div class="salary-neto">Neto ~$49,700–$71,400</div>
+        </td>
+        <td>
+          <div class="bono-val">1 – 2 meses</div>
+          <div class="salary-neto">PTU + bono anual garantizado</div>
+        </td>
+        <td>
+          <div class="beneficios-list">
+            <span><span class="dot">·</span>SGMM premium + dental + visión</span>
+            <span><span class="dot">·</span>Fondo de ahorro 13%</span>
+            <span><span class="dot">·</span>Caja de ahorro</span>
+            <span><span class="dot">·</span>Plan de retiro</span>
+          </div>
+        </td>
+      </tr>
+
+      <!-- NEARSHORING -->
+      <tr>
+        <td>
+          <div class="company-name">🌐 Nearshoring / Consultoría IT</div>
+          <div class="company-examples">Wizeline, Encora, Softtek, Globant MX</div>
+        </td>
+        <td>
+          <div class="salary-range">$28,000 – $40,000</div>
+          <div class="salary-neto">Neto ~$22,000–$30,400</div>
+        </td>
+        <td>
+          <div class="salary-range">$42,000 – $58,000</div>
+          <div class="salary-neto">Neto ~$31,300–$41,800</div>
+        </td>
+        <td>
+          <div class="salary-range">$58,000 – $82,000</div>
+          <div class="salary-neto">Neto ~$40,600–$57,400</div>
+        </td>
+        <td>
+          <div class="salary-range">$82,000 – $120,000</div>
+          <div class="salary-neto">Neto ~$55,800–$81,600</div>
+        </td>
+        <td>
+          <div class="bono-val">1 – 2 meses</div>
+          <div class="salary-neto">Depende de cliente asignado</div>
+        </td>
+        <td>
+          <div class="beneficios-list">
+            <span><span class="dot">·</span>SGMM</span>
+            <span><span class="dot">·</span>Certificaciones pagadas</span>
+            <span><span class="dot">·</span>Inglés corporativo</span>
+            <span><span class="dot">·</span>Exposición a clientes US</span>
+          </div>
+        </td>
+      </tr>
+
+      <!-- UNICORNIO / BIG TECH MX -->
+      <tr class="highlight-high">
+        <td>
+          <div class="company-name">🦄 Tech Unicornio / Scale-up</div>
+          <div class="company-examples">Mercado Libre MX, Rappi MX, Kavak, Incode</div>
+          <div style="margin-top:6px;"><span class="tag tag-high">Paga más</span></div>
+        </td>
+        <td>
+          <div class="salary-range">$32,000 – $50,000</div>
+          <div class="salary-neto">Neto ~$24,600–$37,000</div>
+        </td>
+        <td>
+          <div class="salary-range">$50,000 – $72,000</div>
+          <div class="salary-neto">Neto ~$37,000–$50,400</div>
+        </td>
+        <td>
+          <div class="salary-range">$72,000 – $100,000</div>
+          <div class="salary-neto">Neto ~$49,700–$68,000</div>
+        </td>
+        <td>
+          <div class="salary-range">$100,000 – $145,000</div>
+          <div class="salary-neto">Neto ~$68,000–$98,600</div>
+        </td>
+        <td>
+          <div class="bono-val">2 – 3 meses</div>
+          <div class="salary-neto">PTU + RSU / acciones</div>
+        </td>
+        <td>
+          <div class="beneficios-list">
+            <span><span class="dot">·</span>SGMM top tier</span>
+            <span><span class="dot">·</span>RSU / stock options</span>
+            <span><span class="dot">·</span>Días off ilimitados o flexibles</span>
+            <span><span class="dot">·</span>Dev budget $1,000–$3,000 USD/año</span>
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="isr-note">
+  <strong>Cálculo de neto estimado:</strong> Se aplica ISR + cuotas IMSS parte trabajador (~2%). Rangos aproximados por nivel de ingreso bruto mensual:<br>
+  $15–25K bruto → descuento ~18% · $25–40K → ~22% · $40–60K → ~26% · $60–90K → ~30% · $90K+ → ~32–33%<br>
+  <strong>Importante:</strong> el neto real varía por deducciones personales, subsidio al empleo (rangos bajos) y la estructura de compensación total (mixta vs. solo sueldo).
+</div>
+
+<div class="sources">
+  <h3>Fuentes consultadas</h3>
+
+  <div class="source-item">
+    <span class="source-num">01</span>
+    <div class="source-info">
+      <a href="https://talently.tech/herramientas/mexico/salario/developer/ux-designer" target="_blank">Talently — Calculadora de Salarios UX Designer México</a><br>
+      <span class="source-date">Última actualización: Mayo 2024 · Datos internos de plataforma nearshoring · Rangos en USD/mes (Jr $1,540–2,040 · Mid $1,925–2,550 · Sr $2,502–3,315)</span>
+    </div>
+  </div>
+
+  <div class="source-item">
+    <span class="source-num">02</span>
+    <div class="source-info">
+      <a href="https://www.glassdoor.com.mx/Sueldos/senior-ui-ux-designer-sueldo-SRCH_KO0,21.htm" target="_blank">Glassdoor MX — Sueldos UI/UX Designer por nivel</a><br>
+      <span class="source-date">Feb 2026 · Sr promedio $38,000 MXN/mes · Jr ~$16,000–24,000 MXN/mes · Gerente UX ~$44,000–61,000 MXN/mes (9 reportes)</span>
+    </div>
+  </div>
+
+  <div class="source-item">
+    <span class="source-num">03</span>
+    <div class="source-info">
+      <a href="https://www.coderhouse.com/us/sueldos/sueldo-disenador-ux-ui-mexico-2025" target="_blank">CoderHouse — Sueldo Diseñador UX/UI México 2025</a><br>
+      <span class="source-date">2025 · Jr $17,000–22,000 MXN · Semi-Sr $25,000–38,000 MXN · Sr $45,000+ MXN · Sesgo nearshoring con inglés avanzado</span>
+    </div>
+  </div>
+
+  <div class="source-item">
+    <span class="source-num">04</span>
+    <div class="source-info">
+      <a href="https://coderslink.com/talento/reporte-salarios-ti-mexico/" target="_blank">CodersLink — Reporte de Salarios TI México 2025</a><br>
+      <span class="source-date">Jun 2025 · Promedio TI general $45,224 MXN/mes bruto (+32% YoY) · UX/UI $42,848 MXN/mes promedio en plataforma (sesgo Sr/remote)</span>
+    </div>
+  </div>
+
+  <div class="source-item">
+    <span class="source-num">05</span>
+    <div class="source-info">
+      <a href="https://hireline.io/mx/enciclopedia-de-perfiles-de-tecnologia/disenador-ux" target="_blank">Hireline — Perfil y Sueldo Diseñador UX México 2026</a><br>
+      <span class="source-date">2026 · Promedio neto $60,250–78,333 MXN/mes (CDMX y remoto) · Datos escasos por nivel pero útil como benchmark por ciudad</span>
+    </div>
+  </div>
+
+  <div class="source-item">
+    <span class="source-num">06</span>
+    <div class="source-info">
+      <a href="https://www.glassdoor.com.mx/Sueldo/Mercado-Libre-UX-Designer-Sueldos-E6563240_D_KO14,25.htm" target="_blank">Glassdoor — UX Designer en Mercado Libre México</a><br>
+      <span class="source-date">Oct 2025 · Rango $22,500–$67,800 USD/año · Promedio $31,917 USD/año (~$53K MXN/mes) · Muestra: 3 reportes MX · Alta satisfacción salarial (5/5)</span>
+    </div>
+  </div>
+
+  <div class="source-item">
+    <span class="source-num">07</span>
+    <div class="source-info">
+      <a href="https://mx.indeed.com/cmp/Wizeline/salaries/Dise%C3%B1ador-a-ux" target="_blank">Indeed — Diseñador UX en Wizeline México</a><br>
+      <span class="source-date">Ene 2025 · Datos de 17 publicaciones estimadas · Benchmark nearshoring/consultoría IT GDL-CDMX</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
