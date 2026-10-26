@@ -12,11 +12,13 @@
         .pantalla.activa { display: block; }
         h1, h2 { text-align: center; color: #111; margin-bottom: 5px; }
         p { text-align: center; color: #555; margin-bottom: 30px; }
+        .selector-area { background: #e8f0fe; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 5px solid #1a73e8; }
+        .selector-area label { font-weight: bold; color: #1a73e8; display: block; margin-bottom: 10px; }
+        select { padding: 12px; border-radius: 5px; border: 1px solid #ccc; width: 100%; font-size: 16px; }
         .grid-captura { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; background: #f9f9f9; padding: 15px; border-radius: 8px; }
         .desc-concepto { font-size: 0.85rem; color: #666; display: block; grid-column: 1 / -1; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 5px;}
         .col-input { display: flex; flex-direction: column; }
         .col-input label { font-size: 0.85rem; margin-bottom: 5px; color: #444; }
-        select { padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
         button { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 20px; cursor: pointer; }
         button:hover { background: #333; }
         .btn-descarga { background: #28a745; }
@@ -27,46 +29,43 @@
 <body>
 
 <div class="app-container">
-
-    <!-- PANTALLA 1: Captura -->
     <div id="pantalla1" class="pantalla activa">
         <h1>Panel de Calibración 1:1</h1>
-        <p>Captura los datos del Sheet del colaborador y tu propia evaluación de liderazgo.</p>
+        <p>Selecciona a quién evaluarás hoy y calibra las expectativas.</p>
+        
+        <!-- NUEVO: Área de selección inteligente -->
+        <div class="selector-area">
+            <label>Evaluaciones Pendientes (Cargadas desde tu base de datos):</label>
+            <select id="selectorColaborador" onchange="cargarDatosColaborador()">
+                <option value="">Cargando equipo...</option>
+            </select>
+        </div>
         
         <div id="formGerente">
-            <!-- Concepto 1 -->
             <div class="grid-captura">
-                <span class="desc-concepto">1. Estrategia de Producto y Negocio (1: Reactivo | 3: Usa KPIs | 5: Lidera Roadmap)</span>
-                <div class="col-input"><label>Datos del Colaborador</label><select id="user_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <span class="desc-concepto">1. Estrategia de Producto y Negocio</span>
+                <div class="col-input"><label>Colaborador</label><select id="user_0" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
             </div>
-
-            <!-- Concepto 2 -->
             <div class="grid-captura">
-                <span class="desc-concepto">2. Problem Framing y Pensamiento Crítico (1: Ejecuta | 3: Pregunta | 5: Causa Raíz)</span>
-                <div class="col-input"><label>Datos del Colaborador</label><select id="user_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <span class="desc-concepto">2. Problem Framing y Pensamiento Crítico</span>
+                <div class="col-input"><label>Colaborador</label><select id="user_1" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
             </div>
-
-            <!-- Concepto 3 -->
             <div class="grid-captura">
-                <span class="desc-concepto">3. Adaptabilidad y Orquestación con IA (1: Sin IA | 3: Tareas rápidas | 5: Automatiza flujos)</span>
-                <div class="col-input"><label>Datos del Colaborador</label><select id="user_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <span class="desc-concepto">3. Adaptabilidad y Orquestación con IA</span>
+                <div class="col-input"><label>Colaborador</label><select id="user_2" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
             </div>
-
-            <!-- Concepto 4 -->
             <div class="grid-captura">
-                <span class="desc-concepto">4. Gestión de Stakeholders (1: Fricción | 3: Claridad | 5: Consenso directivo)</span>
-                <div class="col-input"><label>Datos del Colaborador</label><select id="user_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <span class="desc-concepto">4. Gestión de Stakeholders</span>
+                <div class="col-input"><label>Colaborador</label><select id="user_3" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
             </div>
-
-            <!-- Concepto 5 -->
             <div class="grid-captura">
-                <span class="desc-concepto">5. Mentoría y Talento (1: Acapara | 3: Ayuda básica | 5: Coacheo avanzado)</span>
-                <div class="col-input"><label>Datos del Colaborador</label><select id="user_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <span class="desc-concepto">5. Mentoría y Talento</span>
+                <div class="col-input"><label>Colaborador</label><select id="user_4" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
             </div>
 
             <button onclick="generarGrafica()">Generar Gráfica Comparativa</button>
@@ -76,18 +75,50 @@
     <!-- PANTALLA 2: Resultados -->
     <div id="pantalla2" class="pantalla">
         <h2>Matriz Final de Calibración</h2>
-        <p>Análisis de brechas para el plan de desarrollo.</p>
         <div class="chart-container"><canvas id="chartFinal"></canvas></div>
         <button class="btn-descarga" onclick="descargarGrafica()">Descargar Gráfica para Expediente</button>
-        <button onclick="location.reload()" style="background: #666;">Volver al inicio</button>
+        <button onclick="location.reload()" style="background: #666;">Evaluar a alguien más</button>
     </div>
-
 </div>
 
 <script>
     const conceptos = ["Estrategia", "Problem Framing", "Uso de IA", "Stakeholders", "Mentoría"];
     const lineaBase = [4, 4, 3, 4, 3]; 
     let chartRef;
+    let baseDatos = [];
+
+    // --- REEMPLAZA LA URL AQUÍ ---
+    const urlGoogleScript = "https://script.google.com/macros/s/AKfycbzy5Y_D3czYmgLgTWiTp6ayxow2uIzTUrAdlw2Fl3QrVwnSqhMx1F1Gq6AP-iC2xEIT/exec";
+
+    // Al cargar la página, extraemos los datos
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch(urlGoogleScript)
+        .then(res => res.json())
+        .then(datos => {
+            baseDatos = datos;
+            const selector = document.getElementById("selectorColaborador");
+            selector.innerHTML = '<option value="">Selecciona un colaborador...</option>';
+            
+            datos.forEach((item, index) => {
+                const fecha = new Date(item.fecha).toLocaleDateString();
+                selector.innerHTML += `<option value="${index}">${item.nombre} (Enviado el ${fecha})</option>`;
+            });
+        })
+        .catch(err => {
+            document.getElementById("selectorColaborador").innerHTML = '<option value="">Error al cargar datos. Revisa la URL.</option>';
+        });
+    });
+
+    // Función que llena los números automáticamente
+    function cargarDatosColaborador() {
+        const index = document.getElementById("selectorColaborador").value;
+        if (index === "") return;
+        
+        const scores = baseDatos[index].scores;
+        for(let i=0; i<5; i++) {
+            document.getElementById("user_"+i).value = scores[i];
+        }
+    }
 
     function generarGrafica() {
         const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
@@ -121,9 +152,16 @@
     }
 
     function descargarGrafica() {
+        // Obtenemos el nombre seleccionado para nombrar el archivo PNG
+        const selector = document.getElementById("selectorColaborador");
+        let nombre = "Evaluacion";
+        if(selector.value !== "") {
+            nombre = baseDatos[selector.value].nombre.replace(/\s+/g, '_');
+        }
+
         const enlace = document.createElement('a');
         enlace.href = document.getElementById('chartFinal').toDataURL('image/png');
-        enlace.download = 'Calibracion_Final_UX.png';
+        enlace.download = `Calibracion_${nombre}_UX.png`;
         enlace.click();
     }
 </script>
