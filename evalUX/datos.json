@@ -1,0 +1,29 @@
+{
+  "conceptos": [
+    "Estrategia de Negocio",
+    "Problem Framing",
+    "Orquestación con IA",
+    "Gestión de Stakeholders",
+    "Mentoría de Talento"
+  ],
+  "evaluaciones": [
+    {
+      "label": "Expectativa del Nivel (Línea Base)",
+      "data": [4, 4, 3, 4, 3],
+      "backgroundColor": "rgba(201, 203, 207, 0.2)",
+      "borderColor": "rgba(201, 203, 207, 1)"
+    },
+    {
+      "label": "Autoevaluación (Diseñador)",
+      "data": [3, 2, 5, 4, 2],
+      "backgroundColor": "rgba(54, 162, 235, 0.2)",
+      "borderColor": "rgba(54, 162, 235, 1)"
+    },
+    {
+      "label": "Evaluación del Líder (Tú)",
+      "data": [2, 3, 4, 3, 2],
+      "backgroundColor": "rgba(255, 99, 132, 0.2)",
+      "borderColor": "rgba(255, 99, 132, 1)"
+    }
+  ]
+}

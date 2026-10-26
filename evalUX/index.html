@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Soft Skills UX/UI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h1 { text-align: center; color: #111; }
+        p { text-align: center; color: #666; margin-bottom: 40px; }
+        .chart-container {
+            position: relative;
+            height: 60vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Matriz de Competencias Estratégicas UX/UI</h1>
+        <p>Visualización de brechas de desempeño para el desarrollo del equipo</p>
+        
+        <div class="chart-container">
+            <canvas id="skillsRadar"></canvas>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
