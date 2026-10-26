@@ -38,26 +38,26 @@
     <div id="pantalla2" class="pantalla">
         <h2>Tu Autoevaluación</h2>
         <form id="formUsuario">
-            <label>Tu Nombre Completo</label>
+            <label for="nombre">Tu Nombre Completo</label>
             <input type="text" id="nombre" name="nombre" required placeholder="Ej. Ana Pérez">
 
-            <label>1. Estrategia de Producto y Negocio</label>
+            <label for="user_0">1. Estrategia de Producto y Negocio</label>
             <span class="desc-concepto">1: Solo requerimientos visuales | 3: Entiende y aplica KPIs | 5: Lidera decisiones de negocio</span>
             <select id="user_0" name="estrategia" required><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder Estratégico</option></select>
             
-            <label>2. Problem Framing y Pensamiento Crítico</label>
+            <label for="user_1">2. Problem Framing y Pensamiento Crítico</label>
             <span class="desc-concepto">1: Ejecuta sin cuestionar | 3: Hace preguntas aclaratorias | 5: Replantea problemas desde la causa raíz</span>
             <select id="user_1" name="problem" required><option value="1">1 - Ejecuta sin cuestionar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Hace preguntas</option><option value="4">4 - Avanzado</option><option value="5">5 - Replantea problemas</option></select>
             
-            <label>3. Adaptabilidad y Orquestación con IA</label>
+            <label for="user_2">3. Adaptabilidad y Orquestación con IA</label>
             <span class="desc-concepto">1: Flujos tradicionales | 3: Usa IA para tareas rápidas | 5: Orquesta flujos y automatizaciones</span>
             <select id="user_2" name="ia" required><option value="1">1 - Sin IA</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - IA para tareas rápidas</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquesta flujos completos</option></select>
             
-            <label>4. Gestión de Stakeholders y Comunicación</label>
+            <label for="user_3">4. Gestión de Stakeholders y Comunicación</label>
             <span class="desc-concepto">1: Fricción al defender diseños | 3: Claridad técnica | 5: Logra consensos de alto nivel</span>
             <select id="user_3" name="stakeholders" required><option value="1">1 - Fricción al comunicar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Claridad técnica</option><option value="4">4 - Avanzado</option><option value="5">5 - Adapta lenguaje sin fricción</option></select>
             
-            <label>5. Mentoría y Multiplicación de Talento</label>
+            <label for="user_4">5. Mentoría y Multiplicación de Talento</label>
             <span class="desc-concepto">1: Acapara conocimiento | 3: Ayuda si le piden | 5: Diseña planes de entrenamiento</span>
             <select id="user_4" name="mentoria" required><option value="1">1 - No comparte</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Ayuda si le piden</option><option value="4">4 - Avanzado</option><option value="5">5 - Diseña planes de coacheo</option></select>
 
@@ -70,6 +70,7 @@
         <h2>Tus Resultados vs Expectativa</h2>
         <div class="chart-container"><canvas id="chartUsuario"></canvas></div>
         <button class="btn-descarga" onclick="descargarGrafica()">Descargar mi Gráfica</button>
+        <button onclick="location.reload()" style="background: #ccc; color: #333; margin-top: 10px;">Volver a evaluar</button>
         <p id="mensaje">¡Datos enviados al gerente con éxito!</p>
     </div>
 
@@ -92,7 +93,11 @@
         const formData = new FormData(this);
         const urlGoogleScript = "https://script.google.com/macros/s/AKfycbxQdfZ2A-qJ493LZ5PEbMbCOIroQuK3xxlXhaId9P64l0dLO9t86zHr4Y_EFaN5LHtD/exec"; // <-- REEMPLAZAR
 
-        fetch(urlGoogleScript, { method: 'POST', body: formData })
+        fetch(urlGoogleScript, { 
+            method: 'POST', 
+            body: formData,
+            mode: 'no-cors'
+        })
         .then(() => {
             const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
             mostrarPantalla(3);
