@@ -35,7 +35,7 @@
         select { width: 100%; height: 40px; padding: 0 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--on-surface); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-sizing: border-box; cursor: pointer; }
         select:focus { outline: 2px solid var(--primary); border-color: transparent; }
         
-        /* Grid optimizado para manager */
+        /* Grid Manager - Colaborador como texto */
         .grid-captura { display: grid; grid-template-columns: 2fr 1fr 1fr; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-disabled); }
         .grid-captura:last-of-type { border-bottom: none; margin-bottom: 24px; }
         .col-concepto { font-size: 14px; font-weight: 600; color: var(--on-surface); }
@@ -48,27 +48,33 @@
         
         .chart-container { position: relative; height: 500px; width: 100%; margin-top: 24px; }
         .loader { display: none; text-align: center; color: var(--primary); font-weight: 700; margin-top: 16px; }
+
+        /* Panel de Accionables */
+        .accionables-panel { background: var(--surface-subtle); border-radius: 12px; padding: 24px; margin-top: 32px; border: 1px solid var(--border-disabled); }
+        .accionables-panel h3 { margin-top: 0; font-size: 18px; color: var(--on-surface); }
+        .accionable-item { font-size: 14px; margin-bottom: 12px; padding-left: 16px; position: relative; line-height: 1.5; color: var(--on-surface-secondary); }
+        .accionable-item::before { content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 18px; line-height: 1; }
     </style>
 </head>
 <body>
 
 <div class="card">
+    <!-- PANTALLA 1 -->
     <div id="pantalla1" class="pantalla activa">
-        <h1>Panel de calibración</h1>
+        <h1>Panel de calibración 1:1</h1>
         
         <div class="selector-area">
-            <span class="label-bold">Evaluaciones pendientes</span>
+            <span class="label-bold">Selecciona el perfil a evaluar:</span>
             <select id="selectorColaborador" onchange="cargarDatosColaborador()">
-                <option value="">Cargando equipo desde la base de datos...</option>
+                <option value="">Conectando con la base de datos...</option>
             </select>
         </div>
         
-        <!-- Grid limpio: Concepto | Calificación Colaborador (Texto) | Select del Manager -->
         <div id="formGerente" style="display:none;">
             <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 8px;">
                 <span class="label-bold" style="color: var(--on-surface-secondary);">Competencia</span>
                 <span class="label-bold" style="color: var(--on-surface-secondary);">Colaborador</span>
-                <span class="label-bold" style="color: var(--on-surface-secondary);">Tu evaluación</span>
+                <span class="label-bold" style="color: var(--on-surface-secondary);">Tu evaluación final</span>
             </div>
 
             <div class="grid-captura">
@@ -97,16 +103,24 @@
                 <select id="mgr_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select>
             </div>
 
-            <button class="btn-primary" id="btnGenerar" onclick="guardarYGenerarGrafica()">Guardar en Sheet y generar gráfica</button>
-            <div id="loader" class="loader">Guardando datos...</div>
+            <button class="btn-primary" id="btnGenerar" onclick="guardarYGenerarGrafica()">Guardar calibración y analizar</button>
+            <div id="loader" class="loader">Guardando datos en Google Sheets...</div>
         </div>
     </div>
 
+    <!-- PANTALLA 2 -->
     <div id="pantalla2" class="pantalla">
         <h1>Matriz de calibración final</h1>
         <div class="chart-container"><canvas id="chartFinal"></canvas></div>
+        
+        <!-- Panel de Accionables Sugeridos -->
+        <div class="accionables-panel" id="panelAccionables">
+            <h3>Accionables sugeridos para el Manager</h3>
+            <div id="listaAccionables"></div>
+        </div>
+
         <button class="btn-primary" onclick="descargarGrafica()">Descargar gráfica para expediente</button>
-        <button class="btn-primary btn-secondary" onclick="location.reload()">Evaluar a alguien más</button>
+        <button class="btn-primary btn-secondary" onclick="location.reload()">Evaluar a otro miembro del equipo</button>
     </div>
 </div>
 
@@ -146,8 +160,29 @@
         if(mgr_scores[0] !== "") {
             for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = mgr_scores[i];
         } else {
-            for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = 3; 
+            for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = scores[i]; // Default: lo que el usuario se puso
         }
+    }
+
+    function generarAccionables(mgrScores) {
+        let html = "";
+        
+        if (mgrScores[0] < lineaBase[0]) html += "<div class='accionable-item'><strong>Estrategia:</strong> Asignar al colaborador a revisar métricas de negocio con un Product Manager durante el próximo quarter para entender KPIs.</div>";
+        if (mgrScores[1] < lineaBase[1]) html += "<div class='accionable-item'><strong>Problem Framing:</strong> Establecer como regla que el colaborador deba redactar un 'Problem Statement' validado con datos antes de abrir Figma en su próximo ticket.</div>";
+        if (mgrScores[2] < lineaBase[2]) html += "<div class='accionable-item'><strong>IA:</strong> Solicitar al colaborador que presente una herramienta de IA o un prompt útil en la próxima sesión semanal del equipo.</div>";
+        if (mgrScores[3] < lineaBase[3]) html += "<div class='accionable-item'><strong>Stakeholders:</strong> Agendar sesiones de shadowing donde el colaborador observe cómo lideras negociaciones con el equipo de desarrollo.</div>";
+        if (mgrScores[4] < lineaBase[4]) html += "<div class='accionable-item'><strong>Mentoría:</strong> Establecer una meta de documentación para que el colaborador comparta su conocimiento técnico en la wiki del equipo.</div>";
+        
+        // Reconocimiento
+        let talentos = [];
+        mgrScores.forEach((s, i) => { if(s >= 5) talentos.push(conceptos[i]); });
+        if(talentos.length > 0) {
+            html += `<div class='accionable-item'><strong>Oportunidad de Liderazgo:</strong> El colaborador tiene nivel experto en ${talentos.join(', ')}. Sugerencia: Asignarlo como mentor formal de perfiles Junior en estas áreas específicas.</div>`;
+        }
+
+        if(html === "") html = "<div class='accionable-item'>El colaborador cumple o excede las expectativas en todas las áreas. El enfoque debe ser la retención, asignación de proyectos estratégicos e involucramiento en liderazgo directivo.</div>";
+        
+        document.getElementById("listaAccionables").innerHTML = html;
     }
 
     function guardarYGenerarGrafica() {
@@ -173,8 +208,11 @@
 
     function mostrarGraficaFinal(index, nombre, datosGerente) {
         const scores = baseDatos[index].scores;
+        generarAccionables(datosGerente);
+        
         document.getElementById('pantalla1').classList.remove('activa');
         document.getElementById('pantalla2').classList.add('activa');
+        window.scrollTo(0, 0);
 
         const ctx = document.getElementById('chartFinal').getContext('2d');
         if (chartRef) chartRef.destroy();
@@ -189,7 +227,7 @@
                 datasets: [
                     { label: "Expectativa", data: lineaBase, borderColor: "#94A3B8", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
                     { label: "Autoevaluación", data: scores, borderColor: "#3255F7", backgroundColor: "rgba(239, 243, 255, 0.4)" },
-                    { label: "Evaluación Líder", data: datosGerente, borderColor: "#1E293B", backgroundColor: "rgba(30, 41, 59, 0.4)" }
+                    { label: "Tu Evaluación (Manager)", data: datosGerente, borderColor: "#1E293B", backgroundColor: "rgba(30, 41, 59, 0.4)" }
                 ] 
             },
             options: { 

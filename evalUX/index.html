@@ -21,139 +21,216 @@
             --on-surface: #0F172A;
             --on-surface-secondary: #475569;
             --border: #94A3B8;
+            --error: #E11D48;
         }
         body { font-family: 'Manrope', sans-serif; background: var(--surface-subtle); color: var(--on-surface); margin: 0; padding: 32px 16px; display: flex; justify-content: center; letter-spacing: -0.02em; }
-        .card { background: var(--surface); width: 100%; max-width: 800px; padding: 40px; border-radius: 16px; box-shadow: 0 4px 6px -2px rgba(12, 12, 12, 0.10); }
+        .card { background: var(--surface); width: 100%; max-width: 850px; padding: 40px; border-radius: 16px; box-shadow: 0 4px 6px -2px rgba(12, 12, 12, 0.10); }
         .pantalla { display: none; }
         .pantalla.activa { display: block; }
         h1 { font-size: 32px; font-weight: 700; line-height: 1.33; text-align: center; margin-bottom: 8px; }
-        h2 { font-size: 24px; font-weight: 700; line-height: 1.33; margin-top: 0; margin-bottom: 24px;}
-        p { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--on-surface-secondary); text-align: center; margin-bottom: 32px; }
+        h2 { font-size: 24px; font-weight: 700; margin-top: 0; margin-bottom: 24px;}
+        p { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--on-surface-secondary); margin-bottom: 32px; }
         
-        .seccion-evaluacion { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--surface-subtle); }
+        .seccion-evaluacion { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
         .seccion-evaluacion:last-of-type { border-bottom: none; }
-        .label-bold { font-size: 16px; font-weight: 700; display: block; margin-bottom: 12px; }
+        .label-bold { font-size: 18px; font-weight: 700; display: block; margin-bottom: 16px; color: var(--primary); }
         
-        /* Definiciones BARS */
-        .definiciones { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--on-surface-secondary); background: var(--surface-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; }
-        .definiciones ul { margin: 0; padding-left: 20px; }
-        .definiciones li { margin-bottom: 8px; }
-        .definiciones strong { color: var(--on-surface); font-weight: 600; }
+        /* Definiciones Extensas */
+        .definiciones { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--on-surface-secondary); background: var(--surface-subtle); padding: 24px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--primary); }
+        .def-title { font-weight: 700; color: var(--on-surface); display: block; margin-bottom: 8px; margin-top: 16px; }
+        .def-title:first-child { margin-top: 0; }
+        .definiciones ul { margin: 8px 0; padding-left: 20px; }
+        .definiciones li { margin-bottom: 6px; }
         
-        /* Componente Select */
-        select { width: 100%; height: 40px; padding: 0 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--on-surface); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-sizing: border-box; cursor: pointer;}
-        select:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        /* Select y Validaciones */
+        select, input[type="text"] { width: 100%; height: 48px; padding: 0 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--on-surface); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-sizing: border-box; cursor: pointer;}
+        select:focus, input[type="text"]:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        select:invalid { border-left: 4px solid var(--error); }
         
-        /* Componente Chips (Pills) */
+        /* Chips (Pills) */
         .chips-container { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
         .chip { position: relative; }
         .chip input { position: absolute; opacity: 0; width: 0; height: 0; }
-        .chip label { display: inline-flex; align-items: center; height: 40px; padding: 0 12px; background: var(--primary-subtle); color: var(--on-surface-secondary); font-size: 14px; font-weight: 500; border-radius: 9999px; cursor: pointer; transition: all 0.2s; }
+        .chip label { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; background: var(--primary-subtle); color: var(--primary); font-size: 14px; font-weight: 600; border-radius: 9999px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
         .chip input:checked + label { background: var(--surface-inverse); color: var(--on-inverse); }
+        .chip input:invalid ~ label { border-color: var(--error); }
         .input-otro { display: none; margin-top: 12px; }
         
-        /* Botones */
-        .btn-primary { width: 100%; height: 48px; background: var(--primary); color: var(--on-primary); font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 24px; }
+        /* Botones y Gráfica */
+        .btn-primary { width: 100%; height: 56px; background: var(--primary); color: var(--on-primary); font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 24px; }
         .btn-primary:hover { background: var(--primary-hover); }
-        .btn-secondary { background: var(--surface); color: var(--primary); border: 1px solid var(--primary-subtle); margin-top: 16px;}
+        .chart-container { position: relative; height: 450px; width: 100%; margin-top: 24px; }
         
-        .chart-container { position: relative; height: 400px; width: 100%; margin-top: 24px; }
+        /* Feedback */
+        .feedback-box { background: var(--primary-subtle); padding: 24px; border-radius: 12px; margin-top: 24px; font-size: 15px; line-height: 1.6; color: var(--on-surface); }
     </style>
 </head>
 <body>
 
 <div class="card">
+    <!-- PANTALLA 1 -->
     <div id="pantalla1" class="pantalla activa">
         <h1>Evaluación de competencias estratégicas</h1>
-        <p>Esta herramienta mapeará tus fortalezas y áreas de oportunidad. Al finalizar, verás tu gráfica de resultados y la enviaremos al líder para la próxima sesión 1:1.</p>
+        <p style="text-align: center;">Lee detenidamente cada definición y selecciona el nivel que mejor describa tus comportamientos observables recientes.</p>
         <button class="btn-primary" onclick="mostrarPantalla(2)">Comenzar autoevaluación</button>
     </div>
 
+    <!-- PANTALLA 2 -->
     <div id="pantalla2" class="pantalla">
         <h2>Autoevaluación</h2>
         <form id="formUsuario">
             
             <div class="seccion-evaluacion">
                 <span class="label-bold">Selecciona tu nombre</span>
-                <div class="chips-container">
+                <div class="chips-container" id="nombresGroup">
                     <div class="chip"><input type="radio" id="n1" name="nombre_radio" value="Jonathan Alderete" required onclick="toggleOtro(false)"><label for="n1">Jonathan Alderete</label></div>
-                    <div class="chip"><input type="radio" id="n2" name="nombre_radio" value="Gala Chávez" onclick="toggleOtro(false)"><label for="n2">Gala Chávez</label></div>
-                    <div class="chip"><input type="radio" id="n3" name="nombre_radio" value="Itzel Garza" onclick="toggleOtro(false)"><label for="n3">Itzel Garza</label></div>
-                    <div class="chip"><input type="radio" id="n4" name="nombre_radio" value="Mariana Luna" onclick="toggleOtro(false)"><label for="n4">Mariana Luna</label></div>
-                    <div class="chip"><input type="radio" id="n5" name="nombre_radio" value="Miguel Leo" onclick="toggleOtro(false)"><label for="n5">Miguel Leo</label></div>
-                    <div class="chip"><input type="radio" id="n6" name="nombre_radio" value="Otro" onclick="toggleOtro(true)"><label for="n6">Otro...</label></div>
+                    <div class="chip"><input type="radio" id="n2" name="nombre_radio" value="Gala Chávez" required onclick="toggleOtro(false)"><label for="n2">Gala Chávez</label></div>
+                    <div class="chip"><input type="radio" id="n3" name="nombre_radio" value="Itzel Garza" required onclick="toggleOtro(false)"><label for="n3">Itzel Garza</label></div>
+                    <div class="chip"><input type="radio" id="n4" name="nombre_radio" value="Mariana Luna" required onclick="toggleOtro(false)"><label for="n4">Mariana Luna</label></div>
+                    <div class="chip"><input type="radio" id="n5" name="nombre_radio" value="Miguel Leo" required onclick="toggleOtro(false)"><label for="n5">Miguel Leo</label></div>
+                    <div class="chip"><input type="radio" id="n6" name="nombre_radio" value="Otro" required onclick="toggleOtro(true)"><label for="n6">Otro...</label></div>
                 </div>
                 <input type="text" id="nombre_otro" class="input-otro" placeholder="Escribe tu nombre completo...">
             </div>
 
+            <!-- 1. ESTRATEGIA -->
             <div class="seccion-evaluacion">
                 <span class="label-bold">1. Estrategia de producto y negocio</span>
                 <div class="definiciones">
+                    <span class="def-title">Definición Conceptual:</span>
+                    La capacidad de conectar las decisiones de diseño de interacción, flujos y arquitectura de información con la visión comercial, las metas financieras y el posicionamiento de la empresa. No es solo hacer que el producto sea intuitivo, sino resolver un problema del usuario mientras se mueve una métrica clave del negocio.
+                    <span class="def-title">Comportamientos Clave a Evaluar:</span>
                     <ul>
-                        <li><strong>1 - Reactivo:</strong> Ejecutas solicitudes visuales literalmente sin cuestionar ni medir el impacto comercial o KPIs.</li>
-                        <li><strong>3 - Competente:</strong> Justificas tus decisiones conectándolas con los requisitos del usuario y métricas estándar del negocio.</li>
-                        <li><strong>5 - Líder:</strong> Lideras debates estratégicos, identificas oportunidades comerciales y moldeas el roadmap del producto.</li>
+                        <li>Traduce objetivos de negocio en objetivos de diseño.</li>
+                        <li>Entiende y utiliza KPIs (Conversión, LTV, CAC, ROI).</li>
+                        <li>Diseña considerando limitaciones técnicas y el modelo de monetización.</li>
+                        <li>Defiende sus decisiones demostrando la viabilidad financiera de la propuesta.</li>
+                    </ul>
+                    <span class="def-title">Niveles de Madurez:</span>
+                    <ul>
+                        <li><strong>1 - Junior:</strong> Enfoque centrado casi por completo en la usabilidad básica. Entiende que el negocio existe pero requiere ayuda para ver el impacto financiero.</li>
+                        <li><strong>3 - Middle:</strong> Propone soluciones justificando cómo benefician al usuario y al negocio. Prioriza su backlog por valor comercial. Colabora con Product Managers.</li>
+                        <li><strong>5 - Senior / Lead:</strong> Co-crea la visión del producto. Define métricas UX que impactan ingresos. Cuestiona requerimientos iniciales si no están alineados al ROI.</li>
                     </ul>
                 </div>
-                <select id="user_0" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder estratégico</option></select>
+                <select id="user_0" required>
+                    <option value="" disabled selected>Selecciona tu nivel de madurez...</option>
+                    <option value="1">1 - Nivel Junior / Entry</option><option value="2">2 - En transición a Middle</option><option value="3">3 - Nivel Middle / Intermediate</option><option value="4">4 - En transición a Senior</option><option value="5">5 - Nivel Senior / Lead</option>
+                </select>
             </div>
             
+            <!-- 2. PROBLEM FRAMING -->
             <div class="seccion-evaluacion">
                 <span class="label-bold">2. Problem framing y pensamiento crítico</span>
                 <div class="definiciones">
+                    <span class="def-title">Definición Conceptual:</span>
+                    La capacidad para deconstruir requerimientos iniciales, investigar la causa raíz con evidencia y enmarcar correctamente el desafío. Un diseñador que domina esto reduce la incertidumbre y evita que los equipos de ingeniería inviertan tiempo construyendo la solución equivocada.
+                    <span class="def-title">Comportamientos Clave a Evaluar:</span>
                     <ul>
-                        <li><strong>1 - Ejecutor:</strong> Trabajas sobre los problemas planteados sin cuestionar si resuelven la causa raíz real.</li>
-                        <li><strong>3 - Competente:</strong> Identificas requerimientos ambiguos y haces preguntas aclaratorias antes de comenzar a diseñar.</li>
-                        <li><strong>5 - Estratega:</strong> Replanteas problemas iniciales mitigando riesgos e incertidumbre desde la raíz antes de abrir Figma.</li>
+                        <li>No asume los requerimientos como verdades absolutas; investiga el contexto subyacente.</li>
+                        <li>Utiliza datos cualitativos y cuantitativos para delimitar el alcance (scoping).</li>
+                        <li>Sintetiza la ambigüedad en flujos claros antes de diseñar interfaces de alta fidelidad.</li>
+                    </ul>
+                    <span class="def-title">Niveles de Madurez:</span>
+                    <ul>
+                        <li><strong>1 - Junior:</strong> Ejecuta tickets y tareas de manera literal. Rara vez cuestiona si el requerimiento original resuelve el verdadero dolor del usuario.</li>
+                        <li><strong>3 - Middle:</strong> Identifica huecos en los requerimientos y hace preguntas aclaratorias. Evita saltar directamente a Figma sin tener claridad del flujo.</li>
+                        <li><strong>5 - Senior / Lead:</strong> Lidera la definición del problema. Es capaz de rechazar o reencuadrar solicitudes directivas demostrando con datos por qué existe un mejor camino.</li>
                     </ul>
                 </div>
-                <select id="user_1" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Ejecutor</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Estratega</option></select>
+                <select id="user_1" required>
+                    <option value="" disabled selected>Selecciona tu nivel de madurez...</option>
+                    <option value="1">1 - Nivel Junior / Entry</option><option value="2">2 - En transición a Middle</option><option value="3">3 - Nivel Middle / Intermediate</option><option value="4">4 - En transición a Senior</option><option value="5">5 - Nivel Senior / Lead</option>
+                </select>
             </div>
             
+            <!-- 3. IA -->
             <div class="seccion-evaluacion">
                 <span class="label-bold">3. Adaptabilidad y orquestación con IA</span>
                 <div class="definiciones">
+                    <span class="def-title">Definición Conceptual:</span>
+                    El uso estratégico de herramientas de Inteligencia Artificial para acelerar, enriquecer y escalar las fases de investigación, ideación y diseño. Trata de la capacidad tecnológica para evolucionar el proceso de trabajo sin comprometer la ética o la calidad de la experiencia.
+                    <span class="def-title">Comportamientos Clave a Evaluar:</span>
                     <ul>
-                        <li><strong>1 - Tradicional:</strong> Muestras resistencia a nuevas tecnologías; mantienes flujos de trabajo lentos o 100% manuales.</li>
-                        <li><strong>3 - Competente:</strong> Utilizas herramientas de IA para agilizar tareas rápidas o repetitivas cuando se te sugiere.</li>
-                        <li><strong>5 - Orquestador:</strong> Construyes flujos completos y automatizaciones proactivamente, estableciendo el estándar para el resto del equipo.</li>
+                        <li>Implementa IA para sintetizar investigaciones y crear arquitecturas de información.</li>
+                        <li>Genera prompts estructurados y automatizaciones que reducen el trabajo manual.</li>
+                        <li>Se mantiene actualizado sobre nuevas tecnologías y evalúa su viabilidad en la operación.</li>
+                    </ul>
+                    <span class="def-title">Niveles de Madurez:</span>
+                    <ul>
+                        <li><strong>1 - Junior:</strong> Muestra resistencia o desinterés. Mantiene flujos de trabajo tradicionales, lentos o 100% manuales sin apoyarse en tecnología emergente.</li>
+                        <li><strong>3 - Middle:</strong> Utiliza herramientas de IA (ChatGPT, plugins) para agilizar tareas repetitivas o generar ideas cuando se le sugiere.</li>
+                        <li><strong>5 - Senior / Lead:</strong> Orquesta sistemas de automatización completos. Estandariza el uso de IA para todo el equipo y crea lineamientos de mejores prácticas.</li>
                     </ul>
                 </div>
-                <select id="user_2" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Tradicional</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquestador</option></select>
+                <select id="user_2" required>
+                    <option value="" disabled selected>Selecciona tu nivel de madurez...</option>
+                    <option value="1">1 - Nivel Junior / Entry</option><option value="2">2 - En transición a Middle</option><option value="3">3 - Nivel Middle / Intermediate</option><option value="4">4 - En transición a Senior</option><option value="5">5 - Nivel Senior / Lead</option>
+                </select>
             </div>
             
+            <!-- 4. STAKEHOLDERS -->
             <div class="seccion-evaluacion">
                 <span class="label-bold">4. Gestión de stakeholders y comunicación</span>
                 <div class="definiciones">
+                    <span class="def-title">Definición Conceptual:</span>
+                    La habilidad para comunicar el valor del diseño, articular el "por qué" detrás de las decisiones y alinear las expectativas entre perfiles de negocio, tecnología y diseño, previniendo cuellos de botella organizacionales.
+                    <span class="def-title">Comportamientos Clave a Evaluar:</span>
                     <ul>
-                        <li><strong>1 - Reactivo:</strong> Generas fricción al defender tus diseños o, por el contrario, cedes completamente comprometiendo la usabilidad.</li>
-                        <li><strong>3 - Competente:</strong> Comunicas con claridad técnica y logras hacer entregas (handoffs) limpios al equipo de desarrollo.</li>
-                        <li><strong>5 - Líder:</strong> Adaptas tu lenguaje a negocio o ingeniería, negociando restricciones y logrando consensos sin generar conflictos.</li>
+                        <li>Facilita sesiones de crítica de diseño de forma estructurada.</li>
+                        <li>Realiza entregas (handoffs) impecables y claras para los desarrolladores.</li>
+                        <li>Maneja objeciones y frustraciones con inteligencia emocional y diplomacia.</li>
+                    </ul>
+                    <span class="def-title">Niveles de Madurez:</span>
+                    <ul>
+                        <li><strong>1 - Junior:</strong> Se pone a la defensiva al recibir feedback. Genera fricción técnica con desarrolladores o cede rápidamente comprometiendo la usabilidad.</li>
+                        <li><strong>3 - Middle:</strong> Justifica sus decisiones con fundamentos UX. Logra transferencias limpias a desarrollo y mantiene buena relación operativa.</li>
+                        <li><strong>5 - Senior / Lead:</strong> Adapta su lenguaje a audiencias directivas. Negocia eficientemente el alcance técnico y logra consensos en situaciones de alta tensión corporativa.</li>
                     </ul>
                 </div>
-                <select id="user_3" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder</option></select>
+                <select id="user_3" required>
+                    <option value="" disabled selected>Selecciona tu nivel de madurez...</option>
+                    <option value="1">1 - Nivel Junior / Entry</option><option value="2">2 - En transición a Middle</option><option value="3">3 - Nivel Middle / Intermediate</option><option value="4">4 - En transición a Senior</option><option value="5">5 - Nivel Senior / Lead</option>
+                </select>
             </div>
             
+            <!-- 5. MENTORIA -->
             <div class="seccion-evaluacion">
                 <span class="label-bold">5. Mentoría y multiplicación de talento</span>
                 <div class="definiciones">
+                    <span class="def-title">Definición Conceptual:</span>
+                    La disposición y habilidad para elevar la madurez general de todo el departamento. Se centra en el crecimiento orgánico del equipo a través de la transferencia de conocimiento, asegurando que el diseño escale más allá de un individuo.
+                    <span class="def-title">Comportamientos Clave a Evaluar:</span>
                     <ul>
-                        <li><strong>1 - Aislado:</strong> Acaparas el conocimiento, evitas documentar tus procesos o das retroalimentación destructiva.</li>
-                        <li><strong>3 - Competente:</strong> Ayudas cuando te lo piden y proporcionas retroalimentación útil en las sesiones grupales.</li>
-                        <li><strong>5 - Líder:</strong> Diseñas planes de entrenamiento proactivamente y asumes la tutoría de los perfiles junior del equipo.</li>
+                        <li>Proporciona retroalimentación útil y constructiva sobre el trabajo de otros.</li>
+                        <li>Documenta procesos, componentes y hallazgos para evitar silos de información.</li>
+                        <li>Dedica tiempo voluntario para coachear a perfiles de menor experiencia.</li>
+                    </ul>
+                    <span class="def-title">Niveles de Madurez:</span>
+                    <ul>
+                        <li><strong>1 - Junior:</strong> Trabaja de forma aislada. Rara vez documenta su proceso, acapara el conocimiento o proporciona feedback destructivo.</li>
+                        <li><strong>3 - Middle:</strong> Es un buen colaborador de equipo. Ayuda con dudas puntuales de herramientas o métodos cuando alguien se lo solicita directamente.</li>
+                        <li><strong>5 - Senior / Lead:</strong> Es un multiplicador de talento. Diseña planes de entrenamiento formales, asume el coaching de perfiles junior y moldea la cultura de diseño.</li>
                     </ul>
                 </div>
-                <select id="user_4" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Aislado</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder</option></select>
+                <select id="user_4" required>
+                    <option value="" disabled selected>Selecciona tu nivel de madurez...</option>
+                    <option value="1">1 - Nivel Junior / Entry</option><option value="2">2 - En transición a Middle</option><option value="3">3 - Nivel Middle / Intermediate</option><option value="4">4 - En transición a Senior</option><option value="5">5 - Nivel Senior / Lead</option>
+                </select>
             </div>
 
-            <button type="submit" class="btn-primary" id="btnEnviar">Procesar mis resultados</button>
+            <button type="submit" class="btn-primary" id="btnEnviar">Generar mi diagnóstico</button>
         </form>
     </div>
 
+    <!-- PANTALLA 3 -->
     <div id="pantalla3" class="pantalla">
         <h2>Resultados vs expectativa</h2>
-        <p id="mensaje">Tus datos han sido enviados al gerente con éxito.</p>
         <div class="chart-container"><canvas id="chartUsuario"></canvas></div>
+        
+        <!-- Motor de Feedback Dinámico -->
+        <div class="feedback-box" id="feedbackDinamico"></div>
+
         <button class="btn-primary" onclick="descargarGrafica()">Descargar gráfica</button>
     </div>
 </div>
@@ -165,6 +242,7 @@
     function mostrarPantalla(num) {
         document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
         document.getElementById('pantalla' + num).classList.add('activa');
+        window.scrollTo(0, 0);
     }
 
     function toggleOtro(mostrar) {
@@ -173,10 +251,44 @@
         inputOtro.required = mostrar;
     }
 
+    function generarFeedback(scores, nombre) {
+        let texto = `<strong>${nombre}</strong>, con base en tu autoevaluación, observamos lo siguiente en tu perfil de madurez UX:<br><br>`;
+        
+        const sum = scores.reduce((a, b) => a + b, 0);
+        const avg = sum / scores.length;
+
+        // Feedback General
+        if(avg >= 4) {
+            texto += "🚀 Tienes un <strong>perfil de liderazgo sólido</strong>. Tu impacto va más allá de la ejecución y estás moldeando la estrategia del negocio y del equipo. Es momento de enfocar tus esfuerzos en la innovación transversal.<br><br>";
+        } else if(avg >= 2.5) {
+            texto += "🎯 Posees un <strong>perfil competente y autónomo</strong>. Tienes bases fuertes en la ejecución técnica y operativa. Tu siguiente gran salto será aumentar tu influencia en las decisiones directivas y en el descubrimiento estratégico.<br><br>";
+        } else {
+            texto += "🌱 Te encuentras en una <strong>etapa fundacional</strong>. Estás absorbiendo las dinámicas de producto. El enfoque actual debe ser dominar la calidad de la ejecución, cuestionar más los requerimientos y apoyarte en perfiles Senior.<br><br>";
+        }
+
+        // Correlación de reactivos específicos
+        let fortalezas = [];
+        let brechas = [];
+        scores.forEach((score, i) => {
+            if(score >= lineaBase[i]) fortalezas.push(`<strong>${conceptos[i]}</strong>`);
+            if(score < lineaBase[i]) brechas.push(`<strong>${conceptos[i]}</strong>`);
+        });
+
+        if(fortalezas.length > 0) {
+            texto += `✅ Tus pilares más fuertes (alineados o superando la expectativa del rol) son: ${fortalezas.join(', ')}.<br>`;
+        }
+        if(brechas.length > 0) {
+            texto += `💡 Las áreas donde podemos enfocar tu plan de desarrollo para cerrar brechas son: ${brechas.join(', ')}.<br>`;
+        }
+        
+        texto += "<br><em>Estos resultados se han enviado a tu líder para analizarlos en conjunto durante tu próxima sesión 1:1.</em>";
+        return texto;
+    }
+
     document.getElementById("formUsuario").addEventListener("submit", function(e) {
         e.preventDefault();
         const btn = document.getElementById("btnEnviar");
-        btn.innerText = "Enviando datos..."; btn.disabled = true;
+        btn.innerText = "Calculando diagnóstico..."; btn.disabled = true;
 
         let nombreFinal = document.querySelector('input[name="nombre_radio"]:checked').value;
         if(nombreFinal === "Otro") nombreFinal = document.getElementById('nombre_otro').value;
@@ -191,6 +303,7 @@
         fetch(urlGoogleScript, { method: 'POST', body: formData })
         .then(() => {
             const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
+            document.getElementById("feedbackDinamico").innerHTML = generarFeedback(datosUsuario, nombreFinal);
             mostrarPantalla(3);
             
             const ctx = document.getElementById('chartUsuario').getContext('2d');
@@ -211,7 +324,7 @@
                     ctx.save(); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
                 }}]
             });
-        }).catch(() => { alert("Error de conexión."); btn.innerText = "Procesar mis resultados"; btn.disabled = false;});
+        }).catch(() => { alert("Error de conexión. Intenta de nuevo."); btn.innerText = "Generar mi diagnóstico"; btn.disabled = false;});
     });
 
     function descargarGrafica() {
