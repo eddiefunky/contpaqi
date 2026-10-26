@@ -3,41 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación de Soft Skills UX/UI</title>
+    <title>Dashboard del Manager - UX/UI</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        h1 { text-align: center; color: #111; }
-        p { text-align: center; color: #666; margin-bottom: 40px; }
-        .chart-container {
-            position: relative;
-            height: 60vh;
-            width: 100%;
-        }
+        body { font-family: -apple-system, sans-serif; max-width: 1000px; margin: 0 auto; padding: 40px 20px; background-color: #f4f7f6; display: flex; flex-wrap: wrap; gap: 20px; }
+        .header { width: 100%; text-align: center; margin-bottom: 20px; }
+        .panel { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); flex: 1; min-width: 320px; }
+        h2 { font-size: 1.2rem; margin-top: 0; }
+        .fila { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .fila label { font-size: 0.85rem; font-weight: bold; width: 50%; }
+        .inputs { display: flex; gap: 10px; width: 50%; }
+        .inputs div { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; }
+        input[type="number"] { width: 50px; padding: 5px; text-align: center; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-act { background-color: #000; color: #fff; }
+        .btn-des { background-color: #28a745; color: #fff; }
+        .chart-container { position: relative; height: 450px; width: 100%; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Matriz de Competencias Estratégicas UX/UI</h1>
-        <p>Visualización de brechas de desempeño para el desarrollo del equipo</p>
-        
+    <div class="header">
+        <h1>Dashboard de Calibración 1:1</h1>
+    </div>
+
+    <div class="panel">
+        <h2>Captura de Evaluaciones (1-5)</h2>
+        <div id="form-controles"></div>
+        <button class="btn-act" onclick="actualizarGrafica()">1. Actualizar Gráfica</button>
+        <button class="btn-des" onclick="descargarImagen()">2. Descargar Gráfica (PNG)</button>
+    </div>
+
+    <div class="panel">
         <div class="chart-container">
             <canvas id="skillsRadar"></canvas>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <script>
+        const conceptos = [
+            "Estrategia de Negocio", "Problem Framing", 
+            "Orquestación con IA", "Gestión de Stakeholders", "Mentoría de Talento"
+        ];
+        const lineaBase = [4, 4, 3, 4, 3]; // Expectativa del puesto
+        let radarChart;
+
+        const fondoBlancoPlugin = {
+            id: 'fondoBlanco',
+            beforeDraw: (chart) => {
+                const ctx = chart.canvas.getContext('2d');
+                ctx.save(); ctx.globalCompositeOperation = 'destination-over';
+                ctx.fillStyle = 'white'; ctx.fillRect(0, 0, chart.width, chart.height); ctx.restore();
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById('form-controles');
+            conceptos.forEach((concepto, i) => {
+                form.innerHTML += `
+                    <div class="fila">
+                        <label>${concepto}</label>
+                        <div class="inputs">
+                            <div><span>Colaborador</span><input type="number" id="auto_${i}" min="1" max="5" value="3"></div>
+                            <div><span>Líder (Tú)</span><input type="number" id="lider_${i}" min="1" max="5" value="3"></div>
+                        </div>
+                    </div>`;
+            });
+            renderizar([3,3,3,3,3], [3,3,3,3,3]);
+        });
+
+        function renderizar(datosAuto, datosLider) {
+            const ctx = document.getElementById('skillsRadar').getContext('2d');
+            if (radarChart) radarChart.destroy();
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: conceptos,
+                    datasets: [
+                        { label: "Expectativa (Base)", data: lineaBase, backgroundColor: "rgba(201, 203, 207, 0.2)", borderColor: "gray", borderDash: [5, 5] },
+                        { label: "Autoevaluación", data: datosAuto, backgroundColor: "rgba(54, 162, 235, 0.2)", borderColor: "blue", borderWidth: 2 },
+                        { label: "Evaluación Líder", data: datosLider, backgroundColor: "rgba(255, 99, 132, 0.4)", borderColor: "red", borderWidth: 2 }
+                    ]
+                },
+                plugins: [fondoBlancoPlugin],
+                options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } } }
+            });
+        }
+
+        function actualizarGrafica() {
+            let auto = [], lider = [];
+            conceptos.forEach((_, i) => {
+                auto.push(Number(document.getElementById(`auto_${i}`).value));
+                lider.push(Number(document.getElementById(`lider_${i}`).value));
+            });
+            renderizar(auto, lider);
+        }
+
+        function descargarImagen() {
+            const canvas = document.getElementById('skillsRadar');
+            const enlace = document.createElement('a');
+            enlace.href = canvas.toDataURL('image/png');
+            enlace.download = 'Evaluacion_UX.png';
+            enlace.click();
+        }
+    </script>
 </body>
 </html>

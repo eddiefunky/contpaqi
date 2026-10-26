@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoevaluación de Soft Skills UX/UI</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #f9f9f9; color: #333; }
+        .contenedor { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { text-align: center; color: #111; }
+        label { font-weight: bold; display: block; margin-top: 20px; margin-bottom: 5px; }
+        select, input { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background-color: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; margin-top: 30px; cursor: pointer; }
+        button:hover { background-color: #333; }
+        #mensaje { text-align: center; font-weight: bold; margin-top: 20px; color: green; display: none; }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Autoevaluación UX/UI</h1>
+        <p>Evalúa tu desempeño de los últimos 6 meses (Escala 1 al 5) basado en la rúbrica de comportamientos.</p>
+        
+        <form id="uxForm">
+            <label>Tu Nombre Completo</label>
+            <input type="text" name="nombre" required placeholder="Ej. Ana Pérez">
+
+            <label>1. Estrategia de Producto y Negocio (1-5)</label>
+            <select name="estrategia" required>
+                <option value="">Selecciona tu nivel</option>
+                <option value="1">1 - Reactivo (Solo diseño lo que me piden)</option>
+                <option value="2">2 - En desarrollo</option>
+                <option value="3">3 - Competente (Entiendo KPIs y los aplico)</option>
+                <option value="4">4 - Avanzado</option>
+                <option value="5">5 - Líder Estratégico (Moldeo el roadmap)</option>
+            </select>
+
+            <label>2. Problem Framing y Pensamiento Crítico (1-5)</label>
+            <select name="problem" required>
+                <option value="">Selecciona tu nivel</option>
+                <option value="1">1 - Ejecuto sin cuestionar</option>
+                <option value="2">2 - En desarrollo</option>
+                <option value="3">3 - Hago preguntas aclaratorias</option>
+                <option value="4">4 - Avanzado</option>
+                <option value="5">5 - Replanteo problemas (causa raíz)</option>
+            </select>
+
+            <label>3. Adaptabilidad y Orquestación con IA (1-5)</label>
+            <select name="ia" required>
+                <option value="">Selecciona tu nivel</option>
+                <option value="1">1 - Flujos tradicionales (Sin IA)</option>
+                <option value="2">2 - En desarrollo</option>
+                <option value="3">3 - Uso IA para tareas rápidas</option>
+                <option value="4">4 - Avanzado</option>
+                <option value="5">5 - Orquesto flujos completos (automatizaciones)</option>
+            </select>
+
+            <label>4. Gestión de Stakeholders y Comunicación (1-5)</label>
+            <select name="stakeholders" required>
+                <option value="">Selecciona tu nivel</option>
+                <option value="1">1 - Fricción al defender diseños</option>
+                <option value="2">2 - En desarrollo</option>
+                <option value="3">3 - Comunico con claridad técnica</option>
+                <option value="4">4 - Avanzado</option>
+                <option value="5">5 - Adapto lenguaje a negocio/devs sin fricción</option>
+            </select>
+
+            <label>5. Mentoría y Multiplicación de Talento (1-5)</label>
+            <select name="mentoria" required>
+                <option value="">Selecciona tu nivel</option>
+                <option value="1">1 - No comparto / Feedback destructivo</option>
+                <option value="2">2 - En desarrollo</option>
+                <option value="3">3 - Ayudo cuando me lo piden</option>
+                <option value="4">4 - Avanzado</option>
+                <option value="5">5 - Diseñó planes y coacheo a juniors</option>
+            </select>
+
+            <button type="submit" id="btnSubmit">Enviar Autoevaluación</button>
+        </form>
+        <p id="mensaje">¡Respuestas guardadas! Los datos han sido enviados al líder.</p>
+    </div>
+
+    <script>
+        document.getElementById("uxForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const btn = document.getElementById("btnSubmit");
+            btn.innerText = "Enviando..."; btn.disabled = true;
+            
+            const formData = new FormData(this);
+            // REEMPLAZA ESTA URL POR LA QUE TE DIO GOOGLE APPS SCRIPT
+            const urlGoogleScript = "https://script.google.com/macros/s/AKfycbxQdfZ2A-qJ493LZ5PEbMbCOIroQuK3xxlXhaId9P64l0dLO9t86zHr4Y_EFaN5LHtD/exec";
+
+            fetch(urlGoogleScript, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("uxForm").style.display = "none";
+                document.getElementById("mensaje").style.display = "block";
+            })
+            .catch(error => {
+                alert("Error al enviar. Revisa la URL de Google.");
+                btn.innerText = "Enviar Autoevaluación"; btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
