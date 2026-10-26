@@ -14,50 +14,75 @@
         p { text-align: center; color: #555; line-height: 1.6; }
         label { font-weight: bold; display: block; margin-top: 25px; }
         .desc-concepto { font-size: 0.85rem; color: #666; margin-top: 4px; margin-bottom: 8px; display: block; line-height: 1.4; }
+        
+        /* Estilos UI para los nombres (Chips) */
+        .radio-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
+        .radio-group input[type="radio"] { display: none; }
+        .radio-group label { margin: 0; padding: 12px; text-align: center; background: #eef2f5; border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-weight: 500; font-size: 0.9rem;}
+        .radio-group input[type="radio"]:checked + label { background: #e8f0fe; border-color: #1a73e8; color: #1a73e8; }
+        
         input[type="text"], select { width: 100%; padding: 12px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 0.95rem; box-sizing: border-box; }
+        .input-oculto { display: none; margin-top: 10px !important; }
+        
         button { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 35px; cursor: pointer; }
         button:hover { background: #333; }
         .btn-descarga { background: #28a745; margin-top: 15px; }
-        .btn-descarga:hover { background: #218838; }
         .chart-container { position: relative; height: 400px; width: 100%; margin-top: 20px; }
-        #mensaje { text-align: center; color: green; font-weight: bold; display: none; margin-top: 20px; }
+        #mensaje { text-align: center; color: #1a73e8; font-weight: bold; display: none; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-
-    <!-- PANTALLA 1: Portada -->
     <div id="pantalla1" class="pantalla activa">
         <h1>Evaluación de Competencias Estratégicas</h1>
         <p>Bienvenido. Esta herramienta mapeará tus fortalezas y áreas de oportunidad. Al finalizar, verás tu gráfica de resultados y la enviaremos al líder para tu próxima sesión 1:1.</p>
         <button onclick="mostrarPantalla(2)">Comenzar Autoevaluación</button>
     </div>
 
-    <!-- PANTALLA 2: Formulario -->
     <div id="pantalla2" class="pantalla">
         <h2>Tu Autoevaluación</h2>
         <form id="formUsuario">
-            <label for="nombre">Tu Nombre Completo</label>
-            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Ana Pérez">
+            
+            <label>Selecciona tu Nombre</label>
+            <div class="radio-group">
+                <input type="radio" id="n1" name="nombre_radio" value="Jonathan Alderete" required onclick="toggleOtro(false)">
+                <label for="n1">Jonathan Alderete</label>
+                
+                <input type="radio" id="n2" name="nombre_radio" value="Gala Chávez" onclick="toggleOtro(false)">
+                <label for="n2">Gala Chávez</label>
+                
+                <input type="radio" id="n3" name="nombre_radio" value="Itzel Garza" onclick="toggleOtro(false)">
+                <label for="n3">Itzel Garza</label>
+                
+                <input type="radio" id="n4" name="nombre_radio" value="Mariana Luna" onclick="toggleOtro(false)">
+                <label for="n4">Mariana Luna</label>
+                
+                <input type="radio" id="n5" name="nombre_radio" value="Miguel Leo" onclick="toggleOtro(false)">
+                <label for="n5">Miguel Leo</label>
 
-            <label for="user_0">1. Estrategia de Producto y Negocio</label>
+                <input type="radio" id="n6" name="nombre_radio" value="Otro" onclick="toggleOtro(true)">
+                <label for="n6">Otro...</label>
+            </div>
+            <input type="text" id="nombre_otro" class="input-oculto" placeholder="Escribe tu nombre completo...">
+
+            <label>1. Estrategia de Producto y Negocio</label>
             <span class="desc-concepto">1: Solo requerimientos visuales | 3: Entiende y aplica KPIs | 5: Lidera decisiones de negocio</span>
             <select id="user_0" name="estrategia" required><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder Estratégico</option></select>
             
-            <label for="user_1">2. Problem Framing y Pensamiento Crítico</label>
+            <label>2. Problem Framing y Pensamiento Crítico</label>
             <span class="desc-concepto">1: Ejecuta sin cuestionar | 3: Hace preguntas aclaratorias | 5: Replantea problemas desde la causa raíz</span>
             <select id="user_1" name="problem" required><option value="1">1 - Ejecuta sin cuestionar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Hace preguntas</option><option value="4">4 - Avanzado</option><option value="5">5 - Replantea problemas</option></select>
             
-            <label for="user_2">3. Adaptabilidad y Orquestación con IA</label>
+            <label>3. Adaptabilidad y Orquestación con IA</label>
             <span class="desc-concepto">1: Flujos tradicionales | 3: Usa IA para tareas rápidas | 5: Orquesta flujos y automatizaciones</span>
             <select id="user_2" name="ia" required><option value="1">1 - Sin IA</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - IA para tareas rápidas</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquesta flujos completos</option></select>
             
-            <label for="user_3">4. Gestión de Stakeholders y Comunicación</label>
+            <label>4. Gestión de Stakeholders y Comunicación</label>
             <span class="desc-concepto">1: Fricción al defender diseños | 3: Claridad técnica | 5: Logra consensos de alto nivel</span>
             <select id="user_3" name="stakeholders" required><option value="1">1 - Fricción al comunicar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Claridad técnica</option><option value="4">4 - Avanzado</option><option value="5">5 - Adapta lenguaje sin fricción</option></select>
             
-            <label for="user_4">5. Mentoría y Multiplicación de Talento</label>
+            <label>5. Mentoría y Multiplicación de Talento</label>
             <span class="desc-concepto">1: Acapara conocimiento | 3: Ayuda si le piden | 5: Diseña planes de entrenamiento</span>
             <select id="user_4" name="mentoria" required><option value="1">1 - No comparte</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Ayuda si le piden</option><option value="4">4 - Avanzado</option><option value="5">5 - Diseña planes de coacheo</option></select>
 
@@ -65,15 +90,12 @@
         </form>
     </div>
 
-    <!-- PANTALLA 3: Resultados y Envío -->
     <div id="pantalla3" class="pantalla">
         <h2>Tus Resultados vs Expectativa</h2>
         <div class="chart-container"><canvas id="chartUsuario"></canvas></div>
         <button class="btn-descarga" onclick="descargarGrafica()">Descargar mi Gráfica</button>
-        <button onclick="location.reload()" style="background: #ccc; color: #333; margin-top: 10px;">Volver a evaluar</button>
-        <p id="mensaje">¡Datos enviados al gerente con éxito!</p>
+        <p id="mensaje">✅ ¡Datos enviados al gerente con éxito!</p>
     </div>
-
 </div>
 
 <script>
@@ -85,19 +107,29 @@
         document.getElementById('pantalla' + num).classList.add('activa');
     }
 
+    function toggleOtro(mostrar) {
+        const inputOtro = document.getElementById('nombre_otro');
+        inputOtro.style.display = mostrar ? 'block' : 'none';
+        inputOtro.required = mostrar;
+    }
+
     document.getElementById("formUsuario").addEventListener("submit", function(e) {
         e.preventDefault();
         const btn = document.getElementById("btnEnviar");
         btn.innerText = "Calculando y Enviando..."; btn.disabled = true;
 
-        const formData = new FormData(this);
-        const urlGoogleScript = "https://script.google.com/macros/s/AKfycbxQdfZ2A-qJ493LZ5PEbMbCOIroQuK3xxlXhaId9P64l0dLO9t86zHr4Y_EFaN5LHtD/exec"; // <-- REEMPLAZAR
+        // Determinar nombre final
+        let nombreFinal = document.querySelector('input[name="nombre_radio"]:checked').value;
+        if(nombreFinal === "Otro") nombreFinal = document.getElementById('nombre_otro').value;
 
-        fetch(urlGoogleScript, { 
-            method: 'POST', 
-            body: formData,
-            mode: 'no-cors'
-        })
+        const formData = new FormData(this);
+        formData.append("nombre", nombreFinal);
+        formData.append("action", "save_user"); // Bandera para Google Script
+
+        // --- REEMPLAZA ESTA URL ---
+        const urlGoogleScript = "https://script.google.com/macros/s/AKfycbwUNuYeZEb3ZwJB1WUuSBlJf2Nf124KH2EmTggnlpoZJ2KLswftVuF6HfXQrDBHSjhe/exec"; 
+
+        fetch(urlGoogleScript, { method: 'POST', body: formData })
         .then(() => {
             const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
             mostrarPantalla(3);
@@ -113,17 +145,16 @@
                         { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.2)" }
                     ] 
                 },
-                options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } } },
-                plugins: [{
-                    id: 'fondoBlanco',
-                    beforeDraw: (c) => {
-                        const ctx = c.canvas.getContext('2d');
-                        ctx.save(); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
-                    }
-                }]
+                options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } },
+                plugins: {
+                    title: { display: true, text: 'Evaluación de: ' + nombreFinal, font: { size: 16 } }
+                }},
+                plugins: [{ id: 'fondoBlanco', beforeDraw: (c) => {
+                    const ctx = c.canvas.getContext('2d');
+                    ctx.save(); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
+                }}]
             });
-        })
-        .catch(() => alert("Error de conexión."));
+        }).catch(() => alert("Error de conexión."));
     });
 
     function descargarGrafica() {
