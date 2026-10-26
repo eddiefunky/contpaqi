@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Gerente - Calibración UX/UI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #eef2f5; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .app-container { background: #fff; width: 100%; max-width: 900px; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .pantalla { display: none; }
+        .pantalla.activa { display: block; }
+        h1, h2 { text-align: center; color: #111; margin-bottom: 5px; }
+        p { text-align: center; color: #555; margin-bottom: 30px; }
+        .grid-captura { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; background: #f9f9f9; padding: 15px; border-radius: 8px; }
+        .desc-concepto { font-size: 0.85rem; color: #666; display: block; grid-column: 1 / -1; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 5px;}
+        .col-input { display: flex; flex-direction: column; }
+        .col-input label { font-size: 0.85rem; margin-bottom: 5px; color: #444; }
+        select { padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        button { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 20px; cursor: pointer; }
+        button:hover { background: #333; }
+        .btn-descarga { background: #28a745; }
+        .btn-descarga:hover { background: #218838; }
+        .chart-container { position: relative; height: 500px; width: 100%; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- PANTALLA 1: Captura -->
+    <div id="pantalla1" class="pantalla activa">
+        <h1>Panel de Calibración 1:1</h1>
+        <p>Captura los datos del Sheet del colaborador y tu propia evaluación de liderazgo.</p>
+        
+        <div id="formGerente">
+            <!-- Concepto 1 -->
+            <div class="grid-captura">
+                <span class="desc-concepto">1. Estrategia de Producto y Negocio (1: Reactivo | 3: Usa KPIs | 5: Lidera Roadmap)</span>
+                <div class="col-input"><label>Datos del Colaborador</label><select id="user_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+            </div>
+
+            <!-- Concepto 2 -->
+            <div class="grid-captura">
+                <span class="desc-concepto">2. Problem Framing y Pensamiento Crítico (1: Ejecuta | 3: Pregunta | 5: Causa Raíz)</span>
+                <div class="col-input"><label>Datos del Colaborador</label><select id="user_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+            </div>
+
+            <!-- Concepto 3 -->
+            <div class="grid-captura">
+                <span class="desc-concepto">3. Adaptabilidad y Orquestación con IA (1: Sin IA | 3: Tareas rápidas | 5: Automatiza flujos)</span>
+                <div class="col-input"><label>Datos del Colaborador</label><select id="user_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+            </div>
+
+            <!-- Concepto 4 -->
+            <div class="grid-captura">
+                <span class="desc-concepto">4. Gestión de Stakeholders (1: Fricción | 3: Claridad | 5: Consenso directivo)</span>
+                <div class="col-input"><label>Datos del Colaborador</label><select id="user_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+            </div>
+
+            <!-- Concepto 5 -->
+            <div class="grid-captura">
+                <span class="desc-concepto">5. Mentoría y Talento (1: Acapara | 3: Ayuda básica | 5: Coacheo avanzado)</span>
+                <div class="col-input"><label>Datos del Colaborador</label><select id="user_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+                <div class="col-input"><label>Tu Evaluación (Líder)</label><select id="mgr_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+            </div>
+
+            <button onclick="generarGrafica()">Generar Gráfica Comparativa</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 2: Resultados -->
+    <div id="pantalla2" class="pantalla">
+        <h2>Matriz Final de Calibración</h2>
+        <p>Análisis de brechas para el plan de desarrollo.</p>
+        <div class="chart-container"><canvas id="chartFinal"></canvas></div>
+        <button class="btn-descarga" onclick="descargarGrafica()">Descargar Gráfica para Expediente</button>
+        <button onclick="location.reload()" style="background: #666;">Volver al inicio</button>
+    </div>
+
+</div>
+
+<script>
+    const conceptos = ["Estrategia", "Problem Framing", "Uso de IA", "Stakeholders", "Mentoría"];
+    const lineaBase = [4, 4, 3, 4, 3]; 
+    let chartRef;
+
+    function generarGrafica() {
+        const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
+        const datosGerente = [0,1,2,3,4].map(i => Number(document.getElementById('mgr_'+i).value));
+        
+        document.getElementById('pantalla1').classList.remove('activa');
+        document.getElementById('pantalla2').classList.add('activa');
+
+        const ctx = document.getElementById('chartFinal').getContext('2d');
+        if (chartRef) chartRef.destroy();
+        
+        chartRef = new Chart(ctx, {
+            type: 'radar',
+            data: { 
+                labels: conceptos, 
+                datasets: [
+                    { label: "Expectativa", data: lineaBase, borderColor: "gray", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
+                    { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.1)" },
+                    { label: "Evaluación Líder", data: datosGerente, borderColor: "red", backgroundColor: "rgba(255, 99, 132, 0.4)" }
+                ] 
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } } },
+            plugins: [{
+                id: 'fondoBlanco',
+                beforeDraw: (c) => {
+                    const ctx = c.canvas.getContext('2d');
+                    ctx.save(); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
+                }
+            }]
+        });
+    }
+
+    function descargarGrafica() {
+        const enlace = document.createElement('a');
+        enlace.href = document.getElementById('chartFinal').toDataURL('image/png');
+        enlace.download = 'Calibracion_Final_UX.png';
+        enlace.click();
+    }
+</script>
+</body>
+</html>

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación 1:1 UX/UI</title>
+    <title>Autoevaluación UX/UI</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: -apple-system, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        body { font-family: -apple-system, sans-serif; background: #f4f7f6; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
         .app-container { background: #fff; width: 100%; max-width: 800px; padding: 40px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .pantalla { display: none; }
         .pantalla.activa { display: block; }
@@ -14,12 +14,13 @@
         p { text-align: center; color: #555; line-height: 1.6; }
         label { font-weight: bold; display: block; margin-top: 25px; }
         .desc-concepto { font-size: 0.85rem; color: #666; margin-top: 4px; margin-bottom: 8px; display: block; line-height: 1.4; }
-        select { width: 100%; padding: 12px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 0.95rem; }
+        input[type="text"], select { width: 100%; padding: 12px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 0.95rem; box-sizing: border-box; }
         button { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 35px; cursor: pointer; }
         button:hover { background: #333; }
         .btn-descarga { background: #28a745; margin-top: 15px; }
         .btn-descarga:hover { background: #218838; }
         .chart-container { position: relative; height: 400px; width: 100%; margin-top: 20px; }
+        #mensaje { text-align: center; color: green; font-weight: bold; display: none; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -28,82 +29,48 @@
 
     <!-- PANTALLA 1: Portada -->
     <div id="pantalla1" class="pantalla activa">
-        <h1>Evaluación de Competencias Estratégicas UX/UI</h1>
-        <p>Bienvenido. Esta herramienta nos ayudará a mapear tus fortalezas y encontrar oportunidades de crecimiento en el equipo. El proceso consta de una autoevaluación, seguida de una revisión de resultados y posteriormente la retroalimentación del liderazgo.</p>
+        <h1>Evaluación de Competencias Estratégicas</h1>
+        <p>Bienvenido. Esta herramienta mapeará tus fortalezas y áreas de oportunidad. Al finalizar, verás tu gráfica de resultados y la enviaremos al líder para tu próxima sesión 1:1.</p>
         <button onclick="mostrarPantalla(2)">Comenzar Autoevaluación</button>
     </div>
 
-    <!-- PANTALLA 2: Formulario del Colaborador -->
+    <!-- PANTALLA 2: Formulario -->
     <div id="pantalla2" class="pantalla">
-        <h2>Autoevaluación del Colaborador</h2>
-        <p>Evalúa tu desempeño de los últimos 6 meses (Escala 1 al 5).</p>
-        
-        <label>1. Estrategia de Producto y Negocio</label>
-        <span class="desc-concepto">Mide si el diseño se basa solo en requerimientos estéticos (1), si comprende y aplica KPIs estándar (3), o si lidera decisiones y moldea el roadmap (5).</span>
-        <select id="user_0"><option value="1">1 - Reactivo (Solo diseño lo que me piden)</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Competente (Entiendo KPIs y los aplico)</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder Estratégico (Moldeo el roadmap)</option></select>
-        
-        <label>2. Problem Framing y Pensamiento Crítico</label>
-        <span class="desc-concepto">Mide si ejecutas sin cuestionar (1), si haces preguntas aclaratorias (3), o si replanteas el problema mitigando riesgos desde la causa raíz (5).</span>
-        <select id="user_1"><option value="1">1 - Ejecuto sin cuestionar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Hago preguntas aclaratorias</option><option value="4">4 - Avanzado</option><option value="5">5 - Replanteo problemas (causa raíz)</option></select>
-        
-        <label>3. Adaptabilidad y Orquestación con IA</label>
-        <span class="desc-concepto">Mide si usas flujos tradicionales (1), si usas IA para agilizar tareas rápidas (3), o si orquestas flujos completos de automatización para el equipo (5).</span>
-        <select id="user_2"><option value="1">1 - Flujos tradicionales (Sin IA)</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Uso IA para tareas rápidas</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquesto flujos completos (automatizaciones)</option></select>
-        
-        <label>4. Gestión de Stakeholders y Comunicación</label>
-        <span class="desc-concepto">Mide si generas fricción al defender tus diseños (1), si comunicas con claridad técnica (3), o si adaptas tu lenguaje logrando consensos sin conflictos (5).</span>
-        <select id="user_3"><option value="1">1 - Fricción al defender diseños</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Comunico con claridad técnica</option><option value="4">4 - Avanzado</option><option value="5">5 - Adapto lenguaje a negocio/devs sin fricción</option></select>
-        
-        <label>5. Mentoría y Multiplicación de Talento</label>
-        <span class="desc-concepto">Mide si acaparas el conocimiento (1), si ayudas puntualmente cuando te lo piden (3), o si diseñas planes de entrenamiento y coacheo para juniors (5).</span>
-        <select id="user_4"><option value="1">1 - No comparto / Feedback destructivo</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Ayudo cuando me lo piden</option><option value="4">4 - Avanzado</option><option value="5">5 - Diseño planes y coacheo a juniors</option></select>
+        <h2>Tu Autoevaluación</h2>
+        <form id="formUsuario">
+            <label>Tu Nombre Completo</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Ana Pérez">
 
-        <button onclick="procesarUsuario()">Ver Mis Resultados</button>
+            <label>1. Estrategia de Producto y Negocio</label>
+            <span class="desc-concepto">1: Solo requerimientos visuales | 3: Entiende y aplica KPIs | 5: Lidera decisiones de negocio</span>
+            <select id="user_0" name="estrategia" required><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder Estratégico</option></select>
+            
+            <label>2. Problem Framing y Pensamiento Crítico</label>
+            <span class="desc-concepto">1: Ejecuta sin cuestionar | 3: Hace preguntas aclaratorias | 5: Replantea problemas desde la causa raíz</span>
+            <select id="user_1" name="problem" required><option value="1">1 - Ejecuta sin cuestionar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Hace preguntas</option><option value="4">4 - Avanzado</option><option value="5">5 - Replantea problemas</option></select>
+            
+            <label>3. Adaptabilidad y Orquestación con IA</label>
+            <span class="desc-concepto">1: Flujos tradicionales | 3: Usa IA para tareas rápidas | 5: Orquesta flujos y automatizaciones</span>
+            <select id="user_2" name="ia" required><option value="1">1 - Sin IA</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - IA para tareas rápidas</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquesta flujos completos</option></select>
+            
+            <label>4. Gestión de Stakeholders y Comunicación</label>
+            <span class="desc-concepto">1: Fricción al defender diseños | 3: Claridad técnica | 5: Logra consensos de alto nivel</span>
+            <select id="user_3" name="stakeholders" required><option value="1">1 - Fricción al comunicar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Claridad técnica</option><option value="4">4 - Avanzado</option><option value="5">5 - Adapta lenguaje sin fricción</option></select>
+            
+            <label>5. Mentoría y Multiplicación de Talento</label>
+            <span class="desc-concepto">1: Acapara conocimiento | 3: Ayuda si le piden | 5: Diseña planes de entrenamiento</span>
+            <select id="user_4" name="mentoria" required><option value="1">1 - No comparte</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Ayuda si le piden</option><option value="4">4 - Avanzado</option><option value="5">5 - Diseña planes de coacheo</option></select>
+
+            <button type="submit" id="btnEnviar">Procesar mis resultados</button>
+        </form>
     </div>
 
-    <!-- PANTALLA 3: Resultados del Colaborador -->
+    <!-- PANTALLA 3: Resultados y Envío -->
     <div id="pantalla3" class="pantalla">
         <h2>Tus Resultados vs Expectativa</h2>
         <div class="chart-container"><canvas id="chartUsuario"></canvas></div>
-        <button class="btn-descarga" onclick="descargarGrafica('chartUsuario', 'Autoevaluacion_UX.png')">Descargar mi Gráfica</button>
-        <button onclick="mostrarPantalla(4)">Continuar a Evaluación del Gerente</button>
-    </div>
-
-    <!-- PANTALLA 4: Formulario del Gerente -->
-    <div id="pantalla4" class="pantalla">
-        <h2>Evaluación del Gerente (Líder UX)</h2>
-        <p>Captura tu evaluación final tras la conversación 1:1.</p>
-        
-        <label>1. Estrategia de Producto y Negocio</label>
-        <span class="desc-concepto">Mide si el diseño se basa solo en requerimientos estéticos (1), si comprende y aplica KPIs estándar (3), o si lidera decisiones y moldea el roadmap (5).</span>
-        <select id="mgr_0"><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder Estratégico</option></select>
-        
-        <label>2. Problem Framing y Pensamiento Crítico</label>
-        <span class="desc-concepto">Mide si ejecutas sin cuestionar (1), si haces preguntas aclaratorias (3), o si replanteas el problema mitigando riesgos desde la causa raíz (5).</span>
-        <select id="mgr_1"><option value="1">1 - Ejecuto sin cuestionar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Hago preguntas aclaratorias</option><option value="4">4 - Avanzado</option><option value="5">5 - Replanteo problemas</option></select>
-        
-        <label>3. Adaptabilidad y Orquestación con IA</label>
-        <span class="desc-concepto">Mide si usas flujos tradicionales (1), si usas IA para agilizar tareas rápidas (3), o si orquestas flujos completos de automatización para el equipo (5).</span>
-        <select id="mgr_2"><option value="1">1 - Flujos tradicionales</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Uso IA para tareas rápidas</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquesto flujos completos</option></select>
-        
-        <label>4. Gestión de Stakeholders y Comunicación</label>
-        <span class="desc-concepto">Mide si generas fricción al defender tus diseños (1), si comunicas con claridad técnica (3), o si adaptas tu lenguaje logrando consensos sin conflictos (5).</span>
-        <select id="mgr_3"><option value="1">1 - Fricción al defender diseños</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Comunico con claridad técnica</option><option value="4">4 - Avanzado</option><option value="5">5 - Adapto lenguaje sin fricción</option></select>
-        
-        <label>5. Mentoría y Multiplicación de Talento</label>
-        <span class="desc-concepto">Mide si acaparas el conocimiento (1), si ayudas puntualmente cuando te lo piden (3), o si diseñas planes de entrenamiento y coacheo para juniors (5).</span>
-        <select id="mgr_4"><option value="1">1 - No comparto</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Ayudo cuando me lo piden</option><option value="4">4 - Avanzado</option><option value="5">5 - Diseño planes de coacheo</option></select>
-
-        <button onclick="procesarFinal()">Generar Calibración Final</button>
-    </div>
-
-    <!-- PANTALLA 5: Resultados Finales -->
-    <div id="pantalla5" class="pantalla">
-        <h2>Matriz Final de Calibración</h2>
-        <p>Comparativa total para definir los siguientes pasos de desarrollo.</p>
-        <div class="chart-container"><canvas id="chartFinal"></canvas></div>
-        <button class="btn-descarga" onclick="descargarGrafica('chartFinal', 'Calibracion_Final_UX.png')">Descargar Gráfica Final</button>
-        <button onclick="location.reload()">Finalizar y Reiniciar</button>
+        <button class="btn-descarga" onclick="descargarGrafica()">Descargar mi Gráfica</button>
+        <p id="mensaje">¡Datos enviados al gerente con éxito!</p>
     </div>
 
 </div>
@@ -111,62 +78,55 @@
 <script>
     const conceptos = ["Estrategia", "Problem Framing", "Uso de IA", "Stakeholders", "Mentoría"];
     const lineaBase = [4, 4, 3, 4, 3]; 
-    let datosUsuario = [];
-    let datosGerente = [];
-    let chartRef1, chartRef2;
-
-    const fondoBlanco = {
-        id: 'fondoBlanco',
-        beforeDraw: (c) => {
-            const ctx = c.canvas.getContext('2d');
-            ctx.save(); ctx.globalCompositeOperation = 'destination-over';
-            ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
-        }
-    };
 
     function mostrarPantalla(num) {
         document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
         document.getElementById('pantalla' + num).classList.add('activa');
     }
 
-    function procesarUsuario() {
-        datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
-        mostrarPantalla(3);
-        renderizarGrafica('chartUsuario', [
-            { label: "Expectativa (Base)", data: lineaBase, borderColor: "gray", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
-            { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.2)" }
-        ], chartRef1, (chart) => chartRef1 = chart);
-    }
+    document.getElementById("formUsuario").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const btn = document.getElementById("btnEnviar");
+        btn.innerText = "Calculando y Enviando..."; btn.disabled = true;
 
-    function procesarFinal() {
-        datosGerente = [0,1,2,3,4].map(i => Number(document.getElementById('mgr_'+i).value));
-        mostrarPantalla(5);
-        renderizarGrafica('chartFinal', [
-            { label: "Expectativa", data: lineaBase, borderColor: "gray", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
-            { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.1)" },
-            { label: "Líder (Tú)", data: datosGerente, borderColor: "red", backgroundColor: "rgba(255, 99, 132, 0.4)" }
-        ], chartRef2, (chart) => chartRef2 = chart);
-    }
+        const formData = new FormData(this);
+        const urlGoogleScript = "https://script.google.com/macros/s/AKfycbxQdfZ2A-qJ493LZ5PEbMbCOIroQuK3xxlXhaId9P64l0dLO9t86zHr4Y_EFaN5LHtD/exec"; // <-- REEMPLAZAR
 
-    function renderizarGrafica(canvasId, datasets, currentChart, saveRef) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
-        if (currentChart) currentChart.destroy();
-        const chart = new Chart(ctx, {
-            type: 'radar',
-            data: { labels: conceptos, datasets: datasets },
-            plugins: [fondoBlanco],
-            options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } } }
-        });
-        saveRef(chart);
-    }
+        fetch(urlGoogleScript, { method: 'POST', body: formData })
+        .then(() => {
+            const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
+            mostrarPantalla(3);
+            document.getElementById("mensaje").style.display = "block";
+            
+            const ctx = document.getElementById('chartUsuario').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: { 
+                    labels: conceptos, 
+                    datasets: [
+                        { label: "Expectativa", data: lineaBase, borderColor: "gray", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
+                        { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.2)" }
+                    ] 
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } } },
+                plugins: [{
+                    id: 'fondoBlanco',
+                    beforeDraw: (c) => {
+                        const ctx = c.canvas.getContext('2d');
+                        ctx.save(); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
+                    }
+                }]
+            });
+        })
+        .catch(() => alert("Error de conexión."));
+    });
 
-    function descargarGrafica(canvasId, nombre) {
+    function descargarGrafica() {
         const enlace = document.createElement('a');
-        enlace.href = document.getElementById(canvasId).toDataURL('image/png');
-        enlace.download = nombre;
+        enlace.href = document.getElementById('chartUsuario').toDataURL('image/png');
+        enlace.download = 'Mi_Autoevaluacion_UX.png';
         enlace.click();
     }
 </script>
-
 </body>
 </html>
