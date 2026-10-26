@@ -4,102 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autoevaluación UX/UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f4f7f6; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .app-container { background: #fff; width: 100%; max-width: 800px; padding: 40px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        :root {
+            --primary: #3255F7;
+            --primary-hover: #1D21B0;
+            --primary-subtle: #EFF3FF;
+            --on-primary: #FFFFFF;
+            --surface: #FFFFFF;
+            --surface-subtle: #F1F5F9;
+            --surface-inverse: #1E293B;
+            --on-inverse: #FFFFFF;
+            --on-surface: #0F172A;
+            --on-surface-secondary: #475569;
+            --border: #94A3B8;
+        }
+        body { font-family: 'Manrope', sans-serif; background: var(--surface-subtle); color: var(--on-surface); margin: 0; padding: 32px 16px; display: flex; justify-content: center; letter-spacing: -0.02em; }
+        .card { background: var(--surface); width: 100%; max-width: 800px; padding: 40px; border-radius: 16px; box-shadow: 0 4px 6px -2px rgba(12, 12, 12, 0.10); }
         .pantalla { display: none; }
         .pantalla.activa { display: block; }
-        h1, h2 { text-align: center; color: #111; }
-        p { text-align: center; color: #555; line-height: 1.6; }
-        label { font-weight: bold; display: block; margin-top: 25px; }
-        .desc-concepto { font-size: 0.85rem; color: #666; margin-top: 4px; margin-bottom: 8px; display: block; line-height: 1.4; }
+        h1 { font-size: 32px; font-weight: 700; line-height: 1.33; text-align: center; margin-bottom: 8px; }
+        h2 { font-size: 24px; font-weight: 700; line-height: 1.33; margin-top: 0; margin-bottom: 24px;}
+        p { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--on-surface-secondary); text-align: center; margin-bottom: 32px; }
         
-        /* Estilos UI para los nombres (Chips) */
-        .radio-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
-        .radio-group input[type="radio"] { display: none; }
-        .radio-group label { margin: 0; padding: 12px; text-align: center; background: #eef2f5; border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-weight: 500; font-size: 0.9rem;}
-        .radio-group input[type="radio"]:checked + label { background: #e8f0fe; border-color: #1a73e8; color: #1a73e8; }
+        .seccion-evaluacion { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--surface-subtle); }
+        .seccion-evaluacion:last-of-type { border-bottom: none; }
+        .label-bold { font-size: 16px; font-weight: 700; display: block; margin-bottom: 12px; }
         
-        input[type="text"], select { width: 100%; padding: 12px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 0.95rem; box-sizing: border-box; }
-        .input-oculto { display: none; margin-top: 10px !important; }
+        /* Definiciones BARS */
+        .definiciones { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--on-surface-secondary); background: var(--surface-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; }
+        .definiciones ul { margin: 0; padding-left: 20px; }
+        .definiciones li { margin-bottom: 8px; }
+        .definiciones strong { color: var(--on-surface); font-weight: 600; }
         
-        button { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 35px; cursor: pointer; }
-        button:hover { background: #333; }
-        .btn-descarga { background: #28a745; margin-top: 15px; }
-        .chart-container { position: relative; height: 400px; width: 100%; margin-top: 20px; }
-        #mensaje { text-align: center; color: #1a73e8; font-weight: bold; display: none; margin-top: 20px; }
+        /* Componente Select */
+        select { width: 100%; height: 40px; padding: 0 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--on-surface); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-sizing: border-box; cursor: pointer;}
+        select:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        
+        /* Componente Chips (Pills) */
+        .chips-container { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+        .chip { position: relative; }
+        .chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+        .chip label { display: inline-flex; align-items: center; height: 40px; padding: 0 12px; background: var(--primary-subtle); color: var(--on-surface-secondary); font-size: 14px; font-weight: 500; border-radius: 9999px; cursor: pointer; transition: all 0.2s; }
+        .chip input:checked + label { background: var(--surface-inverse); color: var(--on-inverse); }
+        .input-otro { display: none; margin-top: 12px; }
+        
+        /* Botones */
+        .btn-primary { width: 100%; height: 48px; background: var(--primary); color: var(--on-primary); font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 24px; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-secondary { background: var(--surface); color: var(--primary); border: 1px solid var(--primary-subtle); margin-top: 16px;}
+        
+        .chart-container { position: relative; height: 400px; width: 100%; margin-top: 24px; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="card">
     <div id="pantalla1" class="pantalla activa">
-        <h1>Evaluación de Competencias Estratégicas</h1>
-        <p>Bienvenido. Esta herramienta mapeará tus fortalezas y áreas de oportunidad. Al finalizar, verás tu gráfica de resultados y la enviaremos al líder para tu próxima sesión 1:1.</p>
-        <button onclick="mostrarPantalla(2)">Comenzar Autoevaluación</button>
+        <h1>Evaluación de competencias estratégicas</h1>
+        <p>Esta herramienta mapeará tus fortalezas y áreas de oportunidad. Al finalizar, verás tu gráfica de resultados y la enviaremos al líder para la próxima sesión 1:1.</p>
+        <button class="btn-primary" onclick="mostrarPantalla(2)">Comenzar autoevaluación</button>
     </div>
 
     <div id="pantalla2" class="pantalla">
-        <h2>Tu Autoevaluación</h2>
+        <h2>Autoevaluación</h2>
         <form id="formUsuario">
             
-            <label>Selecciona tu Nombre</label>
-            <div class="radio-group">
-                <input type="radio" id="n1" name="nombre_radio" value="Jonathan Alderete" required onclick="toggleOtro(false)">
-                <label for="n1">Jonathan Alderete</label>
-                
-                <input type="radio" id="n2" name="nombre_radio" value="Gala Chávez" onclick="toggleOtro(false)">
-                <label for="n2">Gala Chávez</label>
-                
-                <input type="radio" id="n3" name="nombre_radio" value="Itzel Garza" onclick="toggleOtro(false)">
-                <label for="n3">Itzel Garza</label>
-                
-                <input type="radio" id="n4" name="nombre_radio" value="Mariana Luna" onclick="toggleOtro(false)">
-                <label for="n4">Mariana Luna</label>
-                
-                <input type="radio" id="n5" name="nombre_radio" value="Miguel Leo" onclick="toggleOtro(false)">
-                <label for="n5">Miguel Leo</label>
-
-                <input type="radio" id="n6" name="nombre_radio" value="Otro" onclick="toggleOtro(true)">
-                <label for="n6">Otro...</label>
+            <div class="seccion-evaluacion">
+                <span class="label-bold">Selecciona tu nombre</span>
+                <div class="chips-container">
+                    <div class="chip"><input type="radio" id="n1" name="nombre_radio" value="Jonathan Alderete" required onclick="toggleOtro(false)"><label for="n1">Jonathan Alderete</label></div>
+                    <div class="chip"><input type="radio" id="n2" name="nombre_radio" value="Gala Chávez" onclick="toggleOtro(false)"><label for="n2">Gala Chávez</label></div>
+                    <div class="chip"><input type="radio" id="n3" name="nombre_radio" value="Itzel Garza" onclick="toggleOtro(false)"><label for="n3">Itzel Garza</label></div>
+                    <div class="chip"><input type="radio" id="n4" name="nombre_radio" value="Mariana Luna" onclick="toggleOtro(false)"><label for="n4">Mariana Luna</label></div>
+                    <div class="chip"><input type="radio" id="n5" name="nombre_radio" value="Miguel Leo" onclick="toggleOtro(false)"><label for="n5">Miguel Leo</label></div>
+                    <div class="chip"><input type="radio" id="n6" name="nombre_radio" value="Otro" onclick="toggleOtro(true)"><label for="n6">Otro...</label></div>
+                </div>
+                <input type="text" id="nombre_otro" class="input-otro" placeholder="Escribe tu nombre completo...">
             </div>
-            <input type="text" id="nombre_otro" class="input-oculto" placeholder="Escribe tu nombre completo...">
 
-            <label>1. Estrategia de Producto y Negocio</label>
-            <span class="desc-concepto">1: Solo requerimientos visuales | 3: Entiende y aplica KPIs | 5: Lidera decisiones de negocio</span>
-            <select id="user_0" name="estrategia" required><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder Estratégico</option></select>
+            <div class="seccion-evaluacion">
+                <span class="label-bold">1. Estrategia de producto y negocio</span>
+                <div class="definiciones">
+                    <ul>
+                        <li><strong>1 - Reactivo:</strong> Ejecutas solicitudes visuales literalmente sin cuestionar ni medir el impacto comercial o KPIs.</li>
+                        <li><strong>3 - Competente:</strong> Justificas tus decisiones conectándolas con los requisitos del usuario y métricas estándar del negocio.</li>
+                        <li><strong>5 - Líder:</strong> Lideras debates estratégicos, identificas oportunidades comerciales y moldeas el roadmap del producto.</li>
+                    </ul>
+                </div>
+                <select id="user_0" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder estratégico</option></select>
+            </div>
             
-            <label>2. Problem Framing y Pensamiento Crítico</label>
-            <span class="desc-concepto">1: Ejecuta sin cuestionar | 3: Hace preguntas aclaratorias | 5: Replantea problemas desde la causa raíz</span>
-            <select id="user_1" name="problem" required><option value="1">1 - Ejecuta sin cuestionar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Hace preguntas</option><option value="4">4 - Avanzado</option><option value="5">5 - Replantea problemas</option></select>
+            <div class="seccion-evaluacion">
+                <span class="label-bold">2. Problem framing y pensamiento crítico</span>
+                <div class="definiciones">
+                    <ul>
+                        <li><strong>1 - Ejecutor:</strong> Trabajas sobre los problemas planteados sin cuestionar si resuelven la causa raíz real.</li>
+                        <li><strong>3 - Competente:</strong> Identificas requerimientos ambiguos y haces preguntas aclaratorias antes de comenzar a diseñar.</li>
+                        <li><strong>5 - Estratega:</strong> Replanteas problemas iniciales mitigando riesgos e incertidumbre desde la raíz antes de abrir Figma.</li>
+                    </ul>
+                </div>
+                <select id="user_1" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Ejecutor</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Estratega</option></select>
+            </div>
             
-            <label>3. Adaptabilidad y Orquestación con IA</label>
-            <span class="desc-concepto">1: Flujos tradicionales | 3: Usa IA para tareas rápidas | 5: Orquesta flujos y automatizaciones</span>
-            <select id="user_2" name="ia" required><option value="1">1 - Sin IA</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - IA para tareas rápidas</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquesta flujos completos</option></select>
+            <div class="seccion-evaluacion">
+                <span class="label-bold">3. Adaptabilidad y orquestación con IA</span>
+                <div class="definiciones">
+                    <ul>
+                        <li><strong>1 - Tradicional:</strong> Muestras resistencia a nuevas tecnologías; mantienes flujos de trabajo lentos o 100% manuales.</li>
+                        <li><strong>3 - Competente:</strong> Utilizas herramientas de IA para agilizar tareas rápidas o repetitivas cuando se te sugiere.</li>
+                        <li><strong>5 - Orquestador:</strong> Construyes flujos completos y automatizaciones proactivamente, estableciendo el estándar para el resto del equipo.</li>
+                    </ul>
+                </div>
+                <select id="user_2" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Tradicional</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Orquestador</option></select>
+            </div>
             
-            <label>4. Gestión de Stakeholders y Comunicación</label>
-            <span class="desc-concepto">1: Fricción al defender diseños | 3: Claridad técnica | 5: Logra consensos de alto nivel</span>
-            <select id="user_3" name="stakeholders" required><option value="1">1 - Fricción al comunicar</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Claridad técnica</option><option value="4">4 - Avanzado</option><option value="5">5 - Adapta lenguaje sin fricción</option></select>
+            <div class="seccion-evaluacion">
+                <span class="label-bold">4. Gestión de stakeholders y comunicación</span>
+                <div class="definiciones">
+                    <ul>
+                        <li><strong>1 - Reactivo:</strong> Generas fricción al defender tus diseños o, por el contrario, cedes completamente comprometiendo la usabilidad.</li>
+                        <li><strong>3 - Competente:</strong> Comunicas con claridad técnica y logras hacer entregas (handoffs) limpios al equipo de desarrollo.</li>
+                        <li><strong>5 - Líder:</strong> Adaptas tu lenguaje a negocio o ingeniería, negociando restricciones y logrando consensos sin generar conflictos.</li>
+                    </ul>
+                </div>
+                <select id="user_3" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Reactivo</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder</option></select>
+            </div>
             
-            <label>5. Mentoría y Multiplicación de Talento</label>
-            <span class="desc-concepto">1: Acapara conocimiento | 3: Ayuda si le piden | 5: Diseña planes de entrenamiento</span>
-            <select id="user_4" name="mentoria" required><option value="1">1 - No comparte</option><option value="2">2 - En desarrollo</option><option value="3" selected>3 - Ayuda si le piden</option><option value="4">4 - Avanzado</option><option value="5">5 - Diseña planes de coacheo</option></select>
+            <div class="seccion-evaluacion">
+                <span class="label-bold">5. Mentoría y multiplicación de talento</span>
+                <div class="definiciones">
+                    <ul>
+                        <li><strong>1 - Aislado:</strong> Acaparas el conocimiento, evitas documentar tus procesos o das retroalimentación destructiva.</li>
+                        <li><strong>3 - Competente:</strong> Ayudas cuando te lo piden y proporcionas retroalimentación útil en las sesiones grupales.</li>
+                        <li><strong>5 - Líder:</strong> Diseñas planes de entrenamiento proactivamente y asumes la tutoría de los perfiles junior del equipo.</li>
+                    </ul>
+                </div>
+                <select id="user_4" required><option value="" disabled selected>Selecciona tu nivel...</option><option value="1">1 - Aislado</option><option value="2">2 - En desarrollo</option><option value="3">3 - Competente</option><option value="4">4 - Avanzado</option><option value="5">5 - Líder</option></select>
+            </div>
 
-            <button type="submit" id="btnEnviar">Procesar mis resultados</button>
+            <button type="submit" class="btn-primary" id="btnEnviar">Procesar mis resultados</button>
         </form>
     </div>
 
     <div id="pantalla3" class="pantalla">
-        <h2>Tus Resultados vs Expectativa</h2>
+        <h2>Resultados vs expectativa</h2>
+        <p id="mensaje">Tus datos han sido enviados al gerente con éxito.</p>
         <div class="chart-container"><canvas id="chartUsuario"></canvas></div>
-        <button class="btn-descarga" onclick="descargarGrafica()">Descargar mi Gráfica</button>
-        <p id="mensaje">✅ ¡Datos enviados al gerente con éxito!</p>
+        <button class="btn-primary" onclick="descargarGrafica()">Descargar gráfica</button>
     </div>
 </div>
 
 <script>
-    const conceptos = ["Estrategia", "Problem Framing", "Uso de IA", "Stakeholders", "Mentoría"];
+    const conceptos = ["Estrategia", "Problem framing", "Uso de IA", "Stakeholders", "Mentoría"];
     const lineaBase = [4, 4, 3, 4, 3]; 
 
     function mostrarPantalla(num) {
@@ -116,51 +176,48 @@
     document.getElementById("formUsuario").addEventListener("submit", function(e) {
         e.preventDefault();
         const btn = document.getElementById("btnEnviar");
-        btn.innerText = "Calculando y Enviando..."; btn.disabled = true;
+        btn.innerText = "Enviando datos..."; btn.disabled = true;
 
-        // Determinar nombre final
         let nombreFinal = document.querySelector('input[name="nombre_radio"]:checked').value;
         if(nombreFinal === "Otro") nombreFinal = document.getElementById('nombre_otro').value;
 
         const formData = new FormData(this);
         formData.append("nombre", nombreFinal);
-        formData.append("action", "save_user"); // Bandera para Google Script
+        formData.append("action", "save_user"); 
 
-        // --- REEMPLAZA ESTA URL ---
-        const urlGoogleScript = "https://script.google.com/macros/s/AKfycbwUNuYeZEb3ZwJB1WUuSBlJf2Nf124KH2EmTggnlpoZJ2KLswftVuF6HfXQrDBHSjhe/exec"; 
+        // --- REEMPLAZA ESTA URL CON TU GOOGLE SCRIPT ---
+        const urlGoogleScript = "https://script.google.com/macros/s/AKfycbxPCLyirrZlr6_LfwgvcpUYvqzzpKHs-ax-_RQM9tp_dFLs1_Hmu3tBvUEeJf2sxR9L/exec"; 
 
         fetch(urlGoogleScript, { method: 'POST', body: formData })
         .then(() => {
             const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
             mostrarPantalla(3);
-            document.getElementById("mensaje").style.display = "block";
             
             const ctx = document.getElementById('chartUsuario').getContext('2d');
+            Chart.defaults.font.family = "'Manrope', sans-serif";
             new Chart(ctx, {
                 type: 'radar',
                 data: { 
                     labels: conceptos, 
                     datasets: [
-                        { label: "Expectativa", data: lineaBase, borderColor: "gray", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
-                        { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.2)" }
+                        { label: "Expectativa", data: lineaBase, borderColor: "#94A3B8", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
+                        { label: "Autoevaluación", data: datosUsuario, borderColor: "#3255F7", backgroundColor: "rgba(239, 243, 255, 0.6)" }
                     ] 
                 },
                 options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } },
-                plugins: {
-                    title: { display: true, text: 'Evaluación de: ' + nombreFinal, font: { size: 16 } }
-                }},
+                plugins: { title: { display: true, text: 'Evaluación: ' + nombreFinal, font: { size: 16 } } } },
                 plugins: [{ id: 'fondoBlanco', beforeDraw: (c) => {
                     const ctx = c.canvas.getContext('2d');
                     ctx.save(); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.restore();
                 }}]
             });
-        }).catch(() => alert("Error de conexión."));
+        }).catch(() => { alert("Error de conexión."); btn.innerText = "Procesar mis resultados"; btn.disabled = false;});
     });
 
     function descargarGrafica() {
         const enlace = document.createElement('a');
         enlace.href = document.getElementById('chartUsuario').toDataURL('image/png');
-        enlace.download = 'Mi_Autoevaluacion_UX.png';
+        enlace.download = 'Autoevaluacion_UX.png';
         enlace.click();
     }
 </script>

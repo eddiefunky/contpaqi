@@ -3,90 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Gerente - Calibración UX/UI</title>
+    <title>Panel de gerente - Calibración UX/UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #eef2f5; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .app-container { background: #fff; width: 100%; max-width: 900px; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        :root {
+            --primary: #3255F7;
+            --primary-hover: #1D21B0;
+            --primary-subtle: #EFF3FF;
+            --on-primary: #FFFFFF;
+            --surface: #FFFFFF;
+            --surface-subtle: #F1F5F9;
+            --surface-inverse: #1E293B;
+            --on-inverse: #FFFFFF;
+            --on-surface: #0F172A;
+            --on-surface-secondary: #475569;
+            --border: #94A3B8;
+            --border-disabled: #E2E8F0;
+        }
+        body { font-family: 'Manrope', sans-serif; background: var(--surface-subtle); color: var(--on-surface); margin: 0; padding: 32px 16px; display: flex; justify-content: center; letter-spacing: -0.02em; }
+        .card { background: var(--surface); width: 100%; max-width: 900px; padding: 40px; border-radius: 16px; box-shadow: 0 4px 6px -2px rgba(12, 12, 12, 0.10); }
         .pantalla { display: none; }
         .pantalla.activa { display: block; }
-        h1, h2 { text-align: center; color: #111; margin-bottom: 5px; }
-        p { text-align: center; color: #555; margin-bottom: 30px; }
-        .selector-area { background: #e8f0fe; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 5px solid #1a73e8; }
-        .selector-area label { font-weight: bold; color: #1a73e8; display: block; margin-bottom: 10px; }
-        select { padding: 12px; border-radius: 5px; border: 1px solid #ccc; width: 100%; font-size: 16px; }
-        .grid-captura { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; background: #f9f9f9; padding: 15px; border-radius: 8px; }
-        .desc-concepto { font-size: 0.85rem; color: #666; display: block; grid-column: 1 / -1; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 5px;}
-        .col-input { display: flex; flex-direction: column; }
-        .col-input label { font-size: 0.85rem; margin-bottom: 5px; color: #444; }
-        button { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 20px; cursor: pointer; }
-        button:hover { background: #333; }
-        .btn-descarga { background: #28a745; }
-        .chart-container { position: relative; height: 500px; width: 100%; margin-top: 20px; }
-        .loader { display: none; text-align: center; color: #1a73e8; font-weight: bold; margin-top: 15px; }
+        h1 { font-size: 24px; font-weight: 700; line-height: 1.33; text-align: center; margin-top: 0; margin-bottom: 24px; }
+        
+        .selector-area { background: var(--surface-subtle); padding: 24px; border-radius: 12px; margin-bottom: 32px; border-left: 4px solid var(--primary); }
+        .label-bold { font-size: 14px; font-weight: 700; display: block; margin-bottom: 8px; }
+        
+        select { width: 100%; height: 40px; padding: 0 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--on-surface); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-sizing: border-box; cursor: pointer; }
+        select:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        
+        /* Grid optimizado para manager */
+        .grid-captura { display: grid; grid-template-columns: 2fr 1fr 1fr; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-disabled); }
+        .grid-captura:last-of-type { border-bottom: none; margin-bottom: 24px; }
+        .col-concepto { font-size: 14px; font-weight: 600; color: var(--on-surface); }
+        .col-user-score { font-size: 14px; color: var(--on-surface-secondary); display: flex; align-items: center; gap: 8px; }
+        .score-badge { background: var(--primary-subtle); color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 4px; display: inline-block; }
+        
+        .btn-primary { width: 100%; height: 48px; background: var(--primary); color: var(--on-primary); font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 16px; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-secondary { background: var(--surface); color: var(--primary); border: 1px solid var(--primary-subtle); margin-top: 16px;}
+        
+        .chart-container { position: relative; height: 500px; width: 100%; margin-top: 24px; }
+        .loader { display: none; text-align: center; color: var(--primary); font-weight: 700; margin-top: 16px; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="card">
     <div id="pantalla1" class="pantalla activa">
-        <h1>Panel de Calibración 1:1</h1>
+        <h1>Panel de calibración</h1>
         
         <div class="selector-area">
-            <label>Evaluaciones Pendientes (Desde tu Excel):</label>
+            <span class="label-bold">Evaluaciones pendientes</span>
             <select id="selectorColaborador" onchange="cargarDatosColaborador()">
-                <option value="">Cargando equipo...</option>
+                <option value="">Cargando equipo desde la base de datos...</option>
             </select>
         </div>
         
-        <div id="formGerente">
-            <div class="grid-captura">
-                <span class="desc-concepto">1. Estrategia de Producto y Negocio</span>
-                <div class="col-input"><label>Colaborador</label><select id="user_0" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-            </div>
-            <div class="grid-captura">
-                <span class="desc-concepto">2. Problem Framing y Pensamiento Crítico</span>
-                <div class="col-input"><label>Colaborador</label><select id="user_1" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-            </div>
-            <div class="grid-captura">
-                <span class="desc-concepto">3. Adaptabilidad y Orquestación con IA</span>
-                <div class="col-input"><label>Colaborador</label><select id="user_2" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-            </div>
-            <div class="grid-captura">
-                <span class="desc-concepto">4. Gestión de Stakeholders</span>
-                <div class="col-input"><label>Colaborador</label><select id="user_3" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-            </div>
-            <div class="grid-captura">
-                <span class="desc-concepto">5. Mentoría y Talento</span>
-                <div class="col-input"><label>Colaborador</label><select id="user_4" disabled><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
-                <div class="col-input"><label>Tú (Líder)</label><select id="mgr_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+        <!-- Grid limpio: Concepto | Calificación Colaborador (Texto) | Select del Manager -->
+        <div id="formGerente" style="display:none;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 8px;">
+                <span class="label-bold" style="color: var(--on-surface-secondary);">Competencia</span>
+                <span class="label-bold" style="color: var(--on-surface-secondary);">Colaborador</span>
+                <span class="label-bold" style="color: var(--on-surface-secondary);">Tu evaluación</span>
             </div>
 
-            <button id="btnGenerar" onclick="guardarYGenerarGrafica()">Guardar Calificación en Sheet y Ver Gráfica</button>
-            <div id="loader" class="loader">Guardando datos en Google Sheets...</div>
+            <div class="grid-captura">
+                <span class="col-concepto">1. Estrategia de producto y negocio</span>
+                <span class="col-user-score">Nivel: <span class="score-badge" id="u_text_0">-</span></span>
+                <select id="mgr_0"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select>
+            </div>
+            <div class="grid-captura">
+                <span class="col-concepto">2. Problem framing y pensamiento crítico</span>
+                <span class="col-user-score">Nivel: <span class="score-badge" id="u_text_1">-</span></span>
+                <select id="mgr_1"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select>
+            </div>
+            <div class="grid-captura">
+                <span class="col-concepto">3. Adaptabilidad y orquestación con IA</span>
+                <span class="col-user-score">Nivel: <span class="score-badge" id="u_text_2">-</span></span>
+                <select id="mgr_2"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select>
+            </div>
+            <div class="grid-captura">
+                <span class="col-concepto">4. Gestión de stakeholders y comunicación</span>
+                <span class="col-user-score">Nivel: <span class="score-badge" id="u_text_3">-</span></span>
+                <select id="mgr_3"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select>
+            </div>
+            <div class="grid-captura">
+                <span class="col-concepto">5. Mentoría y multiplicación de talento</span>
+                <span class="col-user-score">Nivel: <span class="score-badge" id="u_text_4">-</span></span>
+                <select id="mgr_4"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select>
+            </div>
+
+            <button class="btn-primary" id="btnGenerar" onclick="guardarYGenerarGrafica()">Guardar en Sheet y generar gráfica</button>
+            <div id="loader" class="loader">Guardando datos...</div>
         </div>
     </div>
 
     <div id="pantalla2" class="pantalla">
-        <h2>Matriz Final de Calibración</h2>
+        <h1>Matriz de calibración final</h1>
         <div class="chart-container"><canvas id="chartFinal"></canvas></div>
-        <button class="btn-descarga" onclick="descargarGrafica()">Descargar Gráfica para Expediente</button>
-        <button onclick="location.reload()" style="background: #666;">Evaluar a alguien más</button>
+        <button class="btn-primary" onclick="descargarGrafica()">Descargar gráfica para expediente</button>
+        <button class="btn-primary btn-secondary" onclick="location.reload()">Evaluar a alguien más</button>
     </div>
 </div>
 
 <script>
-    const conceptos = ["Estrategia", "Problem Framing", "Uso de IA", "Stakeholders", "Mentoría"];
+    const conceptos = ["Estrategia", "Problem framing", "Uso de IA", "Stakeholders", "Mentoría"];
     const lineaBase = [4, 4, 3, 4, 3]; 
     let chartRef;
     let baseDatos = [];
 
     // --- REEMPLAZA LA URL AQUÍ ---
-    const urlGoogleScript = "https://script.google.com/macros/s/AKfycbwUNuYeZEb3ZwJB1WUuSBlJf2Nf124KH2EmTggnlpoZJ2KLswftVuF6HfXQrDBHSjhe/exec";
+    const urlGoogleScript = "https://script.google.com/macros/s/AKfycbxPCLyirrZlr6_LfwgvcpUYvqzzpKHs-ax-_RQM9tp_dFLs1_Hmu3tBvUEeJf2sxR9L/exec";
 
     document.addEventListener("DOMContentLoaded", () => {
         fetch(urlGoogleScript)
@@ -94,37 +125,33 @@
         .then(datos => {
             baseDatos = datos;
             const selector = document.getElementById("selectorColaborador");
-            selector.innerHTML = '<option value="">Selecciona un colaborador...</option>';
+            selector.innerHTML = '<option value="" disabled selected>Selecciona un colaborador...</option>';
             datos.forEach((item, index) => {
                 const fecha = new Date(item.fecha).toLocaleDateString();
-                const estado = item.mgr_scores[0] !== "" ? "✅ (Ya calibrado)" : "⏳ (Pendiente)";
+                const estado = item.mgr_scores[0] !== "" ? "(Calibrado)" : "(Pendiente)";
                 selector.innerHTML += `<option value="${index}">${item.nombre} - ${fecha} ${estado}</option>`;
             });
-        })
-        .catch(err => document.getElementById("selectorColaborador").innerHTML = '<option value="">Error al cargar datos. Revisa la URL.</option>');
+        }).catch(err => document.getElementById("selectorColaborador").innerHTML = '<option value="">Error al cargar datos.</option>');
     });
 
     function cargarDatosColaborador() {
         const index = document.getElementById("selectorColaborador").value;
         if (index === "") return;
+        document.getElementById("formGerente").style.display = "block";
         
-        // Llena los datos del usuario (bloqueados)
         const scores = baseDatos[index].scores;
-        for(let i=0; i<5; i++) document.getElementById("user_"+i).value = scores[i];
+        for(let i=0; i<5; i++) document.getElementById("u_text_"+i).innerText = scores[i];
         
-        // Llena tus datos si ya lo habías evaluado antes
         const mgr_scores = baseDatos[index].mgr_scores;
         if(mgr_scores[0] !== "") {
             for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = mgr_scores[i];
         } else {
-            for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = 3; // default
+            for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = 3; 
         }
     }
 
     function guardarYGenerarGrafica() {
         const index = document.getElementById("selectorColaborador").value;
-        if (index === "") return alert("Selecciona un colaborador primero.");
-
         const btn = document.getElementById("btnGenerar");
         const loader = document.getElementById("loader");
         btn.style.display = "none";
@@ -134,45 +161,40 @@
         const nombreEmpleado = baseDatos[index].nombre;
         const filaExcel = baseDatos[index].fila;
 
-        // Construir datos para enviar a Google Script
         const formData = new FormData();
         formData.append("action", "save_manager");
         formData.append("fila", filaExcel);
         datosGerente.forEach((val, i) => formData.append("mgr_" + i, val));
 
         fetch(urlGoogleScript, { method: 'POST', body: formData })
-        .then(() => {
-            mostrarGraficaFinal(index, nombreEmpleado, datosGerente);
-        })
-        .catch(() => alert("Error al guardar en Sheet, pero mostraremos la gráfica de todas formas."))
-        .finally(() => {
-            mostrarGraficaFinal(index, nombreEmpleado, datosGerente);
-        });
+        .then(() => mostrarGraficaFinal(index, nombreEmpleado, datosGerente))
+        .catch(() => { alert("Error al guardar en Sheet."); mostrarGraficaFinal(index, nombreEmpleado, datosGerente); });
     }
 
     function mostrarGraficaFinal(index, nombre, datosGerente) {
-        const datosUsuario = [0,1,2,3,4].map(i => Number(document.getElementById('user_'+i).value));
+        const scores = baseDatos[index].scores;
         document.getElementById('pantalla1').classList.remove('activa');
         document.getElementById('pantalla2').classList.add('activa');
 
         const ctx = document.getElementById('chartFinal').getContext('2d');
         if (chartRef) chartRef.destroy();
         
+        const fechaHoy = new Date().toLocaleDateString();
+        Chart.defaults.font.family = "'Manrope', sans-serif";
+        
         chartRef = new Chart(ctx, {
             type: 'radar',
             data: { 
                 labels: conceptos, 
                 datasets: [
-                    { label: "Expectativa", data: lineaBase, borderColor: "gray", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
-                    { label: "Autoevaluación", data: datosUsuario, borderColor: "blue", backgroundColor: "rgba(54, 162, 235, 0.1)" },
-                    { label: "Evaluación Líder", data: datosGerente, borderColor: "red", backgroundColor: "rgba(255, 99, 132, 0.4)" }
+                    { label: "Expectativa", data: lineaBase, borderColor: "#94A3B8", borderDash: [5,5], backgroundColor: "rgba(0,0,0,0)" },
+                    { label: "Autoevaluación", data: scores, borderColor: "#3255F7", backgroundColor: "rgba(239, 243, 255, 0.4)" },
+                    { label: "Evaluación Líder", data: datosGerente, borderColor: "#1E293B", backgroundColor: "rgba(30, 41, 59, 0.4)" }
                 ] 
             },
             options: { 
                 responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } },
-                plugins: {
-                    title: { display: true, text: 'Calibración UX/UI: ' + nombre, font: { size: 18 } }
-                }
+                plugins: { title: { display: true, text: [`Calibración: ${nombre}`, `Fecha: ${fechaHoy}`], font: { size: 16 } } }
             },
             plugins: [{ id: 'fondoBlanco', beforeDraw: (c) => {
                 const ctx = c.canvas.getContext('2d');
@@ -186,7 +208,7 @@
         const nombre = baseDatos[selector.value].nombre.replace(/\s+/g, '_');
         const enlace = document.createElement('a');
         enlace.href = document.getElementById('chartFinal').toDataURL('image/png');
-        enlace.download = `Calibracion_${nombre}_UX.png`;
+        enlace.download = `Calibracion_${nombre}.png`;
         enlace.click();
     }
 </script>
