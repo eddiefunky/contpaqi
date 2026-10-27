@@ -35,7 +35,6 @@
         select { width: 100%; height: 40px; padding: 0 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--on-surface); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-sizing: border-box; cursor: pointer; }
         select:focus { outline: 2px solid var(--primary); border-color: transparent; }
         
-        /* Grid Manager - Colaborador como texto */
         .grid-captura { display: grid; grid-template-columns: 2fr 1fr 1fr; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-disabled); }
         .grid-captura:last-of-type { border-bottom: none; margin-bottom: 24px; }
         .col-concepto { font-size: 14px; font-weight: 600; color: var(--on-surface); }
@@ -49,7 +48,6 @@
         .chart-container { position: relative; height: 500px; width: 100%; margin-top: 24px; }
         .loader { display: none; text-align: center; color: var(--primary); font-weight: 700; margin-top: 16px; }
 
-        /* Panel de Accionables */
         .accionables-panel { background: var(--surface-subtle); border-radius: 12px; padding: 24px; margin-top: 32px; border: 1px solid var(--border-disabled); }
         .accionables-panel h3 { margin-top: 0; font-size: 18px; color: var(--on-surface); }
         .accionable-item { font-size: 14px; margin-bottom: 12px; padding-left: 16px; position: relative; line-height: 1.5; color: var(--on-surface-secondary); }
@@ -59,7 +57,6 @@
 <body>
 
 <div class="card">
-    <!-- PANTALLA 1 -->
     <div id="pantalla1" class="pantalla activa">
         <h1>Panel de calibración 1:1</h1>
         
@@ -108,12 +105,10 @@
         </div>
     </div>
 
-    <!-- PANTALLA 2 -->
     <div id="pantalla2" class="pantalla">
         <h1>Matriz de calibración final</h1>
         <div class="chart-container"><canvas id="chartFinal"></canvas></div>
         
-        <!-- Panel de Accionables Sugeridos -->
         <div class="accionables-panel" id="panelAccionables">
             <h3>Accionables sugeridos para el Manager</h3>
             <div id="listaAccionables"></div>
@@ -160,20 +155,18 @@
         if(mgr_scores[0] !== "") {
             for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = mgr_scores[i];
         } else {
-            for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = scores[i]; // Default: lo que el usuario se puso
+            for(let i=0; i<5; i++) document.getElementById("mgr_"+i).value = scores[i];
         }
     }
 
     function generarAccionables(mgrScores) {
         let html = "";
-        
         if (mgrScores[0] < lineaBase[0]) html += "<div class='accionable-item'><strong>Estrategia:</strong> Asignar al colaborador a revisar métricas de negocio con un Product Manager durante el próximo quarter para entender KPIs.</div>";
         if (mgrScores[1] < lineaBase[1]) html += "<div class='accionable-item'><strong>Problem Framing:</strong> Establecer como regla que el colaborador deba redactar un 'Problem Statement' validado con datos antes de abrir Figma en su próximo ticket.</div>";
         if (mgrScores[2] < lineaBase[2]) html += "<div class='accionable-item'><strong>IA:</strong> Solicitar al colaborador que presente una herramienta de IA o un prompt útil en la próxima sesión semanal del equipo.</div>";
         if (mgrScores[3] < lineaBase[3]) html += "<div class='accionable-item'><strong>Stakeholders:</strong> Agendar sesiones de shadowing donde el colaborador observe cómo lideras negociaciones con el equipo de desarrollo.</div>";
         if (mgrScores[4] < lineaBase[4]) html += "<div class='accionable-item'><strong>Mentoría:</strong> Establecer una meta de documentación para que el colaborador comparta su conocimiento técnico en la wiki del equipo.</div>";
         
-        // Reconocimiento
         let talentos = [];
         mgrScores.forEach((s, i) => { if(s >= 5) talentos.push(conceptos[i]); });
         if(talentos.length > 0) {
